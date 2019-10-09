@@ -1,19 +1,49 @@
 import React from 'react';
-import { StyleSheet, Text, View } from 'react-native';
 
-export default function App() {
-  return (
-    <View style={styles.container}>
-      <Text>Open up App.js to start working on your app!</Text>
-    </View>
-  );
-}
+import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: '#fff',
-    alignItems: 'center',
-    justifyContent: 'center',
+import AuthCheckScreen from './app/screens/AuthCheckScreen';
+import AuthScreen from './app/screens/AuthScreen';
+import HomeScreen from './app/screens/HomeScreen';
+import SetupScreen from './app/screens/SetupScreen';
+
+const AppStack = createStackNavigator(
+  {
+    Home: HomeScreen,
   },
-});
+  {    
+    defaultNavigationOptions: {
+      header: null
+    }
+  }
+);
+const AuthStack = createStackNavigator(
+  {
+    Auth: AuthScreen,
+  },
+  {    
+    initialRouteName: 'Auth',
+    defaultNavigationOptions: {
+      header: null
+    }
+  }
+);
+
+const AppSwitch = createSwitchNavigator(
+  {
+    AuthCheck: AuthCheckScreen,
+    App: AppStack,
+    Auth: AuthStack,
+  }
+);
+
+const AppContainer = createAppContainer(AppSwitch);
+
+
+export default class App extends React.Component {
+  
+  render() {
+    return <AppContainer/>;
+  }
+}
