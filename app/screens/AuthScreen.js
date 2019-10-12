@@ -1,13 +1,20 @@
 import React from 'react';
-import { Text, View } from 'react-native';
+import { Text, View, ImageBackground, } from 'react-native';
 import MainStyles from '../styles/MainStyles';
+import LoginContainer from '../containers/LoginContainer';
 
 export default class AuthScreen extends React.Component{
+    constructor(props){
+        super(props);
+    }
     render(){
         return(
-            <View style={MainStyles.containerCenter}>
-                <Text>AuthScreen</Text>
-            </View>
+            <>
+                <Text>Zaguas</Text> 
+                <View>
+                    <LoginContainer/>
+                </View>
+            </>
         );
     };
 }
