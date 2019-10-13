@@ -3,6 +3,7 @@ import { Text, View, ImageBackground, Image, KeyboardAvoidingView } from 'react-
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import MainStyles from '../styles/MainStyles';
 import LoginContainer from '../containers/LoginContainer';
+import RegisterContainer from '../containers/RegisterContainer';
 
 export default class AuthScreen extends React.Component {
     render() {
@@ -11,7 +12,7 @@ export default class AuthScreen extends React.Component {
                 enableOnAndroid={true}
                 resetScrollToCoords={{ x: 0, y: 0 }}
                 style={MainStyles.scrollView}
-                extraHeight={300}>
+                extraHeight={100}>
                 <ImageBackground
                     source={require('../../assets/fondo_login.png')}
                     resizeMode='cover'
@@ -23,6 +24,7 @@ export default class AuthScreen extends React.Component {
                 <View
                     style={MainStyles.mainCard}>
                     <LoginContainer />
+                    {/*<RegisterContainer/>*/}
                 </View>
             </KeyboardAwareScrollView>
         );

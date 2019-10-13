@@ -15,8 +15,7 @@ export default StyleSheet.create({
     mainLogo:{
         width: '60%',
         alignSelf: 'center',
-        paddingVertical: 100,
-        marginBottom: 200
+        marginBottom: 80
     },
     mainCard:{
         backgroundColor:"#fff",
@@ -37,6 +36,17 @@ export default StyleSheet.create({
     },
     spacer:{
         marginBottom: 50
+    },
+    switchContainer:{
+        flexDirection: 'row',
+        alignSelf: 'flex-start',
+        marginBottom: 20
+    },
+    switchSize:{
+        width: 60
+    },
+    switchText:{
+        marginTop: 5
     },
 
     /* Inputs */

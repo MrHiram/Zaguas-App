@@ -13,7 +13,9 @@ export default class LoginContainer extends React.Component {
         password: '',
         passwordError: '',
         passwordSuccess: false,
-        showPassword: true
+        showPassword: true,
+
+    
     };
 
     handleValue = (key, value) => {
@@ -39,6 +41,7 @@ export default class LoginContainer extends React.Component {
     render() {
         return (
             <View style={MainStyles.containerCenter}>
+         
                 <Text>{this.state.email}</Text>
                 <InputMT
                     title='Correo'
@@ -63,12 +66,15 @@ export default class LoginContainer extends React.Component {
                     innerText='¿Se te olvidó lo contraseña?'/>
                 <MainButton 
                     title='Iniciar Sesión'/>
+            
                 <TouchableText
                     style={MainStyles.spacer}
                     alignCenter={true}
                     outerText='¿No tienes cuenta?'
-                    innerText='Crear una'/>
+                    innerText='Crear una'
+                    />
             </View>
+            
         );
     };
 }
