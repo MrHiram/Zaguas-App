@@ -39,7 +39,6 @@ export default class LoginContainer extends React.Component {
     render() {
         return (
             <View style={MainStyles.containerCenter}>
-
                 <Text>{this.state.email}</Text>
                 <InputMT
                     title='Correo'
@@ -65,6 +64,7 @@ export default class LoginContainer extends React.Component {
                 <MainButton 
                     title='Iniciar Sesión'/>
                 <TouchableText
+                    style={MainStyles.spacer}
                     alignCenter={true}
                     outerText='¿No tienes cuenta?'
                     innerText='Crear una'/>

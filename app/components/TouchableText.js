@@ -4,7 +4,9 @@ import MainStyles from '../styles/MainStyles';
 
 export default function TouchableText(props) {
     return(
-        <View style={props.alignCenter? MainStyles.TouchableTextContainerRow : MainStyles.TouchableTextContainer}>
+        <View 
+        style={[ props.style, props.alignCenter? MainStyles.TouchableTextContainerRow : MainStyles.TouchableTextContainer]}
+        >
             <Text>{props.outerText}</Text>
             <TouchableOpacity
                 onPress={props.opPress}>

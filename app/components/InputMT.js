@@ -8,7 +8,6 @@ export default function InputMT(props) {
             <Text style={MainStyles.mainInputTitle}>{props.title}</Text>
 
             <View style={[MainStyles.mainInputContainer, props.error ? MainStyles.mainInputContainerError : null]}>
-
                 <TextInput
                     secureTextEntry={props.secureTextEntry}
                     style={MainStyles.mainInput}
@@ -28,14 +27,14 @@ export default function InputMT(props) {
                         <TouchableOpacity
                             onPress={props.togglePassword}>
                             <Image
-                                style={MainStyles.mainInputImg} 
+                                style={MainStyles.mainInputImg}
                                 resizeMode="contain"
                                 source={props.secureTextEntry ? require('../../assets/lock-closed.png') : require('../../assets/lock-opened.png')}
                             />
                         </TouchableOpacity>
                         :
                         null
-                } 
+                }
             </View>
             <Text style={MainStyles.mainInputErrorMessage}>{props.error}</Text>
         </>

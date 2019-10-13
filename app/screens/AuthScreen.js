@@ -1,25 +1,30 @@
 import React from 'react';
-import { Text, View, ImageBackground, Image} from 'react-native';
+import { Text, View, ImageBackground, Image, KeyboardAvoidingView } from 'react-native';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import MainStyles from '../styles/MainStyles';
 import LoginContainer from '../containers/LoginContainer';
 
-export default class AuthScreen extends React.Component{
-    constructor(props){
-        super(props);
-    }
-    render(){
-        return(
-            <>
-            <View style={MainStyles.mainContainer}>
-            <ImageBackground source={require('../../assets/fondo_login.png')} style={MainStyles.mainBackgroundImage}>
-                <Image source={require('../../assets/logo_white.png')}  resizeMode="contain" style={MainStyles.mainLogo}/>
-                <View style={MainStyles.mainCard}>
-                        <LoginContainer/>
+export default class AuthScreen extends React.Component {
+    render() {
+        return (
+            <KeyboardAwareScrollView
+                enableOnAndroid={true}
+                resetScrollToCoords={{ x: 0, y: 0 }}
+                style={MainStyles.scrollView}
+                extraHeight={300}>
+                <ImageBackground
+                    source={require('../../assets/fondo_login.png')}
+                    resizeMode='cover'
+                    style={MainStyles.mainBackgroundImage} />
+                <Image
+                    source={require('../../assets/logo_white.png')}
+                    resizeMode='contain'
+                    style={MainStyles.mainLogo} />
+                <View
+                    style={MainStyles.mainCard}>
+                    <LoginContainer />
                 </View>
-            </ImageBackground>
-            </View>
-                
-            </>
+            </KeyboardAwareScrollView>
         );
     };
 }

@@ -7,28 +7,36 @@ export default StyleSheet.create({
         justifyContent: 'center',
     },
     mainBackgroundImage:{
-        width: '100%', 
-        height: '100%',   
+        height: '80%',
+        width: '100%',
+        backgroundColor: '#000',
+        position: 'absolute'
     },
     mainLogo:{
-        width: '80%',
-        /* tambien agregar esto height: '20%',*/
-        height: '35%',
-        alignSelf: "center",
-        marginTop: 75
+        width: '60%',
+        alignSelf: 'center',
+        paddingVertical: 100,
+        marginBottom: 200
     },
     mainCard:{
         backgroundColor:"#fff",
         paddingHorizontal: 20,
+        paddingVertical: 30,
         justifyContent:'center',
-        /* esto para que no estorbe cuando escribo la contraseña justifyContent: 'flex-start',*/
-        flex:1,
+        width: '100%',
+        alignSelf: 'baseline',
         borderTopEndRadius: 30,
         borderTopStartRadius: 30
     },
     mainContainer:{
         flex: 1,
         backgroundColor: "#0076A0"
+    },
+    scrollView:{
+        height: '100%',
+    },
+    spacer:{
+        marginBottom: 50
     },
 
     /* Inputs */
