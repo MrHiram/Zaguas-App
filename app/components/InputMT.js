@@ -5,7 +5,7 @@ import MainStyles from '../styles/MainStyles';
 export default function InputMT(props) {
     return (
         <>
-            <Text style={MainStyles.mainInputTitle}>{props.title}</Text>
+            <Text style={[MainStyles.mainTitle, MainStyles.alignLeft]}>{props.title}</Text>
 
             <View style={[MainStyles.mainInputContainer, props.error ? MainStyles.mainInputContainerError : null]}>
                 <TextInput

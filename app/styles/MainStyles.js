@@ -2,15 +2,35 @@ import { StyleSheet } from 'react-native';
 
 export default StyleSheet.create({
     /* Main */
+    mainTitle:{
+        color: '#007EA8',
+        fontSize: 20,
+        marginTop: 10
+    },
+    mainText:{
+        fontSize: 17,
+        color: '#777',
+        paddingVertical: 10
+    },
+    textBold:{
+        fontWeight: 'bold'
+    },
+    alignLeft:{
+        alignSelf: 'flex-start',
+    },
+    alignCenter:{
+        alignSelf: 'center',
+        textAlign: 'center'
+    },
     containerCenter: {
         alignItems: 'center',
         justifyContent: 'center',
     },
     mainBackgroundImage:{
-        height: '80%',
+        height: 500,
         width: '100%',
-        backgroundColor: '#000',
-        position: 'absolute'
+        backgroundColor: '#007EA9',
+        position: 'absolute',
     },
     mainLogo:{
         width: '60%',
@@ -23,9 +43,10 @@ export default StyleSheet.create({
         paddingVertical: 30,
         justifyContent:'center',
         width: '100%',
-        alignSelf: 'baseline',
         borderTopEndRadius: 30,
-        borderTopStartRadius: 30
+        borderTopStartRadius: 30,
+        /*position: 'absolute',
+        bottom: 0*/
     },
     mainContainer:{
         flex: 1,
@@ -33,6 +54,7 @@ export default StyleSheet.create({
     },
     scrollView:{
         height: '100%',
+        width: '100%',
     },
     spacer:{
         marginBottom: 50
@@ -50,14 +72,7 @@ export default StyleSheet.create({
     },
 
     /* Inputs */
-    mainInputTitle:{
-        color: '#007EA8',
-        fontSize: 20,
-        alignSelf: 'flex-start',
-        marginTop: 10
-    },
-    mainInputContainer:{
-       
+    mainInputContainer:{       
         flexDirection: 'row',
         borderBottomColor: '#606060',
         borderBottomWidth: 1,

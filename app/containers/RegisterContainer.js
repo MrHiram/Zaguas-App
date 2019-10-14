@@ -1,8 +1,12 @@
 import React from 'react';
 import { View, Text, Switch } from 'react-native';
+
 import InputMT from '../components/InputMT';
 import TouchableText from '../components/TouchableText';
 import MainButton from '../components/MainButton';
+
+import validator from '../services/Validator';
+
 import MainStyles from '../styles/MainStyles';
 
 export default class LoginContainer extends React.Component {
@@ -10,7 +14,7 @@ export default class LoginContainer extends React.Component {
         name: '',
         nameError: '',
         nameSuccess: false,
-        lastname:'',
+        lastname: '',
         lastnameError: '',
         lastnameSuccess: false,
         email: '',
@@ -20,19 +24,20 @@ export default class LoginContainer extends React.Component {
         passwordError: '',
         passwordSuccess: false,
         showPassword: true,
-        confirmPassword:'',
+        confirmPassword: '',
         confirmPasswordError: '',
         confirmPasswordSuccess: false,
-        
+        termsSuccess: false,
+        termsError: false
     };
 
     handleValue = (key, value) => {
         switch (key) {
-            case 'name': 
-            this.setState({
-                name: value
-            });
-            return;
+            case 'name':
+                this.setState({
+                    name: value
+                });
+                return;
             case 'lastname':
                 this.setState({
                     lastname: value
@@ -55,19 +60,67 @@ export default class LoginContainer extends React.Component {
                 return;
         }
     }
+
     handleToggleSwitch = () =>
-    this.setState(state => ({
-        switchValue: !state.switchValue,
-    }));
+        this.setState({
+            termsSuccess: !this.state.termsSuccess,
+        });
+
     togglePasswords = () => {
         this.setState({
             showPassword: !this.state.showPassword
         });
     }
+
+    requestRegister = () => {
+        let validName = this.state.name != '' ? true : false;
+        let validLastName = this.state.lastname != '' ? true : false;
+        let validEmail = validator.email(this.state.email);
+        let validPassword = validator.password(this.state.password);
+        let validconfirmPassword = validator.passwordConfirm(this.state.password, this.state.confirmPassword);
+
+        if (validName && validLastName && validEmail && validPassword && validconfirmPassword && this.state.termsSuccess) {
+            var data = {
+                name: this.state.name,
+                lastname: this.state.lastname,
+                email: this.state.email,
+                password: this.state.password,
+                confirmPassword: this.state.confirmPassword
+            };
+            //TODO: enviar data a padre
+        } else {
+            if (!validName)
+                this.setState({ nameError: 'Ingrese su nombre.', nameSuccess: false });
+            else
+                this.setState({ nameError: '', nameSuccess: true });
+
+            if (!validLastName)
+                this.setState({ lastnameError: 'Ingrese su apellido.', lastnameSuccess: false });
+            else
+                this.setState({ lastnameError: '', lastnameSuccess: true });
+
+            if (!validEmail)
+                this.setState({ emailError: 'Formato incorrecto.', emailSuccess: false });
+            else
+                this.setState({ emailError: '', emailSuccess: true });
+
+            if (!validconfirmPassword)
+                this.setState({ confirmPasswordError: 'Las contraseñas no coinciden.', confirmPasswordSuccess: false })
+            else
+                this.setState({ confirmPasswordError: '', confirmPasswordSuccess: true });
+
+            if (!validPassword)
+                this.setState({ passwordError: 'Debe superar los 8 caracteres.', passwordSuccess: false })
+            else
+                this.setState({ passwordError: '', passwordSuccess: true });
+
+            this.setState({termsError: !this.state.termsSuccess});
+        }
+    }
+
     render() {
         return (
             <View style={MainStyles.containerCenter}>
-                <Text>{this.state.name}</Text>
                 <InputMT
                     title='Nombre'
                     placeholder='Ingrese su nombre'
@@ -76,7 +129,6 @@ export default class LoginContainer extends React.Component {
                     handleValue={this.handleValue}
                     error={this.state.nameError}
                     success={this.state.nameSuccess} />
-                <Text>{this.state.lastname}</Text>
                 <InputMT
                     title='Apellido'
                     placeholder='Ingrese su apellido'
@@ -85,7 +137,6 @@ export default class LoginContainer extends React.Component {
                     handleValue={this.handleValue}
                     error={this.state.lastnameError}
                     success={this.state.lastnameSuccess} />
-                <Text>{this.state.email}</Text>
                 <InputMT
                     title='Correo'
                     placeholder='Ingrese su correo'
@@ -107,27 +158,29 @@ export default class LoginContainer extends React.Component {
                 <InputMT
                     title='Confirmar contraseña'
                     placeholder='Ingrese la misma contraseña'
-                    handler='password'
+                    handler='confirmPassword'
                     secureTextEntry={this.state.showPassword}
                     value={this.state.confirmPassword}
                     handleValue={this.handleValue}
                     togglePassword={this.togglePasswords}
                     error={this.state.confirmPasswordError}
                     success={this.state.confirmPasswordSuccess} />
-                    <View style={MainStyles.switchContainer}>
+                <View style={MainStyles.switchContainer}>
                     <Switch
                         style={MainStyles.switchSize}
                         onValueChange={this.handleToggleSwitch}
-                        value={this.state.switchValue} />
-                    <Text style={MainStyles.switchText}>acepto los términos y condiciones</Text>
+                        value={this.state.termsSuccess} />
+                    <Text style={[MainStyles.switchText, this.state.termsError ? MainStyles.mainInputErrorMessage : null]}>Acepto los términos y condiciones</Text>
                 </View>
-                <MainButton 
-                    title='Registrarse'/>
+                <MainButton
+                    title='Registrarse'
+                    onPress={this.requestRegister} />
                 <TouchableText
                     style={MainStyles.spacer}
                     alignCenter={true}
                     outerText='¿Ya tienes cuenta?'
-                    innerText='Iniciar sesión'/>
+                    innerText='Iniciar sesión'
+                    onPress={() => this.props.changeModule(1)} />
             </View>
         );
     };

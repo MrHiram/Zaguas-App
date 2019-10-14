@@ -7,7 +7,7 @@ export default function MainButton(props) {
         <>
             <TouchableOpacity
                 style={MainStyles.MainButtonContainer}
-                onPress={props.onPress}>
+                onPress={() => props.onPress()}>
                 <Text
                     style={MainStyles.MainButtonText}>
                     {props.title}

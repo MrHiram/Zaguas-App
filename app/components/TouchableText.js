@@ -9,7 +9,7 @@ export default function TouchableText(props) {
         >
             <Text>{props.outerText}</Text>
             <TouchableOpacity
-                onPress={props.opPress}>
+                onPress={()=>props.onPress()}>
                 <Text
                     style={MainStyles.TouchableText}>
                     {props.innerText}
