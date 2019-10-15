@@ -7,6 +7,7 @@ import AuthCheckScreen from './app/screens/AuthCheckScreen';
 import AuthScreen from './app/screens/AuthScreen';
 import HomeScreen from './app/screens/HomeScreen';
 import SetupScreen from './app/screens/SetupScreen';
+import ValidateEmailScreen from './app/screens/ValidateEmailScreen';
 
 const AppStack = createStackNavigator(
   {
@@ -21,6 +22,10 @@ const AppStack = createStackNavigator(
 const AuthStack = createStackNavigator(
   {
     Auth: AuthScreen,
+    ValidateEmail: {
+      screen: ValidateEmailScreen,
+      path: 'validateEmail/:token'
+    }
   },
   {    
     initialRouteName: 'Auth',
@@ -34,7 +39,10 @@ const AppSwitch = createSwitchNavigator(
   {
     AuthCheck: AuthCheckScreen,
     App: AppStack,
-    Auth: AuthStack,
+    Auth: {
+      screen: AuthStack,
+      path: ''
+    },
   }
 );
 
@@ -44,6 +52,7 @@ const AppContainer = createAppContainer(AppSwitch);
 export default class App extends React.Component {
   
   render() {
-    return <AppContainer/>;
+    const prefix = Linking.makeUrl('/');
+    return <AppContainer uriPrefix={prefix}/>;
   }
 }

@@ -43,9 +43,9 @@ export default class AuthScreen extends React.Component {
                     style={MainStyles.mainLogo} />
                 <View
                     style={MainStyles.mainCard}>
-                    {this.state.activeModule == 1 ? <LoginContainer loginSuccess={this.loginSuccess} requestFetch={this.requestFetch} changeModule={this.toggleModules} /> : null}
-                    {this.state.activeModule == 2 ? <RegisterContainer requestFetch={this.requestFetch} changeModule={this.toggleModules} /> : null}
-                    {this.state.activeModule == 3 ? <RecoverContainer requestFetch={this.requestFetch} changeModule={this.toggleModules} /> : null}
+                    {this.state.activeModule == 1 ? <LoginContainer loginSuccess={this.loginSuccess} changeModule={this.toggleModules} /> : null}
+                    {this.state.activeModule == 2 ? <RegisterContainer changeModule={this.toggleModules} /> : null}
+                    {this.state.activeModule == 3 ? <RecoverContainer changeModule={this.toggleModules} /> : null}
                     {this.state.activeModule == 4 ? <RecoverWaitingContainer changeModule={this.toggleModules} /> : null}
                     {this.state.activeModule == 5 ? <RecoverSuccessContainer changeModule={this.toggleModules} email='mrhiram1@gmail.com' /> : null}
                 </View>

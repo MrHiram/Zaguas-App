@@ -86,8 +86,20 @@ export default class LoginContainer extends React.Component {
                 email: this.state.email,
                 password: this.state.password,
                 passsword_confirmation: this.state.confirmPassword
-            };
-            this.props.requestFetch('register', data);
+            };            
+            Fetcher.postNoToken('register', data)
+                .then(
+                    (response) => {
+                        if (response.data.accessToken) {
+                            //Esperar
+                        } else if (response.data.error) {
+                            this.handleError(response.data.error);
+                        }
+                    }
+                )
+                .catch(
+                    (error) => { console.log(error  ) }
+                );
         } else {
             if (!validName)
                 this.setState({ nameError: 'Ingrese su nombre.', nameSuccess: false });
@@ -116,6 +128,35 @@ export default class LoginContainer extends React.Component {
 
             this.setState({termsError: !this.state.termsSuccess});
         }
+    }
+
+    handleError = (errors) => {
+        let emailError = '';
+        let passwordError = '';
+        console.log(errors);
+        errors.forEach(error => {
+            switch(error){
+                case "Invalid credentials":
+                    emailError = passwordError = 'Credenciales invalidas';
+                    break;
+                case "The email field is required.":
+                    passwordError = 'Correo requerido';
+                    break;
+                case "The password field is required.": 
+                    passwordError = 'Contraseña requerida';
+                    break;
+                case "The email must be a valid email address.":
+                    emailError = 'Formato incorrecto';
+                    break;
+                case "User does not exist":
+                    emailError = 'Usuario no encontrado';
+                    break;
+            }
+        });
+        this.setState({
+            emailError: emailError,
+            passwordError: passwordError,
+        });
     }
 
     render() {

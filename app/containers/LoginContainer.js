@@ -80,7 +80,6 @@ export default class LoginContainer extends React.Component {
     handleError = (errors) => {
         let emailError = '';
         let passwordError = '';
-        console.log(errors);
         errors.forEach(error => {
             switch(error){
                 case "Invalid credentials":
