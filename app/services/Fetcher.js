@@ -21,6 +21,9 @@ const fetcher = {
             });
 
     },
+    getNotToken: async function (route, value) {
+        return await axios.get(this.url + route + "/" + value);
+    },
     getToken: async function (route, accessToken) {
         var config = {
             headers: { 'Authorization': 'Bearer ' + accessToken }
