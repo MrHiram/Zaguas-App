@@ -3,29 +3,36 @@ import React from 'react';
 import { View, ActivityIndicator, StatusBar, AsyncStorage } from 'react-native';
 
 import LocalStorage from '../services/LocalStorage';
+import Fetcher from '../services/Fetcher';
 
 import MainStyles from '../styles/MainStyles';
 
-export default class AuthCheckScreen extends React.Component {
+export default class ValidateEmailScreen extends React.Component {
 
     componentDidMount() {
-        this.props.navigation.getParam('token', {});
+        this.checkToken();
     }
 
-    clearAsyncStorage = async () => {
-        AsyncStorage.clear();
+    checkToken = () => {
+        let paramToken = this.props.navigation.getParam('token', {});
+
+        Fetcher.getToken('checkToken', paramToken)
+            .then((response) => {
+                LocalStorage.saveToken(paramToken);
+                this.props.navigation.navigate('App');
+            })
+            .catch((error) => {
+                console.log(error);
+                this.props.navigation.goBack();
+            });
     }
-    _bootstrapAsync = async () => {
-        const userToken = await LocalStorage.retrieveToken();
-        try {
-            this.props.navigation.navigate(userToken ? 'App' : 'Auth');
-        } catch (e) {
-            console.log(e);
-        }
-    };
+
     render() {
         return (
-        
+            <View style={MainStyles.containerCenter} >
+                <ActivityIndicator />
+                <StatusBar barStyle="default" />
+            </View>
         );
     }
 }

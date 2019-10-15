@@ -23,18 +23,9 @@ const fetcher = {
     },
     getToken: async function (route, accessToken) {
         var config = {
-            headers: { 'Authorization': 'bearer ' + accessToken }
+            headers: { 'Authorization': 'Bearer ' + accessToken }
         }
-        return await axios.get(
-            this.url + route,
-            config)
-            .then(function (response) {
-                console.log(response);
-            })
-            .catch(function (error) {
-                console.log(error);
-            });
-
+        return await axios.get(this.url + route,config);
     },
 }
 export default fetcher;

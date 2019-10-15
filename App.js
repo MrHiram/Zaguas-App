@@ -1,7 +1,9 @@
 import React from 'react';
 
+import { Linking } from 'expo';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
+
 
 import AuthCheckScreen from './app/screens/AuthCheckScreen';
 import AuthScreen from './app/screens/AuthScreen';
@@ -21,14 +23,13 @@ const AppStack = createStackNavigator(
 );
 const AuthStack = createStackNavigator(
   {
-    Auth: AuthScreen,
+    AuthS: AuthScreen, 
     ValidateEmail: {
       screen: ValidateEmailScreen,
       path: 'validateEmail/:token'
-    }
+    },
   },
   {    
-    initialRouteName: 'Auth',
     defaultNavigationOptions: {
       header: null
     }
@@ -38,11 +39,13 @@ const AuthStack = createStackNavigator(
 const AppSwitch = createSwitchNavigator(
   {
     AuthCheck: AuthCheckScreen,
-    App: AppStack,
+    App: {
+      screen: AppStack,
+      path: 'home'},
     Auth: {
       screen: AuthStack,
       path: ''
-    },
+    }
   }
 );
 

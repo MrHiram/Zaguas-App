@@ -4,8 +4,10 @@ import { View, Text, Switch } from 'react-native';
 import InputMT from '../components/InputMT';
 import TouchableText from '../components/TouchableText';
 import MainButton from '../components/MainButton';
+import WaitingContainer from './RecoverWaitingContainer';
 
 import validator from '../services/Validator';
+import Fetcher from '../services/Fetcher';
 
 import MainStyles from '../styles/MainStyles';
 
@@ -85,11 +87,14 @@ export default class LoginContainer extends React.Component {
                 lastname: this.state.lastname,
                 email: this.state.email,
                 password: this.state.password,
-                passsword_confirmation: this.state.confirmPassword
-            };            
+                password_confirmation: this.state.confirmPassword
+            };
+            console.log(data);
+            
             Fetcher.postNoToken('register', data)
                 .then(
                     (response) => {
+                        console.log(response);
                         if (response.data.accessToken) {
                             //Esperar
                         } else if (response.data.error) {
