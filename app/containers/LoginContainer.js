@@ -80,6 +80,8 @@ export default class LoginContainer extends React.Component {
     handleError = (errors) => {
         let emailError = '';
         let passwordError = '';
+        console.log(errors);
+        
         errors.forEach(error => {
             switch(error){
                 case "Invalid credentials":
@@ -96,6 +98,9 @@ export default class LoginContainer extends React.Component {
                     break;
                 case "User does not exist":
                     emailError = 'Usuario no encontrado';
+                    break;
+                case "Inactive user":
+                    emailError = 'Verifica tu correo, por seguridad';
                     break;
             }
         });

@@ -4,7 +4,7 @@ import { View, Text, Switch } from 'react-native';
 import InputMT from '../components/InputMT';
 import TouchableText from '../components/TouchableText';
 import MainButton from '../components/MainButton';
-import WaitingContainer from './RecoverWaitingContainer';
+import WaitingContainer from './RegisterWaitingContainer';
 
 import validator from '../services/Validator';
 import Fetcher from '../services/Fetcher';
@@ -30,7 +30,8 @@ export default class LoginContainer extends React.Component {
         confirmPasswordError: '',
         confirmPasswordSuccess: false,
         termsSuccess: false,
-        termsError: false
+        termsError: false,
+        waiting: false
     };
 
     handleValue = (key, value) => {
@@ -89,21 +90,23 @@ export default class LoginContainer extends React.Component {
                 password: this.state.password,
                 password_confirmation: this.state.confirmPassword
             };
-            console.log(data);
-            
+            this.setState({
+                waiting: true
+            });
             Fetcher.postNoToken('register', data)
                 .then(
                     (response) => {
                         console.log(response);
-                        if (response.data.accessToken) {
-                            //Esperar
+                        if (response.data.message) {
+                            this.props.toggleEmail(data.email);
+                            this.props.changeModule(6);
                         } else if (response.data.error) {
                             this.handleError(response.data.error);
                         }
                     }
                 )
                 .catch(
-                    (error) => { console.log(error  ) }
+                    (error) => { console.log(error) }
                 );
         } else {
             if (!validName)
@@ -131,7 +134,7 @@ export default class LoginContainer extends React.Component {
             else
                 this.setState({ passwordError: '', passwordSuccess: true });
 
-            this.setState({termsError: !this.state.termsSuccess});
+            this.setState({ termsError: !this.state.termsSuccess });
         }
     }
 
@@ -140,14 +143,14 @@ export default class LoginContainer extends React.Component {
         let passwordError = '';
         console.log(errors);
         errors.forEach(error => {
-            switch(error){
+            switch (error) {
                 case "Invalid credentials":
                     emailError = passwordError = 'Credenciales invalidas';
                     break;
                 case "The email field is required.":
                     passwordError = 'Correo requerido';
                     break;
-                case "The password field is required.": 
+                case "The password field is required.":
                     passwordError = 'Contraseña requerida';
                     break;
                 case "The email must be a valid email address.":
@@ -159,75 +162,80 @@ export default class LoginContainer extends React.Component {
             }
         });
         this.setState({
+            waiting: false,
             emailError: emailError,
             passwordError: passwordError,
         });
     }
 
     render() {
-        return (
-            <View style={MainStyles.containerCenter}>
-                <InputMT
-                    title='Nombre'
-                    placeholder='Ingrese su nombre'
-                    handler='name'
-                    value={this.state.name}
-                    handleValue={this.handleValue}
-                    error={this.state.nameError}
-                    success={this.state.nameSuccess} />
-                <InputMT
-                    title='Apellido'
-                    placeholder='Ingrese su apellido'
-                    handler='lastname'
-                    value={this.state.lastname}
-                    handleValue={this.handleValue}
-                    error={this.state.lastnameError}
-                    success={this.state.lastnameSuccess} />
-                <InputMT
-                    title='Correo'
-                    placeholder='Ingrese su correo'
-                    handler='email'
-                    value={this.state.email}
-                    handleValue={this.handleValue}
-                    error={this.state.emailError}
-                    success={this.state.emailSuccess} />
-                <InputMT
-                    title='Contraseña'
-                    placeholder='Crea una contraseña'
-                    handler='password'
-                    secureTextEntry={this.state.showPassword}
-                    value={this.state.password}
-                    handleValue={this.handleValue}
-                    togglePassword={this.togglePasswords}
-                    error={this.state.passwordError}
-                    success={this.state.passwordSuccess} />
-                <InputMT
-                    title='Confirmar contraseña'
-                    placeholder='Ingrese la misma contraseña'
-                    handler='confirmPassword'
-                    secureTextEntry={this.state.showPassword}
-                    value={this.state.confirmPassword}
-                    handleValue={this.handleValue}
-                    togglePassword={this.togglePasswords}
-                    error={this.state.confirmPasswordError}
-                    success={this.state.confirmPasswordSuccess} />
-                <View style={MainStyles.switchContainer}>
-                    <Switch
-                        style={MainStyles.switchSize}
-                        onValueChange={this.handleToggleSwitch}
-                        value={this.state.termsSuccess} />
-                    <Text style={[MainStyles.switchText, this.state.termsError ? MainStyles.mainInputErrorMessage : null]}>Acepto los términos y condiciones</Text>
-                </View>
-                <MainButton
-                    title='Registrarse'
-                    onPress={this.requestRegister} />
-                <TouchableText
-                    style={MainStyles.spacer}
-                    alignCenter={true}
-                    outerText='¿Ya tienes cuenta?'
-                    innerText='Iniciar sesión'
-                    onPress={() => this.props.changeModule(1)} />
-            </View>
+        return (<>
+            {this.state.waiting ?
+                <WaitingContainer />
+                :
+                <View style={MainStyles.containerCenter}>
+                    <InputMT
+                        title='Nombre'
+                        placeholder='Ingrese su nombre'
+                        handler='name'
+                        value={this.state.name}
+                        handleValue={this.handleValue}
+                        error={this.state.nameError}
+                        success={this.state.nameSuccess} />
+                    <InputMT
+                        title='Apellido'
+                        placeholder='Ingrese su apellido'
+                        handler='lastname'
+                        value={this.state.lastname}
+                        handleValue={this.handleValue}
+                        error={this.state.lastnameError}
+                        success={this.state.lastnameSuccess} />
+                    <InputMT
+                        title='Correo'
+                        placeholder='Ingrese su correo'
+                        handler='email'
+                        value={this.state.email}
+                        handleValue={this.handleValue}
+                        error={this.state.emailError}
+                        success={this.state.emailSuccess} />
+                    <InputMT
+                        title='Contraseña'
+                        placeholder='Crea una contraseña'
+                        handler='password'
+                        secureTextEntry={this.state.showPassword}
+                        value={this.state.password}
+                        handleValue={this.handleValue}
+                        togglePassword={this.togglePasswords}
+                        error={this.state.passwordError}
+                        success={this.state.passwordSuccess} />
+                    <InputMT
+                        title='Confirmar contraseña'
+                        placeholder='Ingrese la misma contraseña'
+                        handler='confirmPassword'
+                        secureTextEntry={this.state.showPassword}
+                        value={this.state.confirmPassword}
+                        handleValue={this.handleValue}
+                        togglePassword={this.togglePasswords}
+                        error={this.state.confirmPasswordError}
+                        success={this.state.confirmPasswordSuccess} />
+                    <View style={MainStyles.switchContainer}>
+                        <Switch
+                            style={MainStyles.switchSize}
+                            onValueChange={this.handleToggleSwitch}
+                            value={this.state.termsSuccess} />
+                        <Text style={[MainStyles.switchText, this.state.termsError ? MainStyles.mainInputErrorMessage : null]}>Acepto los términos y condiciones</Text>
+                    </View>
+                    <MainButton
+                        title='Registrarse'
+                        onPress={this.requestRegister} />
+                    <TouchableText
+                        style={MainStyles.spacer}
+                        alignCenter={true}
+                        outerText='¿Ya tienes cuenta?'
+                        innerText='Iniciar sesión'
+                        onPress={() => this.props.changeModule(1)} />
+                </View>}
+        </>
         );
     };
 }

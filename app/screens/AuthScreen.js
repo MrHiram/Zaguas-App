@@ -7,18 +7,26 @@ import RegisterContainer from '../containers/RegisterContainer';
 import RecoverContainer from '../containers/RecoverContainer';
 import RecoverWaitingContainer from '../containers/RecoverWaitingContainer';
 import RecoverSuccessContainer from '../containers/RecoverSuccessContainer';
+import RegisterSuccessContainer from '../containers/RegisterSuccessContainer';
 
 import MainStyles from '../styles/MainStyles';
 
 export default class AuthScreen extends React.Component {
     state = {
         accessToken: '',
-        activeModule: 1
+        activeModule: 1,
+        displayEmail: ''
     }
 
     toggleModules = (moduleNumber) => {
         this.setState({
             activeModule: moduleNumber
+        });
+    }
+
+    toggleEmail = (email) => {
+        this.setState({
+            displayEmail: email
         });
     }
 
@@ -44,10 +52,11 @@ export default class AuthScreen extends React.Component {
                 <View
                     style={MainStyles.mainCard}>
                     {this.state.activeModule == 1 ? <LoginContainer loginSuccess={this.loginSuccess} changeModule={this.toggleModules} /> : null}
-                    {this.state.activeModule == 2 ? <RegisterContainer changeModule={this.toggleModules} /> : null}
+                    {this.state.activeModule == 2 ? <RegisterContainer changeModule={this.toggleModules} toggleEmail={this.toggleEmail} /> : null}
                     {this.state.activeModule == 3 ? <RecoverContainer changeModule={this.toggleModules} /> : null}
                     {this.state.activeModule == 4 ? <RecoverWaitingContainer changeModule={this.toggleModules} /> : null}
-                    {this.state.activeModule == 5 ? <RecoverSuccessContainer changeModule={this.toggleModules} email='mrhiram1@gmail.com' /> : null}
+                    {this.state.activeModule == 5 ? <RecoverSuccessContainer changeModule={this.toggleModules} email={this.state.displayEmail} /> : null}
+                    {this.state.activeModule == 6 ? <RegisterSuccessContainer changeModule={this.toggleModules} email={this.state.displayEmail} /> : null}
                 </View>
             </KeyboardAwareScrollView>
         );

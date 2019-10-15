@@ -3,7 +3,7 @@ import { View, Text } from 'react-native';
 import MainButton from '../components/MainButton';
 import MainStyles from '../styles/MainStyles';
 
-export default class RecoverSuccessContainer extends React.Component {
+export default class RegisterSuccessContainer extends React.Component {
     render() {
         return (
             <View style={MainStyles.containerCenter}>
@@ -14,7 +14,7 @@ export default class RecoverSuccessContainer extends React.Component {
                 <View style={{ marginVertical: 25 } /* This is a spacer */} />
                 <Text
                     style={[MainStyles.mainText, MainStyles.alignCenter]}>
-                    Te enviamos un correo a
+                    Tu contraseña ha sido enviada a
                 </Text>
                 <Text
                     style={[MainStyles.mainText, MainStyles.textBold, MainStyles.alignCenter]}>
@@ -23,7 +23,7 @@ export default class RecoverSuccessContainer extends React.Component {
                 <View style={{ marginVertical: 15 } /* This is a spacer */} />
                 <Text
                     style={[MainStyles.mainText, MainStyles.alignCenter]}>
-                    Verificar tu cuenta{'\n'}para poder ingresar.
+                    El enlace tiene vigencia por{'\n'}60 minutos.
                 </Text>
                 <View style={{ marginVertical: 25 } /* This is a spacer */} />
                 <MainButton
