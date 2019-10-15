@@ -5,7 +5,9 @@ import InputMT from '../components/InputMT';
 import TouchableText from '../components/TouchableText';
 import MainButton from '../components/MainButton';
 
+import Fetcher from '../services/Fetcher';
 import Validator from '../services/Validator';
+import LocalStorage from '../services/LocalStorage';
 
 import MainStyles from '../styles/MainStyles';
 
@@ -41,25 +43,67 @@ export default class LoginContainer extends React.Component {
         });
     }
 
-    requestLogin = () =>{
+    requestLogin = async () => {
         let validEmail = Validator.email(this.state.email);
         let validPassword = Validator.password(this.state.password);
-        if(validEmail&&validPassword){
+        if (validEmail&&validPassword) {
             var data = {
                 email: this.state.email,
                 password: this.state.password
             };
-            //TODO: enviar data a padre
-        }else{
-            if(!validEmail)
-                this.setState({emailError: 'Formato incorrecto.', emailSuccess: false});
+            Fetcher.postNoToken('login', data)
+                .then(
+                    (response) => {
+                        if (response.data.accessToken) {
+                            LocalStorage.saveToken(response.data.accessToken);
+                            this.props.loginSuccess();
+                        } else if (response.data.error) {
+                            this.handleError(response.data.error);
+                        }
+                    }
+                )
+                .catch(
+                    (error) => { console.log(error) }
+                );
+        } else {
+            if (!validEmail)
+                this.setState({ emailError: 'Formato incorrecto', emailSuccess: false });
             else
-                this.setState({emailError: '', emailSuccess: true});
-            if(!validPassword)
-                this.setState({passwordError: 'Debe superar los 8 caracteres.', passwordSuccess: false})
+                this.setState({ emailError: '', emailSuccess: true });
+            if (!validPassword)
+                this.setState({ passwordError: 'Debe superar los 8 caracteres', passwordSuccess: false })
             else
-                this.setState({passwordError: '',passwordSuccess: true});
+                this.setState({ passwordError: '', passwordSuccess: true });
         }
+    }
+
+    handleError = (errors) => {
+        let emailError = '';
+        let passwordError = '';
+        console.log(errors);
+        errors.forEach(error => {
+            switch(error){
+                case "Invalid credentials":
+                    emailError = passwordError = 'Credenciales invalidas';
+                    break;
+                case "The email field is required.":
+                    passwordError = 'Correo requerido';
+                    break;
+                case "The password field is required.": 
+                    passwordError = 'Contraseña requerida';
+                    break;
+                case "The email must be a valid email address.":
+                    emailError = 'Formato incorrecto';
+                    break;
+                case "User does not exist":
+                    emailError = 'Usuario no encontrado';
+                    break;
+            }
+        });
+        this.setState({
+            emailError: emailError,
+            passwordError: passwordError,
+        });
     }
 
     render() {
@@ -85,17 +129,17 @@ export default class LoginContainer extends React.Component {
                     success={this.state.passwordSuccess} />
                 <TouchableText
                     alignCenter={false}
-                    innerText='¿Se te olvidó lo contraseña?' 
-                    onPress={() => this.props.changeModule(3)}/>
+                    innerText='¿Se te olvidó lo contraseña?'
+                    onPress={() => this.props.changeModule(3)} />
                 <MainButton
                     title='Iniciar Sesión'
-                    onPress={this.requestLogin}/>
+                    onPress={this.requestLogin} />
                 <TouchableText
                     style={MainStyles.spacer}
                     alignCenter={true}
                     outerText='¿No tienes cuenta?'
                     innerText='Crear una'
-                    onPress={() => this.props.changeModule(2)}/>
+                    onPress={() => this.props.changeModule(2)} />
             </View>
         );
     };

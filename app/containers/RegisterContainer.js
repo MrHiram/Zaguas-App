@@ -85,9 +85,9 @@ export default class LoginContainer extends React.Component {
                 lastname: this.state.lastname,
                 email: this.state.email,
                 password: this.state.password,
-                confirmPassword: this.state.confirmPassword
+                passsword_confirmation: this.state.confirmPassword
             };
-            //TODO: enviar data a padre
+            this.props.requestFetch('register', data);
         } else {
             if (!validName)
                 this.setState({ nameError: 'Ingrese su nombre.', nameSuccess: false });

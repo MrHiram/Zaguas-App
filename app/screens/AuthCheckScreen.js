@@ -1,5 +1,9 @@
 import React from 'react';
-import { View, ActivityIndicator, StatusBar, AsyncStorage, StyleSheet } from 'react-native';
+
+import { View, ActivityIndicator, StatusBar, AsyncStorage } from 'react-native';
+
+import LocalStorage from '../services/LocalStorage';
+
 import MainStyles from '../styles/MainStyles';
 
 export default class AuthCheckScreen extends React.Component {
@@ -11,7 +15,7 @@ export default class AuthCheckScreen extends React.Component {
     AsyncStorage.clear();
   }
   _bootstrapAsync = async () => {
-    const userToken = await AsyncStorage.getItem('accessToken');
+    const userToken = await LocalStorage.retrieveToken();
     try {
       this.props.navigation.navigate(userToken ? 'App' : 'Auth');
     } catch (e) {
