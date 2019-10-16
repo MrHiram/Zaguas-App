@@ -14,8 +14,9 @@ export default class ValidateEmailScreen extends React.Component {
     }
 
     checkToken = () => {
-        let paramToken = this.props.navigation.getParam('token', {});
-
+        let paramToken = this.props.navigation.getParam('token');
+        console.log(paramToken);
+        
         Fetcher.getToken('checkToken', paramToken)
             .then((response) => {
                 LocalStorage.saveToken(paramToken);

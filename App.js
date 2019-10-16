@@ -10,6 +10,7 @@ import AuthScreen from './app/screens/AuthScreen';
 import HomeScreen from './app/screens/HomeScreen';
 import SetupScreen from './app/screens/SetupScreen';
 import ValidateEmailScreen from './app/screens/ValidateEmailScreen';
+import ResetPasswordScreen from './app/screens/ResetPasswordScreen';
 
 const AppStack = createStackNavigator(
   {
@@ -23,11 +24,17 @@ const AppStack = createStackNavigator(
 );
 const AuthStack = createStackNavigator(
   {
-    AuthS: AuthScreen, 
+    AuthS: {
+      screen: AuthScreen,
+    }, 
     ValidateEmail: {
       screen: ValidateEmailScreen,
       path: 'validateEmail/:token'
     },
+    ResetPassword: {
+      screen: ResetPasswordScreen,
+      path: 'resetPassword/:token'
+    }
   },
   {    
     defaultNavigationOptions: {
@@ -38,7 +45,10 @@ const AuthStack = createStackNavigator(
 
 const AppSwitch = createSwitchNavigator(
   {
-    AuthCheck: AuthCheckScreen,
+    AuthCheck:{
+      screen: AuthCheckScreen,
+      path: 'auth'
+    },
     App: {
       screen: AppStack,
       path: 'home'},

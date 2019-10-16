@@ -14,7 +14,7 @@ export default class RegisterSuccessContainer extends React.Component {
                 <View style={{ marginVertical: 25 } /* This is a spacer */} />
                 <Text
                     style={[MainStyles.mainText, MainStyles.alignCenter]}>
-                    Tu contraseña ha sido enviada a
+                    Te enviamos un correo a
                 </Text>
                 <Text
                     style={[MainStyles.mainText, MainStyles.textBold, MainStyles.alignCenter]}>
@@ -23,7 +23,7 @@ export default class RegisterSuccessContainer extends React.Component {
                 <View style={{ marginVertical: 15 } /* This is a spacer */} />
                 <Text
                     style={[MainStyles.mainText, MainStyles.alignCenter]}>
-                    El enlace tiene vigencia por{'\n'}60 minutos.
+                    Verificar tu cuenta{'\n'}para poder ingresar.
                 </Text>
                 <View style={{ marginVertical: 25 } /* This is a spacer */} />
                 <MainButton

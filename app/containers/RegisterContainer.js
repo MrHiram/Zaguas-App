@@ -106,7 +106,10 @@ export default class LoginContainer extends React.Component {
                     }
                 )
                 .catch(
-                    (error) => { console.log(error) }
+                    (error) => { 
+                        console.log(error);
+                        this.setState({waiting: false});
+                    }
                 );
         } else {
             if (!validName)
