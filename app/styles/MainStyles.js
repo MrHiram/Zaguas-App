@@ -27,15 +27,53 @@ export default StyleSheet.create({
         justifyContent: 'center',
     },
     mainBackgroundImage:{
-        height: 500,
+        height: '100%',
         width: '100%',
         backgroundColor: '#007EA9',
         position: 'absolute',
+    },
+    setupMainImage:{
+        width: '100%',
+        height: '100%',
+    },
+    setupCardImg:{
+        alignSelf: "center",
+        backgroundColor:'#ccc',
+        height: '55%',
+        overflow: 'hidden'
+    },
+    setupCardImagContainer:{
+    height: '50%',
+    },
+    setupContainer:{
+        backgroundColor: '#fff',
+        borderRadius: 10,
+        alignSelf:'center',
+        overflow: 'hidden',
+        width: '90%',
+        height:'30%',
+        marginBottom: 30
+    },
+    paddinText:{
+        paddingHorizontal:20
     },
     mainLogo:{
         width: '60%',
         alignSelf: 'center',
         marginBottom: 80
+    },
+    whiteText:{
+        color: '#fff',
+        marginBottom: 30,
+        fontSize: 20,
+        textAlign: 'center'
+    },
+    secondaryLogo:{
+       width: '80%',
+       alignSelf:'center',
+       height:'10%',
+       marginTop: 60,
+       marginBottom:20
     },
     mainCard:{
         backgroundColor:"#fff",
@@ -45,9 +83,9 @@ export default StyleSheet.create({
         width: '100%',
         borderTopEndRadius: 30,
         borderTopStartRadius: 30,
-        /*position: 'absolute',
-        bottom: 0*/
+        height: '100%'
     },
+
     mainContainer:{
         flex: 1,
         backgroundColor: "#0076A0"
