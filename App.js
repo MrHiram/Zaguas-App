@@ -11,6 +11,7 @@ import HomeScreen from './app/screens/HomeScreen';
 import SetupScreen from './app/screens/SetupScreen';
 import ValidateEmailScreen from './app/screens/ValidateEmailScreen';
 import ResetPasswordScreen from './app/screens/ResetPasswordScreen';
+import AddPetScreen from './app/screens/AddPetScreen';
 
 const AppStack = createStackNavigator(
   {

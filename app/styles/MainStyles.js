@@ -75,8 +75,17 @@ export default StyleSheet.create({
        marginTop: 60,
        marginBottom:20
     },
+    profileCard:{
+        height:800,
+        paddingTop: 0,
+        marginBottom: 20
+    },
+    profilePictureText:{
+        alignSelf:'center',
+        color: '#007EA8'
+    },
     mainCard:{
-        backgroundColor:"#fff",
+        backgroundColor:"#ffff",
         paddingHorizontal: 20,
         paddingVertical: 30,
         justifyContent:'center',
@@ -132,6 +141,12 @@ export default StyleSheet.create({
         color: '#E44F3C',
         fontStyle: 'italic',
         alignSelf: 'flex-start',
+    },
+    comboboxProfile:{
+        borderBottomColor: '#606060',
+        borderBottomWidth: 1,
+        height: 50, 
+        width: '100%'
     },
 
     /* Touchables */
