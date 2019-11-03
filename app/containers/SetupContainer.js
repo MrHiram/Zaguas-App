@@ -1,11 +1,12 @@
 import React from 'react';
 import { View, Text, TouchableOpacity, ImageBackground, Image, ScrollView} from 'react-native';
 import MainStyles from '../styles/MainStyles';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+
 
 export default class SetupContainer extends React.Component {
 render() {
     return (
+  
             <ImageBackground
               source={require('../../assets/setup_background.png')}
               resizeMode='cover'
@@ -32,7 +33,8 @@ render() {
                             </View>
                       </TouchableOpacity>
                       <TouchableOpacity 
-                       style={MainStyles.setupContainer}>
+                       style={MainStyles.setupContainer}
+                       onPress={() => this.props.changeModule(2)}>
                             <View style={MainStyles.setupCardImg}>
                                 <Image 
                                 source={require('../../assets/cuidador.png')}
@@ -49,6 +51,7 @@ render() {
                   </ScrollView>
                       
               </ImageBackground>
+              
      
             
         
