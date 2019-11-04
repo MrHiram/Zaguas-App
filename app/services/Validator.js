@@ -26,9 +26,22 @@ const validator = {
         if(aboutMe.length>0)
             return true;
         else 
-            return false;
-        
-        
+            return false;  
+    },
+    address: function (address){
+        address.trim();
+        if(address.length>0)
+            return true
+        else
+            return false
+    },
+    phone: function(phone){
+        phone.trim();
+        if(phone.length>0)
+            return true
+        else
+            return false
+
     }
 }
 export default validator;
