@@ -20,7 +20,8 @@ render() {
                      <Image style={MainStyles.secondaryLogo} resizeMode='contain' source={require('../../assets/logo_white.png')}/>
                       <Text style={MainStyles.whiteText}>¿Qué tipo de perfil deseás crear?</Text>
                       <TouchableOpacity 
-                       style={MainStyles.setupContainer}>
+                       style={MainStyles.setupContainer}
+                       onPress={() => this.props.changeModule(3)}>
                             <View style={MainStyles.setupCardImg}>
                                 <Image 
                                 source={require('../../assets/people.png')}

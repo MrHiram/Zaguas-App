@@ -56,6 +56,10 @@ const AppSwitch = createSwitchNavigator(
     Auth: {
       screen: AuthStack,
       path: ''
+    },
+    Setup: {
+      screen: SetupScreen,
+      path: 'setup'
     }
   }
 );
@@ -67,6 +71,7 @@ export default class App extends React.Component {
   
   render() {
     const prefix = Linking.makeUrl('/');
-    return <AppContainer uriPrefix={prefix}/>;
+    return <SetupScreen/>
+    //<AppContainer uriPrefix={prefix}/>;
   }
 }

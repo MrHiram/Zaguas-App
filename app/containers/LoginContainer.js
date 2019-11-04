@@ -54,12 +54,21 @@ export default class LoginContainer extends React.Component {
             Fetcher.postNoToken('login', data)
                 .then(
                     (response) => {
-                        if (response.data.accessToken) {
+                        if (response.data.profile) {
+                         
+                            
+                            LocalStorage.saveToken(response.data.accessToken);
+                            this.props.setup();
+                            
+                        } else if(response.data.accessToken){
+                           
                             LocalStorage.saveToken(response.data.accessToken);
                             this.props.loginSuccess();
-                        } else if (response.data.error) {
+                        }else if (response.data.error) {
+                       
                             this.handleError(response.data.error);
                         }
+                        
                     }
                 )
                 .catch(
@@ -102,6 +111,7 @@ export default class LoginContainer extends React.Component {
                 case "Inactive user":
                     emailError = 'Verifica tu correo, por seguridad';
                     break;
+                    
             }
         });
         this.setState({

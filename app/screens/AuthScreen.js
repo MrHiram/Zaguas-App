@@ -34,6 +34,9 @@ export default class AuthScreen extends React.Component {
         this.props.navigation.navigate('App');
     }
 
+    setup = () =>{
+        this.props.navigation.navigate('Setup')
+    }
     render() {
         return (
             <KeyboardAwareScrollView
@@ -51,7 +54,7 @@ export default class AuthScreen extends React.Component {
                     style={MainStyles.mainLogo} />
                 <View
                     style={MainStyles.mainCard}>
-                    {this.state.activeModule == 1 ? <LoginContainer loginSuccess={this.loginSuccess} changeModule={this.toggleModules} /> : null}
+                    {this.state.activeModule == 1 ? <LoginContainer loginSuccess={this.loginSuccess} setup={this.setup} changeModule={this.toggleModules} /> : null}
                     {this.state.activeModule == 2 ? <RegisterContainer changeModule={this.toggleModules} toggleEmail={this.toggleEmail} /> : null}
                     {this.state.activeModule == 3 ? <RecoverContainer changeModule={this.toggleModules} toggleEmail={this.toggleEmail}/> : null}
                     {this.state.activeModule == 4 ? <RecoverWaitingContainer changeModule={this.toggleModules} /> : null}

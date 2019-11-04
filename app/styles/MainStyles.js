@@ -92,7 +92,7 @@ export default StyleSheet.create({
         width: '100%',
         borderTopEndRadius: 30,
         borderTopStartRadius: 30,
-        height: '100%'
+       
     },
 
     mainContainer:{

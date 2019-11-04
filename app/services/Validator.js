@@ -20,6 +20,15 @@ const validator = {
             return true;
         else
             return false;
+    },
+    aboutMe: function (aboutMe) {
+        aboutMe.trim();
+        if(aboutMe.length>0)
+            return true;
+        else 
+            return false;
+        
+        
     }
 }
 export default validator;

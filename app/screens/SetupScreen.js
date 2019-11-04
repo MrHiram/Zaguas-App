@@ -2,7 +2,8 @@ import React from 'react';
 import { Text, View } from 'react-native';
 import MainStyles from '../styles/MainStyles';
 import SetupContainer from '../containers/SetupContainer';
-import RegisterContainer from '../containers/RegisterContainer';
+import CreateClientProfile from '../containers/CreateClientProfile';
+import CreateCareTakerProfile from '../containers/CreateCareTakerProfile';
 export default class SetupScreen extends React.Component{
     state = {
         accessToken: '',
@@ -18,7 +19,8 @@ export default class SetupScreen extends React.Component{
         return(
             <View  style={MainStyles.containerCenter} >
             {this.state.activeModule == 1 ? <SetupContainer  changeModule={this.toggleModules} /> : null}
-            {this.state.activeModule == 2 ? <RegisterContainer  changeModule={this.toggleModules} /> : null}
+            {this.state.activeModule == 2 ? <CreateCareTakerProfile  changeModule={this.toggleModules} /> : null}
+            {this.state.activeModule == 3 ? <CreateClientProfile  changeModule={this.toggleModules} /> : null}
              
             </View>
         );
