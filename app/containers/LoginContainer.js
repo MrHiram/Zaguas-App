@@ -55,8 +55,6 @@ export default class LoginContainer extends React.Component {
                 .then(
                     (response) => {
                         if (response.data.profile) {
-                         
-                            
                             LocalStorage.saveToken(response.data.accessToken);
                             this.props.setup();
                             

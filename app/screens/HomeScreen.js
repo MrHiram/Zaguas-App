@@ -26,7 +26,10 @@ export default class HomeScreen extends React.Component{
     }
 
     requestLogout = () => {
-        Fetcher.postToken('logout', this.state.token);
+        var data= {
+            request:'Logout user'
+        }
+        Fetcher.postToken('logout',data, this.state.token);
         LocalStorage.removeToken();        
         this.props.navigation.navigate('Auth');
     }
