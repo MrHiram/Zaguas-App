@@ -27,7 +27,7 @@ export default StyleSheet.create({
         justifyContent: 'center',
     },
     mainBackgroundImage:{
-        height: '100%',
+        height: 500,
         width: '100%',
         backgroundColor: '#007EA9',
         position: 'absolute',
@@ -62,6 +62,9 @@ export default StyleSheet.create({
         alignSelf: 'center',
         marginBottom: 80
     },
+    mainLogoWithoutBottom:{
+        marginBottom: 0
+    },
     whiteText:{
         color: '#fff',
         marginBottom: 30,
@@ -76,8 +79,7 @@ export default StyleSheet.create({
        marginBottom:20
     },
     profileCard:{
-        height:800,
-        paddingTop: 0,
+        paddingTop: 10,
         marginBottom: 20
     },
     profilePictureText:{
@@ -92,6 +94,7 @@ export default StyleSheet.create({
         width: '100%',
         borderTopEndRadius: 30,
         borderTopStartRadius: 30,
+    
        
     },
 

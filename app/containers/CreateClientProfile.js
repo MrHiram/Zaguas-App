@@ -9,6 +9,7 @@ import Validator from '../services/Validator';
 import Fetcher from '../services/Fetcher';
 import MainButton from '../components/MainButton';
 import LocalStorage from '../services/LocalStorage';
+import UploadPicture from '../components/UploadPicture';
 
 export default class CreateClientProfile extends Component {
 

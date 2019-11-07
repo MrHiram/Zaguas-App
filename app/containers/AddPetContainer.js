@@ -85,6 +85,21 @@ export default class AddPetContainer extends React.Component {
           description: value
         });
         return;
+        case 'feeding':
+        this.setState({
+          feeding: value
+        });
+        return;
+        case 'allergies':
+        this.setState({
+          allergies: value
+        });
+        return;
+        case 'special_cares':
+        this.setState({
+          special_cares: value
+        });
+        return;
     }
   }
   createPet = async () => {
@@ -111,26 +126,15 @@ export default class AddPetContainer extends React.Component {
       Fetcher.postToken('addPet', data, this.state.token)
         .then(
           (response) => {
-            console.log(response);
-            this.props.setupSuccess();
+            console.log(response.data);
+            
           }
         )
         .catch(
           (error) => { console.log(error.error) }
         );
     } else {
-      if (!validAboutMe)
-        this.setState({ aboutMeError: 'Espacio Requerido', aboutMeSuccess: false });
-      else
-        this.setState({ aboutMeError: '', aboutMeSuccess: true });
-      if (!validAddress)
-        this.setState({ addressError: 'Espacio Requerido', addressSuccess: false })
-      else
-        this.setState({ addressError: '', addressSuccess: true });
-      if (!validPhone)
-        this.setState({ phoneError: 'Espacio Requerido', phoneSuccess: false });
-      else
-        this.setState({ phoneError: '', phoneSuccess: true });
+      
 
     }
   }
@@ -149,11 +153,7 @@ export default class AddPetContainer extends React.Component {
 
     return (
 
-      <KeyboardAwareScrollView
-        enableOnAndroid={true}
-        resetScrollToCoords={{ x: 0, y: 0 }}
-        style={MainStyles.scrollView}
-        extraHeight={300}>
+      
         <View style={[MainStyles.mainCard, MainStyles.profileCard]}>
           <UploadPicture
             titlePicture='Añadir foto de mascota'
@@ -165,14 +165,14 @@ export default class AddPetContainer extends React.Component {
             title='Nombre'
             handleValue={this.handleValue}
             placeholder='Ingrese el nombre de su mascota'
-            handler='nombre'
+            handler='name'
             value={this.state.name}
           />
           <InputMT
             title='Tamaño'
             handleValue={this.handleValue}
             placeholder='Ingrese el tamaño de su mascota'
-            handler='tamano'
+            handler='size'
             value={this.state.size}
           />
           <Combobox
@@ -184,35 +184,35 @@ export default class AddPetContainer extends React.Component {
             title='Raza'
             handleValue={this.handleValue}
             placeholder='Ingrese la raza de su mascota'
-            handler='raza'
+            handler='race'
             value={this.state.race}
           />
           <InputMT
             title='Descripcion'
             handleValue={this.handleValue}
             placeholder='Ingrese una pequeña descripción de su mascota'
-            handler='descripcion'
+            handler='description'
             value={this.state.description}
           />
           <InputMT
             title='Alimentacion'
             handleValue={this.handleValue}
             placeholder='Ingrese una pequeña descripción de la alimentación'
-            handler='descripcion'
+            handler='feeding'
             value={this.state.feeding}
           />
           <InputMT
             title='Alergias'
             handleValue={this.handleValue}
             placeholder='Ingrese las alergias si presenta'
-            handler='descripcion'
+            handler='allergies'
             value={this.state.allergies}
           />
           <InputMT
             title='Cuidados especiales'
             handleValue={this.handleValue}
             placeholder='Ingrese si presenta cuidados especiales'
-            handler='descripcion'
+            handler='special_cares'
             value={this.state.special_cares}
           />
           <MainButton
@@ -223,7 +223,7 @@ export default class AddPetContainer extends React.Component {
 
         </View>
 
-      </KeyboardAwareScrollView>
+      
     );
   };
 }
