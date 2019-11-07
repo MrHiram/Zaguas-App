@@ -14,6 +14,8 @@ export default class ComboboxProfile extends React.Component{
                   style={MainStyles.comboText}
                   label={this.props.title}
                   data={this.props.data}
+                  valueExtractor={({value})=> value}
+                  onChangeText={ value =>{this.props.onChangeText(value)}}
                 />
             </View> 
         );

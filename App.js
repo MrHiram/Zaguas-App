@@ -71,6 +71,7 @@ export default class App extends React.Component {
   
   render() {
     const prefix = Linking.makeUrl('/');
-    return <AppContainer uriPrefix={prefix}/>;
+    return <AddPetScreen></AddPetScreen>
+    //<AppContainer uriPrefix={prefix} />;
   }
 }

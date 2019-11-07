@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { View, Text, TouchableOpacity, Image, ActivityIndicator } from 'react-native';
+import { View, Text, ActivityIndicator } from 'react-native';
 import InputMT from '../components/InputMT';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import MainStyles from '../styles/MainStyles';
@@ -17,6 +17,7 @@ export default class CreateClientProfile extends Component {
         aboutMe: '',
         address: '',
         phone: '',
+        imageError: '',
         aboutMeError: false,
         aboutMeSuccess: false,
         addressError: false,
@@ -79,9 +80,9 @@ export default class CreateClientProfile extends Component {
     }
 
     CreateClientProfile = async () => {
-        let validAboutMe = Validator.aboutMe(this.state.aboutMe);
-        let validAddress = Validator.address(this.state.address);
-        let validPhone = Validator.phone(this.state.phone);
+        let validAboutMe = Validator.blankSpace(this.state.aboutMe);
+        let validAddress = Validator.blankSpace(this.state.address);
+        let validPhone = Validator.blankSpace(this.state.phone);
         let validImage = this.state.image === null ? false : true;
 
         if (validAboutMe && validAddress && validPhone && validImage) {
@@ -126,17 +127,13 @@ export default class CreateClientProfile extends Component {
                 style={MainStyles.scrollView}
                 extraHeight={300}>
                 <View style={[MainStyles.mainCard, MainStyles.profileCard]}>
-                    <TouchableOpacity style={{ height: 150 }}
-                        onPress={() => this.handlerImage()}>
-                        <Image
-                            source={this.state.image === null ? require('../../assets/dogProfile.png') : { uri: this.state.image.uri }}
-                            resizeMode='contain'
-                            style={{ height: '90%', width: '90%', alignSelf: 'center', borderRadius: 400 / 2 }}
-                        />
-                        <Text
-                            style={MainStyles.profilePictureText}
-                        >foto de perfil</Text>
-                    </TouchableOpacity>
+                <UploadPicture
+                    titlePicture = 'Añadir foto de mascota'
+                    image = {this.state.image}
+                    error= {this.state.imageError}
+                    handlerImage = {this.handlerImage}
+                    />
+                    
                     <InputMT
                         title='Acerca de mí'
                         value={this.state.aboutMe}
@@ -175,5 +172,6 @@ export default class CreateClientProfile extends Component {
         );
     }
 }
+
 
 

@@ -21,27 +21,12 @@ const validator = {
         else
             return false;
     },
-    aboutMe: function (aboutMe) {
-        aboutMe.trim();
-        if(aboutMe.length>0)
+    blankSpace: function (value) {
+        value.trim();
+        if(value.length>0)
             return true;
         else 
             return false;  
-    },
-    address: function (address){
-        address.trim();
-        if(address.length>0)
-            return true
-        else
-            return false
-    },
-    phone: function(phone){
-        phone.trim();
-        if(phone.length>0)
-            return true
-        else
-            return false
-
     }
 }
 export default validator;

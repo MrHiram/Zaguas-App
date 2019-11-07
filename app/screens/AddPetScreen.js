@@ -22,7 +22,7 @@ export default class SetupScreen extends React.Component{
                 }}
                 />
                 <Image style={{width:'50%', height: '20%'}} resizeMode='contain' source={require('../../assets/logo_white.png')}/>
-              
+                
                 <AddPetContainer></AddPetContainer>
                 
             </View>
