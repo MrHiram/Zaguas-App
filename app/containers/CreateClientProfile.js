@@ -4,7 +4,6 @@ import InputMT from '../components/InputMT';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import MainStyles from '../styles/MainStyles';
 import * as ImagePicker from 'expo-image-picker';
-import * as Permissions from 'expo-permissions';
 import Validator from '../services/Validator';
 import Fetcher from '../services/Fetcher';
 import MainButton from '../components/MainButton';
