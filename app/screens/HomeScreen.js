@@ -1,6 +1,6 @@
 import React from 'react';
-
 import { Text, View } from 'react-native';
+import { TabRouter } from 'react-navigation';
 
 import TouchableText from '../components/TouchableText';
 
@@ -8,6 +8,13 @@ import Fetcher from '../services/Fetcher';
 import LocalStorage from '../services/LocalStorage';
 
 import MainStyles from '../styles/MainStyles';
+
+/*const MainRouter = TabRouter({
+
+    
+    },{
+        initialRouteName: ''
+    });*/
 
 export default class HomeScreen extends React.Component{
     state = { 

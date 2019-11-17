@@ -27,10 +27,10 @@ export default StyleSheet.create({
         justifyContent: 'center',
     },
     mainBackgroundImage:{
-        height: '100%',
         width: '100%',
-        backgroundColor: '#007EA9',
+        height: '100%',
         position: 'absolute',
+        backgroundColor: '#007EA9',
     },
     setupMainImage:{
         width: '100%',

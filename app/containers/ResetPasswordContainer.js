@@ -59,7 +59,7 @@ export default class ResetPasswordContainer extends React.Component {
                         if (response.data.message) {
                             this.props.goBack();
                         } else if (response.data.error) {
-                            console.log(response.data.error);
+                            console.error(response.data.error);
                         }
                     }
                 )

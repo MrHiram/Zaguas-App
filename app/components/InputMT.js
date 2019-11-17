@@ -9,6 +9,7 @@ export default function InputMT(props) {
 
             <View style={[MainStyles.mainInputContainer, props.error ? MainStyles.mainInputContainerError : null]}>
                 <TextInput
+                    autoCompleteType={props.autoCompleteType || 'off'}
                     secureTextEntry={props.secureTextEntry}
                     style={MainStyles.mainInput}
                     placeholder={props.placeholder}
