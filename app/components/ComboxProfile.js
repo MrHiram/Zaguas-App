@@ -17,6 +17,7 @@ export default class ComboboxProfile extends React.Component{
                   valueExtractor={({value})=> value}
                   onChangeText={ value =>{this.props.onChangeText(value)}}
                 />
+                <Text style={MainStyles.mainInputErrorMessage}>{this.props.error}</Text>
             </View> 
         );
     };

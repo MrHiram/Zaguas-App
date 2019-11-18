@@ -11,7 +11,7 @@ export default function UploadPicture (props) {
   
         return (
             <>
-            <TouchableOpacity style={{ height: 150 }}
+            <TouchableOpacity style={{ height: 150, marginTop:20 }}
                         onPress={props.handlerImage}>
                         <Image
                             source={props.image === null ? require('../../assets/dogProfile.png') : { uri: props.image.uri }}
@@ -21,7 +21,7 @@ export default function UploadPicture (props) {
                         <Text
                             style={MainStyles.profilePictureText}
                         >{props.titlePicture}</Text>
-                        <Text style={MainStyles.mainInputErrorMessage}>{props.error}</Text>
+                        <Text style={[MainStyles.mainInputErrorMessage, MainStyles.mainImageErrorMessage]}>{props.error}</Text>
                     </TouchableOpacity>
             </>
         );

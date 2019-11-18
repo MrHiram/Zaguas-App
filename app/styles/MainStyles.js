@@ -1,4 +1,4 @@
-import { StyleSheet } from 'react-native';
+import { StyleSheet, Platform } from 'react-native';
 
 export default StyleSheet.create({
     /* Main */
@@ -145,6 +145,9 @@ export default StyleSheet.create({
         fontStyle: 'italic',
         alignSelf: 'flex-start',
     },
+    mainImageErrorMessage:{
+        alignSelf: 'center',
+    },
     comboboxProfile:{
         borderBottomColor: '#606060',
         borderBottomWidth: 1,
@@ -178,5 +181,13 @@ export default StyleSheet.create({
         fontWeight: 'bold',
         fontSize: 15,
         padding: 10
-    }
+    },
+    animatedHeaderContainer: {
+     
+        top: (Platform.OS == 'ios') ? 20 : 0,
+        left: 0,
+        right: 0,
+        justifyContent: 'center',
+        alignItems: 'center'
+      },
 });
