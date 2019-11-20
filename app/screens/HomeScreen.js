@@ -1,57 +1,56 @@
 import React from 'react';
-import { Text, View } from 'react-native';
-import { TabRouter } from 'react-navigation';
+import { Text, View, Image } from 'react-native';
+import { createBottomTabNavigator } from 'react-navigation-tabs';
 
-import TouchableText from '../components/TouchableText';
+import ProfileScreen from './ProfileScreen';
+import FeedScreen from './FeedScreen';
+import HistoryScreen from './HistoryScreen';
+import { Ionicons } from '@expo/vector-icons';
 
-import Fetcher from '../services/Fetcher';
-import LocalStorage from '../services/LocalStorage';
 
-import MainStyles from '../styles/MainStyles';
-
-/*const MainRouter = TabRouter({
-
-    
-    },{
-        initialRouteName: ''
-    });*/
-
-export default class HomeScreen extends React.Component{
-    state = { 
-        token: ''
+export default createBottomTabNavigator({
+  History: {
+    screen: HistoryScreen,
+    navigationOptions:{
+      tabBarLabel: 'History',
+      tabBarIcon: ({tintColor})=> (
+        <Ionicons name= "md-timer" color=
+        {tintColor} size={24}/>
+      )
     }
-
-    componentDidMount(){
-        this.init();
+  },
+  Feed: {
+    screen: FeedScreen,
+    navigationOptions:{
+      tabBarLabel: 'Home',
+      tabBarIcon: ({tintColor})=> (
+        <Ionicons name= "ios-home" color=
+        {tintColor} size={24}/>
+      )
     }
-    
-    init = async () => {
-        let token = await LocalStorage.retrieveToken();
-        this.setState({
-            token: token
-        });
+  },
+  Profile: {
+    screen: ProfileScreen,
+    navigationOptions:{
+      tabBarLabel: 'Profile',
+      tabBarIcon: ({tintColor})=> (
+        <Ionicons name= "md-settings" color=
+        {tintColor} size={24}/>
+      )
     }
-
-    requestLogout = () => {
-        var data= {
-            request:'Logout user'
-        }
-        Fetcher.postToken('logout',data, this.state.token);
-        LocalStorage.removeToken();        
-        this.props.navigation.navigate('Auth');
+  },
+},{
+  tabBarOptions:{
+    activeTintColor:'#007EA8',
+    inactiveTintColor: 'grey',
+    style: {
+      backgroundColor:'white',
+      borderTopWidth: 0,
+      shadowOffset: {width:5, height:3},
+      shadowColor: 'black',
+      shadowOpacity: 0.5, 
+      elevation:5
     }
+  }
+});
 
-    render(){
-        return(
-            <View style={MainStyles.containerCenter} >
-                <Text>HomeScreen {this.state.token}</Text>
-               
-                <TouchableText
-                    style={MainStyles.spacer}
-                    alignCenter={true}
-                    innerText= "Vamo'a salí"
-                    onPress={() => { this.requestLogout() }} />
-            </View>
-        );
-    };
-}
