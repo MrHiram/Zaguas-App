@@ -78,7 +78,7 @@ export default class HomeScreen extends React.Component{
                         >Hogares Nuevos</Text>
                     </View>
                     </View>
-                    <View style={{backgroundColor:'#dddd', flex:1}}>
+                    <View style={{backgroundColor:'#f3f3f3', flex:1}}>
                         <ScrollView
                         contentContainerStyle={{alignItems:'center'}}>
                                 <HomeCard/>

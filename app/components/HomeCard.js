@@ -33,7 +33,9 @@ class HomeCard extends Component {
                                 marginTop:10, flexWrap:'wrap'}}>
                                      <Image source={require('../../assets/fondo_login.png')}
                                      resizeMode='contain'
-                                     style={{width:'60%', height: 200, borderRadius:10}}/>
+                                     style={{flex:1, borderRadius:10}}/>
+                                     
+                                     
                                      <View style={{flexDirection:'column',  flexWrap:'nowrap',
                                      width:'35%', alignItems:'flex-start'}}>
                                      <Image source={require('../../assets/fondo_login.png')}
@@ -44,6 +46,7 @@ class HomeCard extends Component {
                                      style={{height: 95,width:'90%', borderRadius:10}}/>
 
                                      </View>
+                                     
                                      
 
                                  </View>
