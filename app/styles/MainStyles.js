@@ -97,6 +97,34 @@ export default StyleSheet.create({
     
        
     },
+    /*Profile*/
+    mainName:{
+        color: '#fff',
+        fontSize: 30,
+        alignSelf: "center"
+    },
+    subnames:{
+        fontSize:25
+    },
+    blue:{
+        color:"#1E749D",
+    },
+    green:{
+        color:"#198352",
+    },
+    teal:{
+        color:"#81D0C6",
+    },
+    mainText:{
+        fontSize:18
+    },
+    containerProfile:{
+        backgroundColor: "#f3f3f3",
+        borderRadius: 5,
+        padding: 10,
+        marginVertical: 15
+    },
+    /*****/
 
     mainContainer:{
         flex: 1,
