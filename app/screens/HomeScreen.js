@@ -1,11 +1,9 @@
 import React from 'react';
-import { Text, View, Image } from 'react-native';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-
 import ProfileScreen from './ProfileScreen';
 import FeedScreen from './FeedScreen';
 import HistoryScreen from './HistoryScreen';
-import { Ionicons } from '@expo/vector-icons';
+import Icon from 'react-native-vector-icons/Ionicons';
 
 
 export default createBottomTabNavigator({
@@ -14,7 +12,7 @@ export default createBottomTabNavigator({
     navigationOptions:{
       tabBarLabel: 'History',
       tabBarIcon: ({tintColor})=> (
-        <Ionicons name= "md-timer" color=
+        <Icon name= "md-timer" color=
         {tintColor} size={24}/>
       )
     }
@@ -24,7 +22,7 @@ export default createBottomTabNavigator({
     navigationOptions:{
       tabBarLabel: 'Home',
       tabBarIcon: ({tintColor})=> (
-        <Ionicons name= "ios-home" color=
+        <Icon name= "ios-home" color=
         {tintColor} size={24}/>
       )
     }
@@ -34,7 +32,7 @@ export default createBottomTabNavigator({
     navigationOptions:{
       tabBarLabel: 'Profile',
       tabBarIcon: ({tintColor})=> (
-        <Ionicons name= "md-settings" color=
+        <Icon name= "md-settings" color=
         {tintColor} size={24}/>
       )
     }

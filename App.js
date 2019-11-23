@@ -72,7 +72,7 @@ export default class App extends React.Component {
   
   render() {
     const prefix = Linking.makeUrl('/');
-    return <ProfileScreen></ProfileScreen>
+    return <HomeScreen></HomeScreen>
     //<AppContainer uriPrefix={prefix} />;
   }
 }
