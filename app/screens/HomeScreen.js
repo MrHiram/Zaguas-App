@@ -4,9 +4,10 @@ import ProfileScreen from './ProfileScreen';
 import FeedScreen from './FeedScreen';
 import HistoryScreen from './HistoryScreen';
 import Icon from 'react-native-vector-icons/Ionicons';
+import { createAppContainer } from 'react-navigation';
 
 
-export default createBottomTabNavigator({
+const TabNavigator = createBottomTabNavigator({
   History: {
     screen: HistoryScreen,
     navigationOptions:{
@@ -52,3 +53,8 @@ export default createBottomTabNavigator({
   }
 });
 
+const AppContainer = createAppContainer(TabNavigator);
+
+export default () => (
+    <AppContainer />
+);
