@@ -29,8 +29,9 @@ export default StyleSheet.create({
     mainBackgroundImage:{
         height: 500,
         width: '100%',
-        backgroundColor: '#007EA9',
+        height: '100%',
         position: 'absolute',
+        backgroundColor: '#007EA9',
     },
     setupMainImage:{
         width: '100%',

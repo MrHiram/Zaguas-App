@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ImageBackground, Image, KeyboardAvoidingView, ScrollView } from 'react-native';
+import { View, ImageBackground, Image, BackHandler, KeyboardAvoidingView, ScrollView } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import LoginContainer from '../containers/LoginContainer';
@@ -17,6 +17,19 @@ export default class AuthScreen extends React.Component {
         activeModule: 1,
         displayEmail: ''
     }
+
+    componentDidMount(){
+        this.backHandler = BackHandler.addEventListener('hardwareBackPress', this.handleBackPress);
+    }
+
+    componentWillUnmount(){
+        this.backHandler.remove()
+    }
+
+    handleBackPress = () => {
+        this.toggleModules(1);
+        return true;
+      }
 
     toggleModules = (moduleNumber) => {
         this.setState({
@@ -46,8 +59,9 @@ export default class AuthScreen extends React.Component {
                 extraHeight={100}>
                 <ImageBackground
                     source={require('../../assets/fondo_login.png')}
-                    resizeMode='cover'
-                    style={MainStyles.mainBackgroundImage} />
+                    resizeMode='contain'
+                    style={MainStyles.mainBackgroundImage}
+                    imageStyle={{resizeMode: "cover", width: '100%', height: 430}} />
                 <Image
                     source={require('../../assets/logo_white.png')}
                     resizeMode='contain'
