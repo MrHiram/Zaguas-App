@@ -86,7 +86,7 @@ export default class LoginContainer extends React.Component {
             var data = {
                 name: this.state.name,
                 lastname: this.state.lastname,
-                email: this.state.email,
+                email: this.state.email.toLowerCase(),
                 password: this.state.password,
                 password_confirmation: this.state.confirmPassword
             };

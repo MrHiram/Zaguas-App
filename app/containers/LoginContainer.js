@@ -48,7 +48,7 @@ export default class LoginContainer extends React.Component {
         let validPassword = Validator.password(this.state.password);
         if (validEmail&&validPassword) {
             var data = {
-                email: this.state.email,
+                email: this.state.email.toLowerCase(),
                 password: this.state.password
             };
             Fetcher.postNoToken('login', data)

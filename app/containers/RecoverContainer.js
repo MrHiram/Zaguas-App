@@ -34,7 +34,7 @@ export default class RecoverContainer extends React.Component {
         let validEmail = Validator.email(this.state.email);
         if (validEmail) {
             this.setState({waiting: true});
-            Fetcher.getNotToken('forgotPassword', this.state.email)
+            Fetcher.getNotToken('forgotPassword', this.state.email.toLowerCase())
                 .then((response) => {
                     this.props.toggleEmail(this.state.email);
                     this.props.changeModule(5);

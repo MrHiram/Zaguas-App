@@ -39,6 +39,8 @@ const TabNavigator = createBottomTabNavigator({
     }
   },
 },{
+  initialRouteName: 'Feed',
+},{
   tabBarOptions:{
     activeTintColor:'#007EA8',
     inactiveTintColor: 'grey',
@@ -50,7 +52,7 @@ const TabNavigator = createBottomTabNavigator({
       shadowOpacity: 0.5, 
       elevation:5
     }
-  }
+  },
 });
 
 const AppContainer = createAppContainer(TabNavigator);
