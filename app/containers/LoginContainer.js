@@ -54,7 +54,7 @@ export default class LoginContainer extends React.Component {
             Fetcher.postNoToken('login', data)
                 .then(
                     (response) => {
-                        if (!response.data.profile) {
+                        if (response.data.profile) {
                             LocalStorage.saveToken(response.data.accessToken);
                             this.props.setup();
                         } else if(response.data.accessToken){
