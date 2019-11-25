@@ -12,7 +12,8 @@ class HomeCard extends Component {
             <View
                 style={{
                     width: '90%', height: 400, marginTop: 30,
-                    borderRadius: 15, backgroundColor: 'white'
+                    borderRadius: 15, backgroundColor: 'white',
+                    padding: 10
                 }}>
                 {/** Section de informacion personal */}
                 <View style={{ flexDirection: 'row', marginStart: 15, marginTop: 15 }}>
@@ -50,23 +51,13 @@ class HomeCard extends Component {
                         
                         style={{borderRadius: 10, width:'100%', height:'49%' }} />
                         </View>
-                        
-
                 </View>
                 {/** Section de precio y extrella */}
-                <View style={{ flexDirection: 'row',width:'90%', borderWidth:1, marginHorizontal: 20, marginTop: 10, marginBottom:10 }}>
-                    <Text style={{ fontWeight: '600', fontSize: 14, textAlign: 'left' }}>₡ 8000/ por noche</Text>
-                    {/**Componente de extrella */}
-                    <View style={{alignContent:'flex-end'}}>
-                    <Icon name="ios-search" size={20}
-                                 />
-                    </View>
-
-
-
+                <View style={{ flexDirection: 'row', marginHorizontal: 20, marginTop: 10, marginBottom:10 }}>
+                    <Text style={{ fontWeight: '600', fontSize: 14, textAlign: 'left', width: '100%' }}>
+                        ₡ 8000/ por noche
+                    </Text>
                 </View>
-
-
             </View>
         );
     }

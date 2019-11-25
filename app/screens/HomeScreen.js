@@ -1,11 +1,24 @@
 import React from 'react';
+import Icon from 'react-native-vector-icons/Ionicons';
+
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
+
 import ProfileScreen from './ProfileScreen';
 import FeedScreen from './FeedScreen';
 import HistoryScreen from './HistoryScreen';
-import Icon from 'react-native-vector-icons/Ionicons';
-import { createAppContainer } from 'react-navigation';
+import SettingsScreen from './SettingsScreen';
 
+const ProfileStack = createStackNavigator({
+  Profile: ProfileScreen,
+  Settings: SettingsScreen,
+},{
+  defaultNavigationOptions: {
+    header: null
+  },
+  initialRouteName: 'Profile'
+});
 
 const TabNavigator = createBottomTabNavigator({
   History: {
@@ -29,15 +42,15 @@ const TabNavigator = createBottomTabNavigator({
     }
   },
   Profile: {
-    screen: ProfileScreen,
+    screen: ProfileStack,
     navigationOptions:{
       tabBarLabel: 'Profile',
       tabBarIcon: ({tintColor})=> (
-        <Icon name= "md-settings" color=
+        <Icon name= "md-person" color=
         {tintColor} size={24}/>
       )
     }
-  },
+  }, 
 },{
   initialRouteName: 'Feed',
 },{

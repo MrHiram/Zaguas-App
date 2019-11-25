@@ -212,11 +212,18 @@ export default StyleSheet.create({
         padding: 10
     },
     animatedHeaderContainer: {
-     
         top: (Platform.OS == 'ios') ? 20 : 0,
         left: 0,
         right: 0,
         justifyContent: 'center',
         alignItems: 'center'
       },
+    topRightSetings: {
+        minHeight: 28, 
+        minWidth: 28,
+        position: 'absolute',
+        top: 50, 
+        right: 10,
+        zIndex: 50
+    }
 });

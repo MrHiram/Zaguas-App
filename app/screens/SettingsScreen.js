@@ -3,12 +3,12 @@ import { Text, View } from 'react-native';
 
 import MainStyles from '../styles/MainStyles';
 
-export default class HistoryScreen extends React.Component{
+export default class SettingsScreen extends React.Component{
 
     render(){
         return(
             <View style={MainStyles.containerCenter} >
-                <Text>History</Text>
+                <Text>Settings</Text>
             </View>
         );
     };

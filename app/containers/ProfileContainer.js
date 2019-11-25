@@ -1,7 +1,6 @@
 import React from 'react';
 import { View, Text, TouchableOpacity } from 'react-native';
 import MainStyles from '../styles/MainStyles';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import Validator from '../services/Validator';
 import Fetcher from '../services/Fetcher';
 export default class AddPetContainer extends React.Component {
@@ -11,7 +10,7 @@ export default class AddPetContainer extends React.Component {
     description: '',
     waiting: false
   }
- 
+
   handleValue = (key, value) => {
     switch (key) {
       case 'name':
@@ -61,26 +60,37 @@ export default class AddPetContainer extends React.Component {
 
 
   render() {
- 
+
     return (
 
 
       <View style={[MainStyles.mainCard, MainStyles.profileCard]}>
-     
-              
-                <Text style={[MainStyles.subnames,MainStyles.blue]}>Descripción</Text>
-                <View style={MainStyles.containerProfile}>
-                    <Text style={MainStyles.mainText}>Soy una persona temperamental como mi mascosta</Text>
-                </View> 
-                <Text style={[MainStyles.subnames,MainStyles.green]}>Mis Mascotas</Text>
-                <View style={{flexDirection: "row"}}> 
-                    <TouchableOpacity style={MainStyles.containerProfile}><Text>Añade nueva mascota</Text></TouchableOpacity>   
-              </View> 
-              <Text style={[MainStyles.subnames,MainStyles.teal]}>Mis casas cuido recientes</Text>
-              <View style={MainStyles.containerProfile}><Text style={MainStyles.mainText}>No tenés ninguna casa cuido reciente</Text><TouchableOpacity><Text style={[MainStyles.blue, MainStyles.mainText]}>Comienza ahora</Text></TouchableOpacity></View>
-                    
-
+        <Text style={[MainStyles.subnames, MainStyles.blue]}>Descripción</Text>
+        <View style={MainStyles.containerProfile}>
+          <Text style={MainStyles.mainText}>Soy una persona temperamental como mi mascosta</Text>
         </View>
+        <Text style={[MainStyles.subnames, MainStyles.green]}>Mis Mascotas</Text>
+        <View style={{ flexDirection: "row" }}>
+          <TouchableOpacity style={MainStyles.containerProfile}>
+            <Text>
+              Añade nueva mascota
+            </Text>
+          </TouchableOpacity>
+        </View>
+        <Text style={[MainStyles.subnames, MainStyles.teal]}>
+          Mis casas cuido recientes
+        </Text>
+        <View style={MainStyles.containerProfile}>
+          <Text style={MainStyles.mainText}>
+            No tenés ninguna casa cuido reciente
+          </Text>
+          <TouchableOpacity>
+            <Text style={[MainStyles.blue, MainStyles.mainText]}>
+              Comienza ahora
+            </Text>
+          </TouchableOpacity>
+        </View>
+      </View>
 
     );
   };
