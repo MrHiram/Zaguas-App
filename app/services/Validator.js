@@ -20,6 +20,13 @@ const validator = {
             return true;
         else
             return false;
+    },
+    blankSpace: function (value) {
+        value.trim();
+        if(value.length>0)
+            return true;
+        else 
+            return false;  
     }
 }
 export default validator;

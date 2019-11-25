@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ImageBackground, Image, KeyboardAvoidingView, ScrollView } from 'react-native';
+import { View, ImageBackground, Image, Text,KeyboardAvoidingView, ScrollView } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 
 import ResetPasswordContainer from '../containers/ResetPasswordContainer';
@@ -43,8 +43,9 @@ export default class ResetPasswordScreen extends React.Component {
                 extraHeight={100}>
                 <ImageBackground
                     source={require('../../assets/fondo_login.png')}
-                    resizeMode='cover'
-                    style={MainStyles.mainBackgroundImage} />
+                    resizeMode='contain'
+                    style={MainStyles.mainBackgroundImage}
+                    imageStyle={{resizeMode: "cover", width: '100%', height: 430}}/>
                 <Image
                     source={require('../../assets/logo_white.png')}
                     resizeMode='contain'

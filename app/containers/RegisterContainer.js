@@ -86,7 +86,7 @@ export default class LoginContainer extends React.Component {
             var data = {
                 name: this.state.name,
                 lastname: this.state.lastname,
-                email: this.state.email,
+                email: this.state.email.toLowerCase(),
                 password: this.state.password,
                 password_confirmation: this.state.confirmPassword
             };
@@ -195,8 +195,9 @@ export default class LoginContainer extends React.Component {
                         success={this.state.lastnameSuccess} />
                     <InputMT
                         title='Correo'
-                        placeholder='Ingrese su correo'
+                        placeholder='correo@ejemplo.com'
                         handler='email'
+                        autoCompleteType='email'
                         value={this.state.email}
                         handleValue={this.handleValue}
                         error={this.state.emailError}
@@ -205,6 +206,7 @@ export default class LoginContainer extends React.Component {
                         title='Contraseña'
                         placeholder='Crea una contraseña'
                         handler='password'
+                        autoCompleteType='password'
                         secureTextEntry={this.state.showPassword}
                         value={this.state.password}
                         handleValue={this.handleValue}
@@ -215,6 +217,7 @@ export default class LoginContainer extends React.Component {
                         title='Confirmar contraseña'
                         placeholder='Ingrese la misma contraseña'
                         handler='confirmPassword'
+                        autoCompleteType='password'
                         secureTextEntry={this.state.showPassword}
                         value={this.state.confirmPassword}
                         handleValue={this.handleValue}

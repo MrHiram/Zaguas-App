@@ -11,6 +11,8 @@ import HomeScreen from './app/screens/HomeScreen';
 import SetupScreen from './app/screens/SetupScreen';
 import ValidateEmailScreen from './app/screens/ValidateEmailScreen';
 import ResetPasswordScreen from './app/screens/ResetPasswordScreen';
+import AddPetScreen from './app/screens/AddPetScreen';
+import ProfileScreen from './app/screens/ProfileScreen';
 
 const AppStack = createStackNavigator(
   {
@@ -51,10 +53,14 @@ const AppSwitch = createSwitchNavigator(
     },
     App: {
       screen: AppStack,
-      path: 'home'},
+      path: 'ProfileScreen'},
     Auth: {
       screen: AuthStack,
       path: ''
+    },
+    Setup: {
+      screen: SetupScreen,
+      path: 'setup'
     }
   }
 );
@@ -66,6 +72,6 @@ export default class App extends React.Component {
   
   render() {
     const prefix = Linking.makeUrl('/');
-    return <AppContainer uriPrefix={prefix}/>;
+    return <AppContainer uriPrefix={prefix} />;
   }
 }
