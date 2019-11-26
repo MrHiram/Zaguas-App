@@ -40,6 +40,7 @@ export default class AddPetContainer extends React.Component {
     this.init();
   }
 
+ 
   init = async () => {
     let token = await LocalStorage.retrieveToken();
     this.setState({
@@ -134,7 +135,7 @@ export default class AddPetContainer extends React.Component {
       Fetcher.postToken('addPet', data, this.state.token)
         .then(
           (response) => {
-            console.log(response.data);
+            this.props.goBack();
 
           }
         )

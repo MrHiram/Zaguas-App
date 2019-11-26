@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const fetcher = {
-    url: 'http://192.168.43.178:8000/api/', 
+    url: 'http://192.168.1.13:8000/api/', 
     postNoToken: async function (route, data) {
         return await axios.post(this.url + route, data);
     },
@@ -47,5 +47,12 @@ const fetcher = {
         }
         return await axios.get(this.url + route,config);
     },
+    //prueba
+    getUser: async function(accessToken){
+        var config = {
+            headers: { 'Authorization': 'Bearer ' + accessToken }
+        }
+        return await axios.get(this.url+"user", config);
+    }
 }
 export default fetcher;

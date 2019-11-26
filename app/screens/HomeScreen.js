@@ -9,10 +9,12 @@ import ProfileScreen from './ProfileScreen';
 import FeedScreen from './FeedScreen';
 import HistoryScreen from './HistoryScreen';
 import SettingsScreen from './SettingsScreen';
+import AddPetScreen from './AddPetScreen';
 
 const ProfileStack = createStackNavigator({
   Profile: ProfileScreen,
   Settings: SettingsScreen,
+  AddPet: AddPetScreen
 },{
   defaultNavigationOptions: {
     header: null
