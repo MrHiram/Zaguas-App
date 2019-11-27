@@ -7,7 +7,7 @@ export default class AddPetContainer extends React.Component {
 
   render() {
     const petList = this.props.pets.map((data) => {
-      let image = { uri: "http://192.168.1.13:8000/pets/" + data.image };
+      let image = { uri: data.image };
       return (
         <PetProfileCard key={data.id} name={data.name}
           image={image}

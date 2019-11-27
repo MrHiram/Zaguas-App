@@ -42,7 +42,7 @@ export default class ProfileScreen extends React.Component {
       .then((response) => {
         this.setState({
           profileInfo: response.data,
-          image: {uri:"http://192.168.1.13:8000/profileClients/"+response.data.profile.image},
+          image: {uri:response.data.profile.image},
           loading:false,
         });
         console.log(this.state.image);
