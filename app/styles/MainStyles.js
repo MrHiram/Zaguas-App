@@ -1,15 +1,19 @@
 import { StyleSheet, Platform } from 'react-native';
 
+const colors = {
+    PRIMARY_ACCENT: '#007EA8',
+}
+
 export default StyleSheet.create({
     /* Main */
     mainTitle:{
-        color: '#007EA8',
+        color: colors.PRIMARY_ACCENT,
         fontSize: 20,
         marginTop: 10
     },
     mainText:{
         fontSize: 17,
-        color: '#777',
+        color: '#777',  
         paddingVertical: 10
     },
     textBold:{
@@ -125,6 +129,11 @@ export default StyleSheet.create({
         padding: 10,
         marginVertical: 15
     },
+    animatedBox: {
+        flex: 1,
+        backgroundColor: "#fff",
+        padding: 20,
+    },
     /*****/
 
     mainContainer:{
@@ -222,8 +231,12 @@ export default StyleSheet.create({
         minHeight: 28, 
         minWidth: 28,
         position: 'absolute',
-        top: 50, 
-        right: 10,
+        top: 30, 
+        left: 10,
         zIndex: 50
+    },
+    topLeftSetings: {
+        minHeight: 28, 
+        minWidth: 28,
     }
 });

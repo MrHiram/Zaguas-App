@@ -29,8 +29,8 @@ export default class RecoverContainer extends React.Component {
         }
     }
 
-
     requestRecover = () => {
+        let { t } = this.props.t;
         let validEmail = Validator.email(this.state.email);
         if (validEmail) {
             this.setState({waiting: true});
@@ -46,29 +46,30 @@ export default class RecoverContainer extends React.Component {
         } else {
             this.setState({ 
                 waiting: false,
-                emailError: 'Formato incorrecto.' 
+                emailError: t('wrongFormatER')
             });
         }
     }
 
     render() {
+        let { t } = this.props.t;
         return (
             <>
                 {this.state.waiting ?
-                    <RecoverWaitingContainer />
+                    <RecoverWaitingContainer  t={this.props.t}/>
                     :
                     <View style={MainStyles.containerCenter}>
                         <Text
                             style={[MainStyles.mainTitle, MainStyles.alignCenter]}>
-                            Recupera tu contraseña
+                            {t('recoverPassword')}
                         </Text>
                         <Text
                             style={[MainStyles.mainText, MainStyles.alignCenter]}>
-                            Ingresa tu correo electrónico{'\n'}para enviarte una contraseña nueva.
+                            {t('recoverPasswordMsg')}
                         </Text>
                         <InputMT
-                            title='Correo'
-                            placeholder='correo@ejemplo.com'
+                            title={t('email')}
+                            placeholder={t('emailExampleCom')}
                             handler='email'
                             value={this.state.email}
                             handleValue={this.handleValue}
@@ -76,13 +77,13 @@ export default class RecoverContainer extends React.Component {
                             success={this.state.emailSuccess} />
                         <View style={{ marginBottom: 15 } /* This is a spacer */} />
                         <MainButton
-                            title='Enviar correo'
+                            title={t('sendEmail')}
                             onPress={this.requestRecover} />
                         <TouchableText
                             style={MainStyles.spacer}
                             alignCenter={true}
-                            outerText='¿Deseas ingresar?'
-                            innerText='Iniciar sesión'
+                            outerText={t('wantToEnterQN')}
+                            innerText={t('logIn')}
                             onPress={() => this.props.changeModule(1)} />
                     </View>
                 }

@@ -4,16 +4,17 @@ import MainStyles from '../styles/MainStyles';
 
 export default class RegisterWaitingContainer extends React.Component {
     render() {
+        let { t } = this.props.t;
         return (
             <View style={MainStyles.containerCenter}>
                 <Text
                     style={[MainStyles.mainTitle, MainStyles.alignCenter]}>
-                    Espera un momento...
+                    {t('waitOneMoment')}
                 </Text>
                 <View style={{marginVertical: 40} /* This is a spacer */}/>
                 <Text
                     style={[MainStyles.mainText, MainStyles.alignCenter]}>
-                        Tu registro está siendo procesado,{'\n'}esto puede tardar unos segundos.
+                    {t('processing')}
                 </Text>
                 <View style={{marginVertical: 50} /* This is a spacer */}/>   
             </View>

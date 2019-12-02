@@ -8,17 +8,6 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import ProfileScreen from './ProfileScreen';
 import FeedScreen from './FeedScreen';
 import HistoryScreen from './HistoryScreen';
-import SettingsScreen from './SettingsScreen';
-
-const ProfileStack = createStackNavigator({
-  Profile: ProfileScreen,
-  Settings: SettingsScreen,
-},{
-  defaultNavigationOptions: {
-    header: null
-  },
-  initialRouteName: 'Profile'
-});
 
 const TabNavigator = createBottomTabNavigator({
   History: {
@@ -42,7 +31,7 @@ const TabNavigator = createBottomTabNavigator({
     }
   },
   Profile: {
-    screen: ProfileStack,
+    screen: ProfileScreen,
     navigationOptions:{
       tabBarLabel: 'Profile',
       tabBarIcon: ({tintColor})=> (
@@ -70,6 +59,10 @@ const TabNavigator = createBottomTabNavigator({
 
 const AppContainer = createAppContainer(TabNavigator);
 
-export default () => (
-    <AppContainer />
-);
+export default class HomeScreen extends React.Component {
+  render(){
+    return(
+      <AppContainer />
+    )
+  }
+}

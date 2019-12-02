@@ -44,6 +44,7 @@ export default class LoginContainer extends React.Component {
     }
 
     requestLogin = async () => {
+        let { t } = this.props.t;
         let validEmail = Validator.email(this.state.email);
         let validPassword = Validator.password(this.state.password);
         if (validEmail&&validPassword) {
@@ -72,17 +73,18 @@ export default class LoginContainer extends React.Component {
                 );
         } else {
             if (!validEmail)
-                this.setState({ emailError: 'Formato incorrecto', emailSuccess: false });
+                this.setState({ emailError: t('wrongFormatER'), emailSuccess: false });
             else
                 this.setState({ emailError: '', emailSuccess: true });
             if (!validPassword)
-                this.setState({ passwordError: 'Debe superar los 8 caracteres', passwordSuccess: false })
+                this.setState({ passwordError: t('eightLettersER') , passwordSuccess: false })
             else
                 this.setState({ passwordError: '', passwordSuccess: true });
         }
     }
 
     handleError = (errors) => {
+        let { t } = this.props.t;
         let emailError = '';
         let passwordError = '';
         console.log(errors);
@@ -90,22 +92,22 @@ export default class LoginContainer extends React.Component {
         errors.forEach(error => {
             switch(error){
                 case "Invalid credentials":
-                    emailError = passwordError = 'Credenciales invalidas';
+                    emailError = passwordError =t('invalidCredentialsER');
                     break;
                 case "The email field is required.":
-                    passwordError = 'Correo requerido';
+                    passwordError = t('emailRequiredER')
                     break;
                 case "The password field is required.": 
-                    passwordError = 'Contraseña requerida';
+                    passwordError = t('passwordRequiredER');
                     break;
                 case "The email must be a valid email address.":
-                    emailError = 'Formato incorrecto';
+                    emailError = t('wrongFormatER');
                     break;
                 case "User does not exist":
-                    emailError = 'Usuario no encontrado';
+                    emailError = t('userNotFoundER');
                     break;
                 case "Inactive user":
-                    emailError = 'Verifica tu correo, por seguridad';
+                    emailError = t('inactiveUserER');
                     break;
                     
             }
@@ -117,19 +119,20 @@ export default class LoginContainer extends React.Component {
     }
 
     render() {
+        let { t, locale } = this.props.t;
         return (
             <View style={MainStyles.containerCenter}>
                 <InputMT
-                    title='Correo'
-                    placeholder='correo@ejemplo.com'
+                    title={t('email')}
+                    placeholder={t('emailExampleCom')}
                     handler='email'
                     value={this.state.email}
                     handleValue={this.handleValue}
                     error={this.state.emailError}
                     success={this.state.emailSuccess} />
                 <InputMT
-                    title='Contraseña'
-                    placeholder='Contraseña'
+                    title={t('password')}
+                    placeholder={t('password')}
                     handler='password'
                     secureTextEntry={this.state.showPassword}
                     value={this.state.password}
@@ -139,16 +142,16 @@ export default class LoginContainer extends React.Component {
                     success={this.state.passwordSuccess} />
                 <TouchableText
                     alignCenter={false}
-                    innerText='¿Se te olvidó lo contraseña?'
+                    innerText={t('forgotPasswordQN')}
                     onPress={() => this.props.changeModule(3)} />
                 <MainButton
-                    title='Iniciar Sesión'
+                    title={t('logIn')}
                     onPress={this.requestLogin} />
                 <TouchableText
                     style={MainStyles.spacer}
                     alignCenter={true}
-                    outerText='¿No tienes cuenta?'
-                    innerText='Crear una'
+                    outerText={t('registerQN')}
+                    innerText={t('signUp')}
                     onPress={() => this.props.changeModule(2)} />
             </View>
         );

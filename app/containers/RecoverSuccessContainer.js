@@ -5,17 +5,17 @@ import MainStyles from '../styles/MainStyles';
 
 export default class RecoverSuccessContainer extends React.Component {
     render() {
+        let { t } = this.props.t;
         return (
-            
             <View style={MainStyles.containerCenter}>
                 <Text
                     style={[MainStyles.mainTitle, MainStyles.alignCenter]}>
-                    ¡Correo enviado!
+                    {t('emailSent')}
                 </Text>
                 <View style={{ marginVertical: 25 } /* This is a spacer */} />
                 <Text
                     style={[MainStyles.mainText, MainStyles.alignCenter]}>
-                    Tu contraseña ha sido enviada a
+                    {t('passwordSentTo')}
                 </Text>
                 <Text
                     style={[MainStyles.mainText, MainStyles.textBold, MainStyles.alignCenter]}>
@@ -24,11 +24,11 @@ export default class RecoverSuccessContainer extends React.Component {
                 <View style={{ marginVertical: 15 } /* This is a spacer */} />
                 <Text
                     style={[MainStyles.mainText, MainStyles.alignCenter]}>
-                    El enlace tiene vigencia por{'\n'}60 minutos.
+                    {t('linkForTimeMsg')}
                 </Text>
                 <View style={{ marginVertical: 25 } /* This is a spacer */} />
                 <MainButton
-                    title='Volver al inicio'
+                    title={t('backToHome')}
                     onPress={() => this.props.changeModule(1)} />
                 <View style={{ marginVertical: 25 } /* This is a spacer */} />
             </View>
