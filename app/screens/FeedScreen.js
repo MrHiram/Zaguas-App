@@ -41,11 +41,11 @@ export default class FeedScreen extends React.Component {
                                 , backgroundColor: 'white'
                             }} />
                     </View>
-                    <View style={{ height: 20 }}>
+                    <View>
                         <Text
                             style={{
                                 fontSize: 24, textAlign: 'left', fontWeight: 'bold', marginStart: 20,
-                                marginTop: 15
+                                marginVertical: 10
                             }}
                         >{t('newHomes')}</Text>
                     </View>
