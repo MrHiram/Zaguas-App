@@ -30,7 +30,7 @@ export default class ValidateEmailScreen extends React.Component {
 
     render() {
         return (
-            <View style={MainStyles.containerCenter} >
+            <View style={[MainStyles.containerCenter, {flex: 1}]} >
                 <ActivityIndicator />
                 <StatusBar barStyle="default" />
             </View>

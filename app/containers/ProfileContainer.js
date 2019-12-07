@@ -65,28 +65,28 @@ export default class AddPetContainer extends React.Component {
 
 
       <View style={[MainStyles.mainCard, MainStyles.profileCard]}>
-        <Text style={[MainStyles.subnames, MainStyles.blue]}>Descripción</Text>
+        <Text style={[MainStyles.subnames, MainStyles.blue]}>{this.props.t('description')}</Text>
         <View style={MainStyles.containerProfile}>
           <Text style={MainStyles.mainText}>Soy una persona temperamental como mi mascosta</Text>
         </View>
-        <Text style={[MainStyles.subnames, MainStyles.green]}>Mis Mascotas</Text>
+        <Text style={[MainStyles.subnames, MainStyles.green]}>{this.props.t('myPets')}</Text>
         <View style={{ flexDirection: "row" }}>
           <TouchableOpacity style={MainStyles.containerProfile}>
             <Text>
-              Añade nueva mascota
+              {this.props.t('addNewPetMSG')}
             </Text>
           </TouchableOpacity>
         </View>
         <Text style={[MainStyles.subnames, MainStyles.teal]}>
-          Mis casas cuido recientes
+          {this.props.t('recientHomes')}
         </Text>
         <View style={MainStyles.containerProfile}>
           <Text style={MainStyles.mainText}>
-            No tenés ninguna casa cuido reciente
+            {this.props.t('noRecientHomesMSG')}
           </Text>
           <TouchableOpacity>
             <Text style={[MainStyles.blue, MainStyles.mainText]}>
-              Comienza ahora
+              {this.props.t('beginNow')}
             </Text>
           </TouchableOpacity>
         </View>

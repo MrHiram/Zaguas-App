@@ -6,6 +6,10 @@ const en = {
     logIn: 'Log in',
     processing: 'Your request is being processed,\nthis might take a few seconds',
     backToHome: 'Go back',
+    feed: 'Feed',
+    history: 'History', 
+    profile: 'Profile',
+
 
     /* Log in screen */
     forgotPasswordQN: 'Forgot your password?',
@@ -35,6 +39,10 @@ const en = {
     emailSent: 'Email sent!',
     passwordSentTo: 'Your password has been sent to',
     linkForTimeMsg: 'The link will be valid for \n60 minutes',
+
+    /* Reset password */
+    changePassword: 'Change password',
+    linkExpired: 'Link expired',
     
     /* Errors */
     wrongFormatER: 'Wrong format',
@@ -48,7 +56,21 @@ const en = {
     lastnameER: 'Check your lastname',
     passwordMatchER: "Passwords don't match",
     invalidCredentialsER: 'Invalid credentials',
+    alertErrorTitle: 'Something went wrong',
+    alertErrorMSG: 'There was an error changing your password, seems that your link expired',
 
+    /* Feed */ 
+    newHomes: 'New Places',
+    search: 'Search',
+    perNight: 'per night',
+
+    /* Profile */
+    description: 'Description',
+    myPets: 'My pets',
+    addNewPetMSG: 'Add a new pet',
+    recientHomes: 'My recient places',
+    noRecientHomesMSG: "You don't have recient homes",
+    beginNow: 'Begin now'
 };
 
 export default en;

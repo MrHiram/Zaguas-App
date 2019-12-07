@@ -7,15 +7,10 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import AuthCheckScreen from './app/screens/AuthCheckScreen';
 import AuthScreen from './app/screens/AuthScreen';
-import HomeScreen from './app/screens/HomeScreen';
 import SetupScreen from './app/screens/SetupScreen';
 import ValidateEmailScreen from './app/screens/ValidateEmailScreen';
 import ResetPasswordScreen from './app/screens/ResetPasswordScreen';
 import AddPetScreen from './app/screens/AddPetScreen';
-
-import ProfileScreen from './app/screens/ProfileScreen';
-import FeedScreen from './app/screens/FeedScreen';
-import HistoryScreen from './app/screens/HistoryScreen';
 
 import * as Localization from 'expo-localization';
 import i18n from 'i18n-js';
@@ -23,57 +18,11 @@ import en from './app/languages/en';
 import es from './app/languages/es';
 import LocalStorage from './app/services/LocalStorage';
 
+import DynamicTabNavigatorScreen from './app/screens/DynamicTabNavigatorScreen';
+
 i18n.fallbacks = true;
 i18n.translations = { es, en };
 i18n.locale = Localization.locale;
-
-const TabNavigator = createBottomTabNavigator({
-  History: {
-    screen: HistoryScreen,
-    navigationOptions: {
-      tabBarLabel: 'History', //Estos estan muy rudos de llegarles
-      tabBarIcon: ({ tintColor }) => (
-        <Icon name="md-timer" color=
-          {tintColor} size={24} />
-      )
-    }
-  },
-  Feed: {
-    screen: FeedScreen,
-    navigationOptions: {
-      tabBarLabel: 'Home', //Estos estan muy rudos de llegarles
-      tabBarIcon: ({ tintColor }) => (
-        <Icon name="ios-home" color=
-          {tintColor} size={24} />
-      )
-    }
-  },
-  Profile: {
-    screen: ProfileScreen,
-    navigationOptions: {
-      tabBarLabel: 'Profile', //Estos estan muy rudos de llegarles
-      tabBarIcon: ({ tintColor }) => (
-        <Icon name="md-person" color=
-          {tintColor} size={24} />
-      )
-    }
-  },
-}, {
-  initialRouteName: 'Feed',
-}, {
-  tabBarOptions: {
-    activeTintColor: '#007EA8',
-    inactiveTintColor: 'grey',
-    style: {
-      backgroundColor: 'white',
-      borderTopWidth: 0,
-      shadowOffset: { width: 5, height: 3 },
-      shadowColor: 'black',
-      shadowOpacity: 0.5,
-      elevation: 5
-    }
-  },
-});
 
 const AuthStack = createStackNavigator(
   {
@@ -103,7 +52,7 @@ const AppSwitch = createSwitchNavigator(
       path: 'auth'
     },
     App: {
-      screen: TabNavigator,
+      screen: DynamicTabNavigatorScreen,
       path: 'ProfileScreen'
     },
     Auth: {
@@ -129,9 +78,9 @@ export default class App extends React.Component {
     this.init();
   }
 
-  init = async () =>{
+  init = async () => {
     let localeStored = await LocalStorage.retrieve('locale');
-    if(localeStored != null){
+    if (localeStored != null) {
       this.setState({
         locale: localeStored
       });
@@ -140,8 +89,7 @@ export default class App extends React.Component {
 
   setLocale = locale => {
     this.setState({ locale });
-    LocalStorage.save('locale',  locale );
-    
+    LocalStorage.save('locale', locale);
   };
 
   t = (scope, options) => {

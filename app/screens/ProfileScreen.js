@@ -44,13 +44,13 @@ export default class ProfileScreen extends React.Component {
     this.setState({ open: !this.state.open });
   };
 
-  requestLogout = () => {
+  requestLogout = (exit) => {
     Fetcher.postToken('logout', this.state.token);
     LocalStorage.removeToken();
-    this.props.navigation.navigate({ routeName: 'Auth' });
+    exit();
   }
 
-  drawerContent = () => {
+  drawerContent = (locale, exit) => {
     return (
       <View onPress={this.toggleOpen} style={MainStyles.animatedBox}>
         <IconButton
@@ -59,20 +59,34 @@ export default class ProfileScreen extends React.Component {
           name={"md-arrow-back"}
           color={'#000'}
           size={28} />
+
+        {locale === 'en-US' || locale === 'en' ?
+          (
+            <MainButton
+              title="Español"
+              onPress={() => this.props.screenProps.setLocale('es')}
+            />
+          ) : (
+            <MainButton
+              title="English"
+              onPress={() => this.props.screenProps.setLocale('en')}
+            />
+          )}
+
         <MainButton
-          onPress={() => this.requestLogout()}
+          onPress={() => this.requestLogout(exit)}
           title="Logout" />
       </View>
     );
   };
 
   render() {
-
+    let { t, locale, exit } = this.props.screenProps;
     return (
-      <View style={{ flex: 1, backgroundColor: "#000", }}>
+      <View style={{ flex: 1, backgroundColor: "#fff", }}>
         <MenuDrawer
           open={this.state.open}
-          drawerContent={this.drawerContent()}
+          drawerContent={this.drawerContent(locale, exit)}
           drawerPercentage={100}
           animationTime={250}
           overlay={true}
@@ -103,7 +117,8 @@ export default class ProfileScreen extends React.Component {
               </Text>
               </View>
             </View>
-            <ProfileContainer />
+            <ProfileContainer
+              t={t} />
           </ScrollView>
         </MenuDrawer>
       </View>
