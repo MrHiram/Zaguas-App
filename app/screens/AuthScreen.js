@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ImageBackground, Image, BackHandler, Text, Button } from 'react-native';
+import { View, ImageBackground, Image, BackHandler, Text, Switch, Picker } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import MenuDrawer from 'react-native-side-drawer'
 
@@ -20,7 +20,9 @@ export default class AuthScreen extends React.Component {
         accessToken: '',
         activeModule: 1,
         displayEmail: '',
-        open: false
+        open: false,
+        darkThemeSwitch: false,
+        language: 'en'
     }
 
     componentDidMount() {
@@ -60,11 +62,28 @@ export default class AuthScreen extends React.Component {
         this.props.navigation.navigate('Setup')
     }
 
-    toggleOpen = () => {
-        this.setState({ open: !this.state.open });
+    toggleOpen = (locale) => {
+        let { darkThemeOn } = this.props.screenProps;
+
+        this.setState({
+            open: !this.state.open,
+            darkThemeSwitch: darkThemeOn,
+            language: locale === 'en-US' || locale === 'en' ? 'en' : 'es'
+        });
     };
 
-    drawerContent = (locale, colorTheme, darkThemeOn) => {
+    toggleDarkTheme = () =>
+        this.setState({
+            darkThemeSwitch: !this.state.darkThemeSwitch,
+        });
+
+    applySettings = () => {
+        this.props.screenProps.setDarkThemeOn(this.state.darkThemeSwitch);
+        this.props.screenProps.setLocale(this.state.language);
+        this.setState({ open: false });
+    }
+
+    drawerContent = (locale, t, colorTheme, darkThemeOn) => {
         return (
             <View style={[MainStyles.animatedBox, colorTheme.mainBackground]}>
                 <IconButton
@@ -73,34 +92,29 @@ export default class AuthScreen extends React.Component {
                     name={"md-arrow-back"}
                     color={darkThemeOn ? '#fff' : '#222'}
                     size={28} />
-                {locale === 'en-US' || locale === 'en' ?
-                    (
-                        <MainButton
-                            title="Español"
-                            onPress={() => this.props.screenProps.setLocale('es')}
-                            colorTheme={colorTheme}
-                        />
-                    ) : (
-                        <MainButton
-                            title="English"
-                            onPress={() => this.props.screenProps.setLocale('en')}
-                            colorTheme={colorTheme}
-                        />
-                    )}
-                {darkThemeOn ?
-                    (
-                        <MainButton
-                            title="LightTheme"
-                            onPress={() => this.props.screenProps.setDarkThemeOn(false)}
-                            colorTheme={colorTheme}
-                        />
-                    ) : (
-                        <MainButton
-                            title="DarkTheme"
-                            onPress={() => this.props.screenProps.setDarkThemeOn(true)}
-                            colorTheme={colorTheme}
-                        />
-                    )}
+
+                <View style={[MainStyles.switchContainer, {marginTop: 20}]}>
+                    <Switch
+                        style={MainStyles.switchSize}
+                        onValueChange={this.toggleDarkTheme}
+                        value={this.state.darkThemeSwitch} />
+                    <Text style={[MainStyles.switchText, colorTheme.secondaryTextColor, this.state.termsError ? MainStyles.mainInputErrorMessage : null]}>{t('darkTheme')}</Text>
+                </View>
+
+                <Picker
+                    style={colorTheme.mainTextColor}
+                    im
+                    selectedValue={this.state.language}
+                    onValueChange={(itemValue, itemIndex) => this.setState({ language: itemValue })}>
+                    <Picker.Item label="Español" value="es" />
+                    <Picker.Item label="English" value="en" />
+                </Picker>
+
+                <MainButton
+                    title={t('apply')}
+                    onPress={() => this.applySettings()}
+                    colorTheme={colorTheme}
+                />
             </View>
         );
     };
@@ -108,11 +122,12 @@ export default class AuthScreen extends React.Component {
 
     render() {
         let { t, locale, colorTheme, darkThemeOn } = this.props.screenProps;
+
         return (
             <View style={[MainStyles.mainContainer, colorTheme.mainBackground]}>
                 <MenuDrawer
                     open={this.state.open}
-                    drawerContent={this.drawerContent(locale, colorTheme, darkThemeOn)}
+                    drawerContent={this.drawerContent(locale, t, colorTheme, darkThemeOn)}
                     drawerPercentage={100}
                     animationTime={250}
                     overlay={true}
@@ -133,7 +148,7 @@ export default class AuthScreen extends React.Component {
                             resizeMode='contain'
                             style={MainStyles.mainLogo} />
                         <IconButton
-                            onPress={() => this.toggleOpen()}
+                            onPress={() => this.toggleOpen(locale)}
                             style={MainStyles.topRightSetings}
                             name={"md-settings"}
                             color={darkThemeOn ? '#222' : '#fff'}

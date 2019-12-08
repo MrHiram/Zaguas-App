@@ -1,10 +1,9 @@
 import React from 'react';
-import { View, Text, TouchableOpacity } from 'react-native';
+import { View, Text, Switch, Picker } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import UploadPicture from '../components/UploadPicture';
 import MenuDrawer from 'react-native-side-drawer'
 import { ScrollView } from 'react-native-gesture-handler';
-import { StackActions, NavigationActions } from 'react-navigation';
 
 import ProfileContainer from '../containers/ProfileContainer';
 import IconButton from '../components/IconButton';
@@ -15,18 +14,12 @@ import LocalStorage from '../services/LocalStorage';
 
 import MainStyles from '../styles/MainStyles';
 
-
-const resetAction = StackActions.reset({
-  index: 1,
-  actions: [
-    NavigationActions.back(),
-  ],
-});
-
 export default class ProfileScreen extends React.Component {
   state = {
     token: '',
-    open: false
+    open: false,
+    darkThemeSwitch: false,
+    language: 'en'
   }
 
   componentDidMount() {
@@ -40,8 +33,14 @@ export default class ProfileScreen extends React.Component {
     });
   }
 
-  toggleOpen = () => {
-    this.setState({ open: !this.state.open });
+  toggleOpen = (locale) => {
+    let { darkThemeOn } = this.props.screenProps;
+
+    this.setState({ 
+      open: !this.state.open ,
+      darkThemeSwitch: darkThemeOn,
+      language: locale === 'en-US' || locale === 'en' ? 'en' : 'es'
+    });
   };
 
   requestLogout = (exit) => {
@@ -50,43 +49,67 @@ export default class ProfileScreen extends React.Component {
     exit();
   }
 
-  drawerContent = (locale, exit) => {
+  toggleDarkTheme = () =>
+    this.setState({
+      darkThemeSwitch: !this.state.darkThemeSwitch,
+    });
+
+  applySettings = () => {
+    this.props.screenProps.setDarkThemeOn(this.state.darkThemeSwitch);
+    this.props.screenProps.setLocale(this.state.language);
+    this.setState({ open: false });
+  }
+
+  drawerContent = (locale, exit, t, colorTheme, darkThemeOn) => {
     return (
-      <View onPress={this.toggleOpen} style={MainStyles.animatedBox}>
+      <View style={[MainStyles.animatedBox, colorTheme.mainBackground]}>
         <IconButton
-          onPress={() => this.toggleOpen()}
+          onPress={() => this.toggleOpen(locale)}
           style={MainStyles.topLeftSetings}
           name={"md-arrow-back"}
-          color={'#000'}
+          color={darkThemeOn ? '#fff' : '#222'}
           size={28} />
 
-        {locale === 'en-US' || locale === 'en' ?
-          (
-            <MainButton
-              title="Español"
-              onPress={() => this.props.screenProps.setLocale('es')}
-            />
-          ) : (
-            <MainButton
-              title="English"
-              onPress={() => this.props.screenProps.setLocale('en')}
-            />
-          )}
+        <View style={[MainStyles.switchContainer, { marginTop: 20 }]}>
+          <Switch
+            style={MainStyles.switchSize}
+            onValueChange={this.toggleDarkTheme}
+            value={this.state.darkThemeSwitch} />
+          <Text style={[MainStyles.switchText, colorTheme.secondaryTextColor, this.state.termsError ? MainStyles.mainInputErrorMessage : null]}>{t('darkTheme')}</Text>
+        </View>
+
+        <Picker
+          style={colorTheme.mainTextColor}
+          im
+          selectedValue={this.state.language}
+          onValueChange={(itemValue, itemIndex) => this.setState({ language: itemValue })}>
+          <Picker.Item label="Español" value="es" />
+          <Picker.Item label="English" value="en" />
+        </Picker>
+
+        <MainButton
+          title={t('apply')}
+          onPress={() => this.applySettings()}
+          colorTheme={colorTheme}
+        />
+
+        <View style={{height: 20}} />
 
         <MainButton
           onPress={() => this.requestLogout(exit)}
-          title="Logout" />
+          title="Logout"
+          colorTheme={colorTheme} />
       </View>
     );
   };
 
   render() {
-    let { t, locale, exit } = this.props.screenProps;
+    let { t, locale, exit, colorTheme, darkThemeOn } = this.props.screenProps;
     return (
-      <View style={{ flex: 1, backgroundColor: "#fff", }}>
+      <View style={[MainStyles.mainContainer, colorTheme.mainBackground]}>
         <MenuDrawer
           open={this.state.open}
-          drawerContent={this.drawerContent(locale, exit)}
+          drawerContent={this.drawerContent(locale, exit, t, colorTheme, darkThemeOn)}
           drawerPercentage={100}
           animationTime={250}
           overlay={true}
@@ -103,7 +126,7 @@ export default class ProfileScreen extends React.Component {
                 onPress={() => this.toggleOpen()}
                 style={MainStyles.topRightSetings}
                 name={"md-settings"}
-                color={'#ffffff'}
+                color={darkThemeOn ? '#222' : '#fff'}
                 size={28} />
               <View style={{ height: 500, paddingTop: 130 }}>
                 <UploadPicture
@@ -111,14 +134,16 @@ export default class ProfileScreen extends React.Component {
                   image={this.state.image}
                   error={this.state.imageError}
                   handlerImage={this.handlerImage}
+                  colorTheme={colorTheme}
                 />
-                <Text style={MainStyles.mainName} >
+                <Text style={[MainStyles.mainName, colorTheme.btnTextColor]} >
                   Lolo Patel
               </Text>
               </View>
             </View>
             <ProfileContainer
-              t={t} />
+              t={t}
+              colorTheme={colorTheme} />
           </ScrollView>
         </MenuDrawer>
       </View>

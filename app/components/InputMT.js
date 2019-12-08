@@ -14,7 +14,7 @@ export default function InputMT(props) {
                 <TextInput
                     autoCompleteType={props.autoCompleteType || 'off'}
                     secureTextEntry={props.secureTextEntry}
-                    style={[MainStyles.mainInput, props.colorTheme.mainTextColor]}
+                    style={[MainStyles.mainContainer, props.colorTheme.mainTextColor]}
                     placeholder={props.placeholder}
                     onChangeText={e => props.handleValue(props.handler, e)}
                     value={props.value} />

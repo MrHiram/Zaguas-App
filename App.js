@@ -91,7 +91,7 @@ export default class App extends React.Component {
         locale: localeStored,
         colorTheme: darkThemeOn == 'true' ? DarkTheme : LightTheme, //cambiar
         darkThemeOn: darkThemeOn == 'true' ? true : false, //cambiar
-      });
+      }),(console.log(this.state.darkThemeOn));
     }
   }
 

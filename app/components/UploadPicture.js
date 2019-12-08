@@ -19,7 +19,7 @@ export default function UploadPicture(props) {
                     style={{ height: '90%', width: '90%', alignSelf: 'center', borderRadius: 400 / 2 }}
                 />
                 <Text
-                    style={MainStyles.profilePictureText}
+                    style={[MainStyles.profilePictureText, props.colorTheme.btnTextColor]}
                 >{props.titlePicture}</Text>
                 <Text style={[MainStyles.mainInputErrorMessage, MainStyles.mainImageErrorMessage]}>{props.error}</Text>
             </TouchableOpacity>

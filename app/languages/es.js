@@ -9,6 +9,8 @@ const es = {
     feed: 'Inicio',
     history: 'Historial', 
     profile: 'Perfil',
+    darkTheme: 'Tema oscuro',
+    apply: 'Aplicar',
 
     /* Página de iniciar sesion */
     forgotPasswordQN: '¿Se te olvidó lo contraseña?',
