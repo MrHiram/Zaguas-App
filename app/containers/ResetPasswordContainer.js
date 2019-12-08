@@ -66,22 +66,23 @@ export default class ResetPasswordContainer extends React.Component {
                     (error) => { this.handleError(error, t) }
                 );
         } else {
-            if (!validPassword)
-                this.setState({ passwordError: t('eightLetterER'), passwordSuccess: false })
-            else
+            console.log(['valid',validPassword]);
+            if (!validPassword){
+                this.setState({ passwordError: t('eightLettersER'), passwordSuccess: false });
+            }else{
                 this.setState({ passwordError: '', passwordSuccess: true });
-            if (!validConfirmation) {
-                this.setState({ confirmPasswordError: t('passwordMatchER'), passwordSuccess: false })
-            } else {
-
             }
-            this.setState({ passwordError: '', passwordSuccess: true });
+            if (!validConfirmation) {
+                this.setState({ confirmPasswordError: t('passwordMatchER'), confirmPasswordSuccess: false });
+            } else {
+                this.setState({ confirmPasswordError: '', confirmPasswordSuccess: true });
+            }
         }
     }
 
     handleError = (errors, t) => {
         let passwordError = '';
-        console.log(errors);
+        // console.log(errors);
 
         errors.forEach(error => {
             switch (error) {
@@ -121,9 +122,9 @@ export default class ResetPasswordContainer extends React.Component {
     }
 
     render() {
-        let { t } = this.props;
+        let { t, colorTheme, darkThemeOn } = this.props.screenProps;
         return (
-            <View style={MainStyles.containerCenter}>
+            <View style={[MainStyles.containerCenter]}>
                 <InputMT
                     title={t('password')}
                     placeholder={t('password')}
@@ -133,7 +134,9 @@ export default class ResetPasswordContainer extends React.Component {
                     handleValue={this.handleValue}
                     togglePassword={this.togglePasswords}
                     error={this.state.passwordError}
-                    success={this.state.passwordSuccess} />
+                    success={this.state.passwordSuccess}
+                    darkThemeOn={darkThemeOn}
+                    colorTheme={colorTheme} />
                 <InputMT
                     title={(t('confirmPassword'))}
                     placeholder={(t('confirmPassword'))}
@@ -143,10 +146,13 @@ export default class ResetPasswordContainer extends React.Component {
                     handleValue={this.handleValue}
                     togglePassword={this.togglePasswords}
                     error={this.state.confirmPasswordError}
-                    success={this.state.confirmPasswordSuccess} />
+                    success={this.state.confirmPasswordSuccess}
+                    darkThemeOn={darkThemeOn}
+                    colorTheme={colorTheme} />
                 <MainButton
                     title={t('changePassword')}
-                    onPress={() => this.requestReset(t)} />
+                    onPress={() => this.requestReset(t)} 
+                    colorTheme={colorTheme}/>
             </View>
         );
     };

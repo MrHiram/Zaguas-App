@@ -7,7 +7,7 @@ export default function TouchableText(props) {
         <View 
         style={[ props.style, props.alignCenter? MainStyles.TouchableTextContainerRow : MainStyles.TouchableTextContainer]}
         >
-            <Text style={props.colorTheme.mainTextColor}>{props.outerText}</Text>
+            <Text style={props.colorTheme.secondaryTextColor}>{props.outerText}</Text>
             <TouchableOpacity
                 onPress={()=>props.onPress()}>
                 <Text

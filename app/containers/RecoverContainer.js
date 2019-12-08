@@ -52,19 +52,19 @@ export default class RecoverContainer extends React.Component {
     }
 
     render() {
-        let { t } = this.props.t;
+        let { t, colorTheme } = this.props.screenProps;
         return (
             <>
                 {this.state.waiting ?
-                    <RecoverWaitingContainer  t={this.props.t}/>
+                    <RecoverWaitingContainer  screenProps={this.props.screenProps}/>
                     :
                     <View style={MainStyles.containerCenter}>
                         <Text
-                            style={[MainStyles.mainTitle, MainStyles.alignCenter]}>
+                            style={[MainStyles.mainTitle, MainStyles.alignCenter, colorTheme.subtitleTextColor]}>
                             {t('recoverPassword')}
                         </Text>
                         <Text
-                            style={[MainStyles.mainText, MainStyles.alignCenter]}>
+                            style={[MainStyles.mainText, MainStyles.alignCenter, colorTheme.secondaryTextColor]}>
                             {t('recoverPasswordMsg')}
                         </Text>
                         <InputMT
@@ -74,17 +74,20 @@ export default class RecoverContainer extends React.Component {
                             value={this.state.email}
                             handleValue={this.handleValue}
                             error={this.state.emailError}
-                            success={this.state.emailSuccess} />
+                            success={this.state.emailSuccess} 
+                            colorTheme={colorTheme}/>
                         <View style={{ marginBottom: 15 } /* This is a spacer */} />
                         <MainButton
                             title={t('sendEmail')}
-                            onPress={this.requestRecover} />
+                            onPress={this.requestRecover}
+                            colorTheme={colorTheme} />
                         <TouchableText
                             style={MainStyles.spacer}
                             alignCenter={true}
                             outerText={t('wantToEnterQN')}
                             innerText={t('logIn')}
-                            onPress={() => this.props.changeModule(1)} />
+                            onPress={() => this.props.changeModule(1)}
+                            colorTheme={colorTheme} />
                     </View>
                 }
             </>

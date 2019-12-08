@@ -66,7 +66,7 @@ export default class AuthScreen extends React.Component {
 
     drawerContent = (locale, colorTheme, darkThemeOn) => {
         return (
-            <View onPress={this.toggleOpen} style={[MainStyles.animatedBox, colorTheme.mainBackground]}>
+            <View style={[MainStyles.animatedBox, colorTheme.mainBackground]}>
                 <IconButton
                     onPress={() => this.toggleOpen()}
                     style={MainStyles.topLeftSetings}
@@ -108,7 +108,6 @@ export default class AuthScreen extends React.Component {
 
     render() {
         let { t, locale, colorTheme, darkThemeOn } = this.props.screenProps;
-        console.log(['Auth', darkThemeOn])
         return (
             <View style={[MainStyles.mainContainer, colorTheme.mainBackground]}>
                 <MenuDrawer
@@ -142,11 +141,10 @@ export default class AuthScreen extends React.Component {
                         <View
                             style={[MainStyles.mainCard, colorTheme.mainBackground]}>
                             {this.state.activeModule == 1 ? <LoginContainer loginSuccess={this.loginSuccess} setup={this.setup} changeModule={this.toggleModules} screenProps={this.props.screenProps} /> : null}
-                            {this.state.activeModule == 2 ? <RegisterContainer changeModule={this.toggleModules} toggleEmail={this.toggleEmail} t={this.props.screenProps} /> : null}
-                            {this.state.activeModule == 3 ? <RecoverContainer changeModule={this.toggleModules} toggleEmail={this.toggleEmail} t={this.props.screenProps} /> : null}
-                            {/*this.state.activeModule == 4 ? <RecoverWaitingContainer changeModule={this.toggleModules} t={this.props.screenProps} /> : null*/}
-                            {this.state.activeModule == 5 ? <RecoverSuccessContainer changeModule={this.toggleModules} email={this.state.displayEmail} t={this.props.screenProps} /> : null}
-                            {this.state.activeModule == 6 ? <RegisterSuccessContainer changeModule={this.toggleModules} email={this.state.displayEmail} t={this.props.screenProps} /> : null}
+                            {this.state.activeModule == 2 ? <RegisterContainer changeModule={this.toggleModules} toggleEmail={this.toggleEmail} screenProps={this.props.screenProps} /> : null}
+                            {this.state.activeModule == 3 ? <RecoverContainer changeModule={this.toggleModules} toggleEmail={this.toggleEmail} screenProps={this.props.screenProps} /> : null}
+                            {this.state.activeModule == 5 ? <RecoverSuccessContainer changeModule={this.toggleModules} email={this.state.displayEmail} screenProps={this.props.screenProps} /> : null}
+                            {this.state.activeModule == 6 ? <RegisterSuccessContainer changeModule={this.toggleModules} email={this.state.displayEmail} screenProps={this.props.screenProps} /> : null}
                         </View>
                     </KeyboardAwareScrollView>
                 </MenuDrawer>
