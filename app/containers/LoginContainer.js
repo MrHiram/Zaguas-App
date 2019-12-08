@@ -44,7 +44,7 @@ export default class LoginContainer extends React.Component {
     }
 
     requestLogin = async () => {
-        let { t } = this.props.t;
+        let { t } = this.props.screenProps;
         let validEmail = Validator.email(this.state.email);
         let validPassword = Validator.password(this.state.password);
         if (validEmail&&validPassword) {
@@ -84,7 +84,7 @@ export default class LoginContainer extends React.Component {
     }
 
     handleError = (errors) => {
-        let { t } = this.props.t;
+        let { t } = this.props.screenProps;
         let emailError = '';
         let passwordError = '';
         console.log(errors);
@@ -119,9 +119,9 @@ export default class LoginContainer extends React.Component {
     }
 
     render() {
-        let { t, locale } = this.props.t;
+        let { t, colorTheme, darkThemeOn } = this.props.screenProps;
         return (
-            <View style={MainStyles.containerCenter}>
+            <View style={[MainStyles.containerCenter]}>
                 <InputMT
                     title={t('email')}
                     placeholder={t('emailExampleCom')}
@@ -129,7 +129,8 @@ export default class LoginContainer extends React.Component {
                     value={this.state.email}
                     handleValue={this.handleValue}
                     error={this.state.emailError}
-                    success={this.state.emailSuccess} />
+                    success={this.state.emailSuccess} 
+                    colorTheme={colorTheme}/>
                 <InputMT
                     title={t('password')}
                     placeholder={t('password')}
@@ -139,20 +140,25 @@ export default class LoginContainer extends React.Component {
                     handleValue={this.handleValue}
                     togglePassword={this.togglePasswords}
                     error={this.state.passwordError}
-                    success={this.state.passwordSuccess} />
+                    success={this.state.passwordSuccess} 
+                    colorTheme={colorTheme}
+                    darkThemeOn={darkThemeOn}/>
                 <TouchableText
                     alignCenter={false}
                     innerText={t('forgotPasswordQN')}
-                    onPress={() => this.props.changeModule(3)} />
+                    onPress={() => this.props.changeModule(3)}
+                    colorTheme={colorTheme} />
                 <MainButton
                     title={t('logIn')}
-                    onPress={this.requestLogin} />
+                    onPress={this.requestLogin} 
+                    colorTheme={colorTheme}/>
                 <TouchableText
-                    style={MainStyles.spacer}
+                    style={[MainStyles.spacer]}
                     alignCenter={true}
                     outerText={t('registerQN')}
                     innerText={t('signUp')}
-                    onPress={() => this.props.changeModule(2)} />
+                    onPress={() => this.props.changeModule(2)} 
+                    colorTheme={colorTheme}/>
             </View>
         );
     };

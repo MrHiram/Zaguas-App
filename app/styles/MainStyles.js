@@ -5,7 +5,16 @@ const colors = {
 }
 
 export default StyleSheet.create({
-    /* Main */
+    /* Primary Containers */
+    mainContainer:{
+        flex: 1, 
+    },
+    scrollView:{
+        height: '100%',
+        width: '100%',
+    },
+
+
     mainTitle:{
         color: colors.PRIMARY_ACCENT,
         fontSize: 20,
@@ -92,15 +101,12 @@ export default StyleSheet.create({
         color: '#007EA8'
     },
     mainCard:{
-        backgroundColor:"#ffff",
         paddingHorizontal: 20,
         paddingVertical: 30,
         justifyContent:'center',
         width: '100%',
         borderTopEndRadius: 30,
-        borderTopStartRadius: 30,
-    
-       
+        borderTopStartRadius: 30,      
     },
     /*Profile*/
     mainName:{
@@ -131,7 +137,6 @@ export default StyleSheet.create({
     },
     animatedBox: {
         flex: 1,
-        backgroundColor: "#fff",
         padding: 20,
     },
     /*****/
@@ -139,10 +144,6 @@ export default StyleSheet.create({
     mainContainer:{
         flex: 1,
         backgroundColor: "#0076A0"
-    },
-    scrollView:{
-        height: '100%',
-        width: '100%',
     },
     spacer:{
         marginBottom: 50

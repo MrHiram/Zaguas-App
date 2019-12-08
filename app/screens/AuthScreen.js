@@ -64,25 +64,41 @@ export default class AuthScreen extends React.Component {
         this.setState({ open: !this.state.open });
     };
 
-    drawerContent = (locale) => {
+    drawerContent = (locale, colorTheme, darkThemeOn) => {
         return (
-            <View onPress={this.toggleOpen} style={MainStyles.animatedBox}>
+            <View onPress={this.toggleOpen} style={[MainStyles.animatedBox, colorTheme.mainBackground]}>
                 <IconButton
                     onPress={() => this.toggleOpen()}
                     style={MainStyles.topLeftSetings}
                     name={"md-arrow-back"}
-                    color={'#000'}
+                    color={darkThemeOn ? '#fff' : '#222'}
                     size={28} />
                 {locale === 'en-US' || locale === 'en' ?
                     (
                         <MainButton
                             title="Español"
                             onPress={() => this.props.screenProps.setLocale('es')}
+                            colorTheme={colorTheme}
                         />
                     ) : (
                         <MainButton
                             title="English"
                             onPress={() => this.props.screenProps.setLocale('en')}
+                            colorTheme={colorTheme}
+                        />
+                    )}
+                {darkThemeOn ?
+                    (
+                        <MainButton
+                            title="LightTheme"
+                            onPress={() => this.props.screenProps.setDarkThemeOn(false)}
+                            colorTheme={colorTheme}
+                        />
+                    ) : (
+                        <MainButton
+                            title="DarkTheme"
+                            onPress={() => this.props.screenProps.setDarkThemeOn(true)}
+                            colorTheme={colorTheme}
                         />
                     )}
             </View>
@@ -91,13 +107,13 @@ export default class AuthScreen extends React.Component {
 
 
     render() {
-        let { t, locale } = this.props.screenProps;
+        let { t, locale, colorTheme, darkThemeOn } = this.props.screenProps;
+        console.log(['Auth', darkThemeOn])
         return (
-
-            <View style={{ flex: 1, backgroundColor: "#fff", }}>
+            <View style={[MainStyles.mainContainer, colorTheme.mainBackground]}>
                 <MenuDrawer
                     open={this.state.open}
-                    drawerContent={this.drawerContent(locale)}
+                    drawerContent={this.drawerContent(locale, colorTheme, darkThemeOn)}
                     drawerPercentage={100}
                     animationTime={250}
                     overlay={true}
@@ -111,7 +127,7 @@ export default class AuthScreen extends React.Component {
                         <ImageBackground
                             source={require('../../assets/fondo_login.png')}
                             resizeMode='contain'
-                            style={MainStyles.mainBackgroundImage}
+                            style={[MainStyles.mainBackgroundImage, colorTheme.mainAccentBackground]}
                             imageStyle={{ resizeMode: "cover", width: '100%', height: 430 }} />
                         <Image
                             source={require('../../assets/logo_white.png')}
@@ -121,11 +137,11 @@ export default class AuthScreen extends React.Component {
                             onPress={() => this.toggleOpen()}
                             style={MainStyles.topRightSetings}
                             name={"md-settings"}
-                            color={'#ffffff'}
+                            color={darkThemeOn ? '#222' : '#fff'}
                             size={28} />
                         <View
-                            style={MainStyles.mainCard}>
-                            {this.state.activeModule == 1 ? <LoginContainer loginSuccess={this.loginSuccess} setup={this.setup} changeModule={this.toggleModules} t={this.props.screenProps} /> : null}
+                            style={[MainStyles.mainCard, colorTheme.mainBackground]}>
+                            {this.state.activeModule == 1 ? <LoginContainer loginSuccess={this.loginSuccess} setup={this.setup} changeModule={this.toggleModules} screenProps={this.props.screenProps} /> : null}
                             {this.state.activeModule == 2 ? <RegisterContainer changeModule={this.toggleModules} toggleEmail={this.toggleEmail} t={this.props.screenProps} /> : null}
                             {this.state.activeModule == 3 ? <RecoverContainer changeModule={this.toggleModules} toggleEmail={this.toggleEmail} t={this.props.screenProps} /> : null}
                             {/*this.state.activeModule == 4 ? <RecoverWaitingContainer changeModule={this.toggleModules} t={this.props.screenProps} /> : null*/}
