@@ -11,6 +11,7 @@ import SetupScreen from './app/screens/SetupScreen';
 import ValidateEmailScreen from './app/screens/ValidateEmailScreen';
 import ResetPasswordScreen from './app/screens/ResetPasswordScreen';
 import AddPetScreen from './app/screens/AddPetScreen';
+import CaretakerScreen from './app/screens/CaretakerScreen';
 
 import * as Localization from 'expo-localization';
 import i18n from 'i18n-js';
@@ -91,7 +92,7 @@ export default class App extends React.Component {
         locale: localeStored,
         colorTheme: darkThemeOn == 'true' ? DarkTheme : LightTheme, //cambiar
         darkThemeOn: darkThemeOn == 'true' ? true : false, //cambiar
-      }),(console.log(this.state.darkThemeOn));
+      }), (console.log(this.state.darkThemeOn));
     }
   }
 
@@ -114,7 +115,7 @@ export default class App extends React.Component {
 
   render() {
     const prefix = Linking.makeUrl('/');
-    return <AppContainer
+    return (<AppContainer
       uriPrefix={prefix}
       screenProps={{
         t: this.t,
@@ -123,6 +124,6 @@ export default class App extends React.Component {
         colorTheme: this.state.colorTheme,
         darkThemeOn: this.state.darkThemeOn,
         setDarkThemeOn: this.setDarkThemeOn
-      }} />;
+      }} />);
   }
 }

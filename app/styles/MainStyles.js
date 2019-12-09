@@ -164,6 +164,100 @@ export default StyleSheet.create({
         flex: 1,
         padding: 20,
     },
+     /*Caretaker*/
+     mainTitleRow: {
+        flexDirection: 'row',
+        width: '100%',
+        paddingTop:20
+    },
+    imageColumn: {
+        flexDirection: 'column',
+        width:'45%',
+        
+    },
+    textColumn: {
+        flexDirection: 'column',
+        width: '60%'
+    },
+    descriptionContainer: {
+        width: '80%',
+        marginTop: 10,
+        backgroundColor: '#005C95',
+        borderBottomStartRadius: 10,
+        borderBottomEndRadius: 10,
+        borderTopRightRadius: 10
+    },
+    descriptionText: {
+        padding: 10,
+        color: '#fff',
+        fontSize: 15
+    },
+    descriptionColumn: {
+        flexDirection: 'column',
+        justifyContent: 'flex-start',
+        width: '50%',
+    },
+    daysColumn:{
+        flexDirection: 'column',
+        width: '30%'
+    },
+    descriptionRow: {
+        flexDirection: 'row',
+        width: '100%'
+    },
+    decriptionInfo: {
+        color: '#ffff',
+        marginLeft: 10,
+        alignSelf: 'center'
+    },
+    subtextDescription: {
+        color: '#ffff',
+        fontSize: 20,
+        fontWeight: "bold",
+        marginVertical: 15
+    },
+    mainNameCaretaker: {
+        color: '#ffff',
+        fontSize: 30,
+        fontWeight: "bold",
+    },
+    caretakerCard: {
+        width: '90%',
+        borderRadius: 10,
+        backgroundColor: '#ffff',
+        alignSelf: 'center',
+        marginTop: 20
+    },
+    editInfoCaretaker: {
+        width: '100%',
+        zIndex: 1,
+        flexDirection: 'row-reverse',
+        position: 'absolute'
+    },
+    iconEdit: {
+        marginLeft: 20,
+        backgroundColor: '#078846',
+        padding: 10,
+        borderTopRightRadius: 10
+    },
+    cardImageCaretaker: {
+        width: '100%',
+        overflow: 'hidden',
+        borderRadius: 0,
+        height: 235,
+        borderTopLeftRadius: 10,
+        justifyContent: 'center'
+    },
+    subTitile:{
+        fontWeight: 'bold',
+        fontSize: 15,
+        marginHorizontal: 10,
+        marginVertical: 5
+    },
+    marginText:{
+        marginBottom: 10,
+        marginHorizontal: 10
+    },
     /*****/
     spacer: {
         marginBottom: 50
@@ -246,10 +340,10 @@ export default StyleSheet.create({
         alignItems: 'center'
     },
     topRightSetings: {
-        minHeight: 28,
+        minHeight: 25,
         minWidth: 28,
         position: 'absolute',
-        top: 30,
+        top: 50,
         left: 10,
         zIndex: 50
     },
