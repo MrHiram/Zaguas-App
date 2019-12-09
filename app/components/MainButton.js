@@ -9,7 +9,7 @@ export default function MainButton(props) {
                 style={MainStyles.MainButtonContainer}
                 onPress={() => props.onPress()}>
                 <Text
-                    style={MainStyles.MainButtonText}>
+                    style={[MainStyles.MainButtonText, props.colorTheme.btnTextColor]}>
                     {props.title}
                 </Text>
             </TouchableOpacity>

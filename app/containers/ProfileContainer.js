@@ -60,33 +60,31 @@ export default class AddPetContainer extends React.Component {
 
 
   render() {
-
+    let { t, colorTheme} = this.props;
     return (
-
-
-      <View style={[MainStyles.mainCard, MainStyles.profileCard]}>
-        <Text style={[MainStyles.subnames, MainStyles.blue]}>{this.props.t('description')}</Text>
-        <View style={MainStyles.containerProfile}>
+      <View style={[MainStyles.mainCard, MainStyles.profileCard, colorTheme.mainBackground]}>
+        <Text style={[MainStyles.subnames, MainStyles.blue]}>{t('description')}</Text>
+        <View style={[MainStyles.containerProfile]}>
           <Text style={MainStyles.mainText}>Soy una persona temperamental como mi mascosta</Text>
         </View>
-        <Text style={[MainStyles.subnames, MainStyles.green]}>{this.props.t('myPets')}</Text>
+        <Text style={[MainStyles.subnames, MainStyles.green]}>{t('myPets')}</Text>
         <View style={{ flexDirection: "row" }}>
           <TouchableOpacity style={MainStyles.containerProfile}>
             <Text>
-              {this.props.t('addNewPetMSG')}
+              {t('addNewPetMSG')}
             </Text>
           </TouchableOpacity>
         </View>
         <Text style={[MainStyles.subnames, MainStyles.teal]}>
-          {this.props.t('recientHomes')}
+          {t('recientHomes')}
         </Text>
         <View style={MainStyles.containerProfile}>
           <Text style={MainStyles.mainText}>
-            {this.props.t('noRecientHomesMSG')}
+            {t('noRecientHomesMSG')}
           </Text>
           <TouchableOpacity>
             <Text style={[MainStyles.blue, MainStyles.mainText]}>
-              {this.props.t('beginNow')}
+              {t('beginNow')}
             </Text>
           </TouchableOpacity>
         </View>

@@ -9,7 +9,8 @@ const en = {
     feed: 'Feed',
     history: 'History', 
     profile: 'Profile',
-
+    darkTheme: 'Dark theme',
+    apply: 'Apply',
 
     /* Log in screen */
     forgotPasswordQN: 'Forgot your password?',

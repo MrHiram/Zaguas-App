@@ -76,7 +76,7 @@ export default class LoginContainer extends React.Component {
     }
 
     requestRegister = () => {
-        let { t } = this.props.t;
+        let { t } = this.props.screenProps;
         let validName = this.state.name != '' ? true : false;
         let validLastName = this.state.lastname != '' ? true : false;
         let validEmail = validator.email(this.state.email);
@@ -97,7 +97,7 @@ export default class LoginContainer extends React.Component {
             Fetcher.postNoToken('register', data)
                 .then(
                     (response) => {
-                        console.log(response);
+                        // console.log(response);
                         if (response.data.message) {
                             this.props.toggleEmail(data.email);
                             this.props.changeModule(6);
@@ -108,7 +108,7 @@ export default class LoginContainer extends React.Component {
                 )
                 .catch(
                     (error) => {
-                        console.log(error);
+                        // console.log(error);
                         this.setState({ waiting: false });
                     }
                 );
@@ -145,7 +145,7 @@ export default class LoginContainer extends React.Component {
     handleError = (errors) => {
         let emailError = '';
         let passwordError = '';
-        console.log(errors);
+        // console.log(errors);
         errors.forEach(error => {
             switch (error) {
                 case "Invalid credentials":
@@ -173,10 +173,10 @@ export default class LoginContainer extends React.Component {
     }
 
     render() {
-        let { t } = this.props.t;
+        let { t, colorTheme, darkThemeOn } = this.props.screenProps;
         return (<>
             {this.state.waiting ?
-                <WaitingContainer t={this.props.t} />
+                <WaitingContainer screenProps={this.props.screenProps} />
                 :
                 <View style={MainStyles.containerCenter}>
                     <InputMT
@@ -186,7 +186,8 @@ export default class LoginContainer extends React.Component {
                         value={this.state.name}
                         handleValue={this.handleValue}
                         error={this.state.nameError}
-                        success={this.state.nameSuccess} />
+                        success={this.state.nameSuccess}
+                        colorTheme={colorTheme} />
                     <InputMT
                         title={t('lastname')}
                         placeholder={t('enterLastname')}
@@ -194,7 +195,8 @@ export default class LoginContainer extends React.Component {
                         value={this.state.lastname}
                         handleValue={this.handleValue}
                         error={this.state.lastnameError}
-                        success={this.state.lastnameSuccess} />
+                        success={this.state.lastnameSuccess}
+                        colorTheme={colorTheme} />
                     <InputMT
                         title={t('email')}
                         placeholder={t('emailExampleCom')}
@@ -203,7 +205,8 @@ export default class LoginContainer extends React.Component {
                         value={this.state.email}
                         handleValue={this.handleValue}
                         error={this.state.emailError}
-                        success={this.state.emailSuccess} />
+                        success={this.state.emailSuccess}
+                        colorTheme={colorTheme} />
                     <InputMT
                         title={t('password')}
                         placeholder={t('createPassword')}
@@ -214,7 +217,9 @@ export default class LoginContainer extends React.Component {
                         handleValue={this.handleValue}
                         togglePassword={this.togglePasswords}
                         error={this.state.passwordError}
-                        success={this.state.passwordSuccess} />
+                        success={this.state.passwordSuccess}
+                        colorTheme={colorTheme}
+                        darkThemeOn={darkThemeOn} />
                     <InputMT
                         title={t('confirmPassword')}
                         placeholder={t('enterSamePassword')}
@@ -225,23 +230,27 @@ export default class LoginContainer extends React.Component {
                         handleValue={this.handleValue}
                         togglePassword={this.togglePasswords}
                         error={this.state.confirmPasswordError}
-                        success={this.state.confirmPasswordSuccess} />
+                        success={this.state.confirmPasswordSuccess}
+                        colorTheme={colorTheme}
+                        darkThemeOn={darkThemeOn} />
                     <View style={MainStyles.switchContainer}>
                         <Switch
                             style={MainStyles.switchSize}
                             onValueChange={this.handleToggleSwitch}
                             value={this.state.termsSuccess} />
-                        <Text style={[MainStyles.switchText, this.state.termsError ? MainStyles.mainInputErrorMessage : null]}>{t('acceptTerms')}</Text>
+                        <Text style={[MainStyles.switchText, colorTheme.secondaryTextColor, this.state.termsError ? MainStyles.mainInputErrorMessage : null]}>{t('acceptTerms')}</Text>
                     </View>
                     <MainButton
                         title={t('register')}
-                        onPress={this.requestRegister} />
+                        onPress={this.requestRegister}
+                        colorTheme={colorTheme} />
                     <TouchableText
                         style={MainStyles.spacer}
                         alignCenter={true}
                         outerText={t('haveAccountQN')}
                         innerText={t('logIn')}
-                        onPress={() => this.props.changeModule(1)} />
+                        onPress={() => this.props.changeModule(1)}
+                        colorTheme={colorTheme} />
                 </View>}
         </>
         );

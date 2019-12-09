@@ -5,16 +5,16 @@ import MainStyles from '../styles/MainStyles';
 
 export default class RecoverWaitingContainer extends React.Component {
     render() {
-        let { t } = this.props.t;
+        let { t, colorTheme } = this.props.screenProps;
         return (
             <View style={MainStyles.containerCenter}>
                 <Text
-                    style={[MainStyles.mainTitle, MainStyles.alignCenter]}>
+                    style={[MainStyles.mainTitle, MainStyles.alignCenter, colorTheme.subtitleTextColor]}>
                     {t('waitOneMoment')}
                 </Text>
                 <View style={{marginVertical: 40}}/>
                 <Text
-                    style={[MainStyles.mainText, MainStyles.alignCenter]}>
+                    style={[MainStyles.mainText, MainStyles.alignCenter, colorTheme.secondaryTextColor]}>
                     {t('processing')}
                 </Text>
                 <View style={{marginVertical: 40}}/>   
@@ -23,7 +23,8 @@ export default class RecoverWaitingContainer extends React.Component {
                     alignCenter={true}
                     outerText={t('wantToEnterQN')}
                     innerText={t('logIn')}
-                    onPress={() => this.props.changeModule(1)}/>
+                    onPress={() => this.props.changeModule(1)}
+                    colorTheme={colorTheme}/>
             </View>
 
         );

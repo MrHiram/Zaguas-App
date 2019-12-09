@@ -44,10 +44,10 @@ export default class LoginContainer extends React.Component {
     }
 
     requestLogin = async () => {
-        let { t } = this.props.t;
+        let { t } = this.props.screenProps;
         let validEmail = Validator.email(this.state.email);
         let validPassword = Validator.password(this.state.password);
-        if (validEmail&&validPassword) {
+        if (validEmail && validPassword) {
             var data = {
                 email: this.state.email.toLowerCase(),
                 password: this.state.password
@@ -58,18 +58,18 @@ export default class LoginContainer extends React.Component {
                         if (response.data.profile) {
                             LocalStorage.saveToken(response.data.accessToken);
                             this.props.setup();
-                        } else if(response.data.accessToken){
+                        } else if (response.data.accessToken) {
                             LocalStorage.saveToken(response.data.accessToken);
                             this.props.loginSuccess();
-                        }else if (response.data.error) {
-                       
+                        } else if (response.data.error) {
+
                             this.handleError(response.data.error);
                         }
-                        
+
                     }
                 )
                 .catch(
-                    (error) => { console.log(error) }
+                    (error) => { console.log(['Login container error', error]) }
                 );
         } else {
             if (!validEmail)
@@ -77,27 +77,27 @@ export default class LoginContainer extends React.Component {
             else
                 this.setState({ emailError: '', emailSuccess: true });
             if (!validPassword)
-                this.setState({ passwordError: t('eightLettersER') , passwordSuccess: false })
+                this.setState({ passwordError: t('eightLettersER'), passwordSuccess: false })
             else
                 this.setState({ passwordError: '', passwordSuccess: true });
         }
     }
 
     handleError = (errors) => {
-        let { t } = this.props.t;
+        let { t } = this.props.screenProps;
         let emailError = '';
         let passwordError = '';
-        console.log(errors);
-        
+        console.log(['Login container error', errors]);
+
         errors.forEach(error => {
-            switch(error){
+            switch (error) {
                 case "Invalid credentials":
-                    emailError = passwordError =t('invalidCredentialsER');
+                    emailError = passwordError = t('invalidCredentialsER');
                     break;
                 case "The email field is required.":
                     passwordError = t('emailRequiredER')
                     break;
-                case "The password field is required.": 
+                case "The password field is required.":
                     passwordError = t('passwordRequiredER');
                     break;
                 case "The email must be a valid email address.":
@@ -109,7 +109,7 @@ export default class LoginContainer extends React.Component {
                 case "Inactive user":
                     emailError = t('inactiveUserER');
                     break;
-                    
+
             }
         });
         this.setState({
@@ -119,9 +119,9 @@ export default class LoginContainer extends React.Component {
     }
 
     render() {
-        let { t, locale } = this.props.t;
+        let { t, colorTheme, darkThemeOn } = this.props.screenProps;
         return (
-            <View style={MainStyles.containerCenter}>
+            <View style={[MainStyles.containerCenter]}>
                 <InputMT
                     title={t('email')}
                     placeholder={t('emailExampleCom')}
@@ -129,7 +129,8 @@ export default class LoginContainer extends React.Component {
                     value={this.state.email}
                     handleValue={this.handleValue}
                     error={this.state.emailError}
-                    success={this.state.emailSuccess} />
+                    success={this.state.emailSuccess}
+                    colorTheme={colorTheme} />
                 <InputMT
                     title={t('password')}
                     placeholder={t('password')}
@@ -139,20 +140,25 @@ export default class LoginContainer extends React.Component {
                     handleValue={this.handleValue}
                     togglePassword={this.togglePasswords}
                     error={this.state.passwordError}
-                    success={this.state.passwordSuccess} />
+                    success={this.state.passwordSuccess}
+                    colorTheme={colorTheme}
+                    darkThemeOn={darkThemeOn} />
                 <TouchableText
                     alignCenter={false}
                     innerText={t('forgotPasswordQN')}
-                    onPress={() => this.props.changeModule(3)} />
+                    onPress={() => this.props.changeModule(3)}
+                    colorTheme={colorTheme} />
                 <MainButton
                     title={t('logIn')}
-                    onPress={this.requestLogin} />
+                    onPress={this.requestLogin}
+                    colorTheme={colorTheme} />
                 <TouchableText
-                    style={MainStyles.spacer}
+                    style={[MainStyles.spacer]}
                     alignCenter={true}
                     outerText={t('registerQN')}
                     innerText={t('signUp')}
-                    onPress={() => this.props.changeModule(2)} />
+                    onPress={() => this.props.changeModule(2)}
+                    colorTheme={colorTheme} />
             </View>
         );
     };

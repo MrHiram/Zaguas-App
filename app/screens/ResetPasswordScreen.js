@@ -35,12 +35,12 @@ export default class ResetPasswordScreen extends React.Component {
     }
 
     render() {
-        let { t } = this.props.screenProps;
+        let { t, colorTheme } = this.props.screenProps;
         return (
             <KeyboardAwareScrollView
                 enableOnAndroid={true}
                 resetScrollToCoords={{ x: 0, y: 0 }}
-                style={MainStyles.scrollView}
+                style={[MainStyles.scrollView, colorTheme.mainBackground]}
                 extraHeight={100}>
                 <ImageBackground
                     source={require('../../assets/fondo_login.png')}
@@ -52,15 +52,16 @@ export default class ResetPasswordScreen extends React.Component {
                     resizeMode='contain'
                     style={MainStyles.mainLogo} />
                 <View
-                    style={MainStyles.mainCard}>
+                    style={[MainStyles.mainCard, colorTheme.mainBackground]}>
                     {this.state.valid ?
-                        <ResetPasswordContainer token={this.state.token} goBack={this.goBack} t={t} />
+                        <ResetPasswordContainer token={this.state.token} goBack={this.goBack} screenProps={this.props.screenProps}/>
                         :
                         <View style={MainStyles.containerCenter}>
                             <Text style={[MainStyles.mainTitle, {marginBottom: 30}]}>{t('linkExpired')}</Text>
                             <MainButton
                                 title={t('backToHome')}
-                                onPress={() => this.goBack()} />
+                                onPress={() => this.goBack()}
+                                colorTheme={colorTheme} />
                         </View>
                     }
                 </View>

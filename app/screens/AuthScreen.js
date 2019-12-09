@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, ImageBackground, Image, BackHandler, Text, Button } from 'react-native';
+import { View, ImageBackground, Image, BackHandler, Text, Switch, Picker } from 'react-native';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import MenuDrawer from 'react-native-side-drawer'
 
@@ -20,7 +20,9 @@ export default class AuthScreen extends React.Component {
         accessToken: '',
         activeModule: 1,
         displayEmail: '',
-        open: false
+        open: false,
+        darkThemeSwitch: false,
+        language: 'en'
     }
 
     componentDidMount() {
@@ -60,44 +62,72 @@ export default class AuthScreen extends React.Component {
         this.props.navigation.navigate('Setup')
     }
 
-    toggleOpen = () => {
-        this.setState({ open: !this.state.open });
+    toggleOpen = (locale) => {
+        let { darkThemeOn } = this.props.screenProps;
+
+        this.setState({
+            open: !this.state.open,
+            darkThemeSwitch: darkThemeOn,
+            language: locale === 'en-US' || locale === 'en' ? 'en' : 'es'
+        });
     };
 
-    drawerContent = (locale) => {
+    toggleDarkTheme = () =>
+        this.setState({
+            darkThemeSwitch: !this.state.darkThemeSwitch,
+        });
+
+    applySettings = () => {
+        this.props.screenProps.setDarkThemeOn(this.state.darkThemeSwitch);
+        this.props.screenProps.setLocale(this.state.language);
+        this.setState({ open: false });
+    }
+
+    drawerContent = (locale, t, colorTheme, darkThemeOn) => {
         return (
-            <View onPress={this.toggleOpen} style={MainStyles.animatedBox}>
+            <View style={[MainStyles.animatedBox, colorTheme.mainBackground]}>
                 <IconButton
                     onPress={() => this.toggleOpen()}
                     style={MainStyles.topLeftSetings}
                     name={"md-arrow-back"}
-                    color={'#000'}
+                    color={darkThemeOn ? '#fff' : '#222'}
                     size={28} />
-                {locale === 'en-US' || locale === 'en' ?
-                    (
-                        <MainButton
-                            title="Español"
-                            onPress={() => this.props.screenProps.setLocale('es')}
-                        />
-                    ) : (
-                        <MainButton
-                            title="English"
-                            onPress={() => this.props.screenProps.setLocale('en')}
-                        />
-                    )}
+
+                <View style={[MainStyles.switchContainer, {marginTop: 20}]}>
+                    <Switch
+                        style={MainStyles.switchSize}
+                        onValueChange={this.toggleDarkTheme}
+                        value={this.state.darkThemeSwitch} />
+                    <Text style={[MainStyles.switchText, colorTheme.secondaryTextColor, this.state.termsError ? MainStyles.mainInputErrorMessage : null]}>{t('darkTheme')}</Text>
+                </View>
+
+                <Picker
+                    style={colorTheme.mainTextColor}
+                    im
+                    selectedValue={this.state.language}
+                    onValueChange={(itemValue, itemIndex) => this.setState({ language: itemValue })}>
+                    <Picker.Item label="Español" value="es" />
+                    <Picker.Item label="English" value="en" />
+                </Picker>
+
+                <MainButton
+                    title={t('apply')}
+                    onPress={() => this.applySettings()}
+                    colorTheme={colorTheme}
+                />
             </View>
         );
     };
 
 
     render() {
-        let { t, locale } = this.props.screenProps;
-        return (
+        let { t, locale, colorTheme, darkThemeOn } = this.props.screenProps;
 
-            <View style={{ flex: 1, backgroundColor: "#fff", }}>
+        return (
+            <View style={[MainStyles.mainContainer, colorTheme.mainBackground]}>
                 <MenuDrawer
                     open={this.state.open}
-                    drawerContent={this.drawerContent(locale)}
+                    drawerContent={this.drawerContent(locale, t, colorTheme, darkThemeOn)}
                     drawerPercentage={100}
                     animationTime={250}
                     overlay={true}
@@ -111,26 +141,25 @@ export default class AuthScreen extends React.Component {
                         <ImageBackground
                             source={require('../../assets/fondo_login.png')}
                             resizeMode='contain'
-                            style={MainStyles.mainBackgroundImage}
+                            style={[MainStyles.mainBackgroundImage, colorTheme.mainAccentBackground]}
                             imageStyle={{ resizeMode: "cover", width: '100%', height: 430 }} />
                         <Image
                             source={require('../../assets/logo_white.png')}
                             resizeMode='contain'
                             style={MainStyles.mainLogo} />
                         <IconButton
-                            onPress={() => this.toggleOpen()}
+                            onPress={() => this.toggleOpen(locale)}
                             style={MainStyles.topRightSetings}
                             name={"md-settings"}
-                            color={'#ffffff'}
+                            color={darkThemeOn ? '#222' : '#fff'}
                             size={28} />
                         <View
-                            style={MainStyles.mainCard}>
-                            {this.state.activeModule == 1 ? <LoginContainer loginSuccess={this.loginSuccess} setup={this.setup} changeModule={this.toggleModules} t={this.props.screenProps} /> : null}
-                            {this.state.activeModule == 2 ? <RegisterContainer changeModule={this.toggleModules} toggleEmail={this.toggleEmail} t={this.props.screenProps} /> : null}
-                            {this.state.activeModule == 3 ? <RecoverContainer changeModule={this.toggleModules} toggleEmail={this.toggleEmail} t={this.props.screenProps} /> : null}
-                            {/*this.state.activeModule == 4 ? <RecoverWaitingContainer changeModule={this.toggleModules} t={this.props.screenProps} /> : null*/}
-                            {this.state.activeModule == 5 ? <RecoverSuccessContainer changeModule={this.toggleModules} email={this.state.displayEmail} t={this.props.screenProps} /> : null}
-                            {this.state.activeModule == 6 ? <RegisterSuccessContainer changeModule={this.toggleModules} email={this.state.displayEmail} t={this.props.screenProps} /> : null}
+                            style={[MainStyles.mainCard, colorTheme.mainBackground]}>
+                            {this.state.activeModule == 1 ? <LoginContainer loginSuccess={this.loginSuccess} setup={this.setup} changeModule={this.toggleModules} screenProps={this.props.screenProps} /> : null}
+                            {this.state.activeModule == 2 ? <RegisterContainer changeModule={this.toggleModules} toggleEmail={this.toggleEmail} screenProps={this.props.screenProps} /> : null}
+                            {this.state.activeModule == 3 ? <RecoverContainer changeModule={this.toggleModules} toggleEmail={this.toggleEmail} screenProps={this.props.screenProps} /> : null}
+                            {this.state.activeModule == 5 ? <RecoverSuccessContainer changeModule={this.toggleModules} email={this.state.displayEmail} screenProps={this.props.screenProps} /> : null}
+                            {this.state.activeModule == 6 ? <RegisterSuccessContainer changeModule={this.toggleModules} email={this.state.displayEmail} screenProps={this.props.screenProps} /> : null}
                         </View>
                     </KeyboardAwareScrollView>
                 </MenuDrawer>

@@ -44,7 +44,7 @@ const TABS = {
 export default class DynamicTabNavigatorScreen extends React.Component {
     exit = () => this.props.navigation.navigate({ routeName: 'Auth' });
 
-    _tabNavigator(t) {
+    _tabNavigator(t, darkThemeOn) {
         let tabs = {};
         const { History, Feed, Profile } = TABS;
         tabs = { History, Feed, Profile };
@@ -54,10 +54,10 @@ export default class DynamicTabNavigatorScreen extends React.Component {
         return createBottomTabNavigator(tabs, {
             initialRouteName: 'Feed',
             tabBarOptions: {
-                activeTintColor: '#007EA8',
+                activeTintColor: darkThemeOn ? '#fff' : '#007EA8',
                 inactiveTintColor: 'grey',
                 style: {
-                    backgroundColor: 'white',
+                    backgroundColor: darkThemeOn ? '#222' : '#fff',
                     borderTopWidth: 0,
                     shadowOffset: { width: 5, height: 3 },
                     shadowColor: 'black',
@@ -69,17 +69,20 @@ export default class DynamicTabNavigatorScreen extends React.Component {
     }
 
     render() {
-        let { t, locale, setLocale } = this.props.screenProps;
-        const Tabs = this._tabNavigator(t);
+        let { t, locale, setLocale, colorTheme, darkThemeOn, setDarkThemeOn } = this.props.screenProps;
+        const Tabs = this._tabNavigator(t, darkThemeOn);
         const AppContainer = createAppContainer(Tabs);
         return (
             <AppContainer
-            screenProps={{
-                exit: this.exit,
-                t: t,
-                locale: locale,
-                setLocale: setLocale,
-            }}/>
+                screenProps={{
+                    exit: this.exit,
+                    t: t,
+                    locale: locale,
+                    setLocale: setLocale,
+                    colorTheme: colorTheme,
+                    darkThemeOn: darkThemeOn,
+                    setDarkThemeOn: setDarkThemeOn
+                }} />
         );
     }
 }
