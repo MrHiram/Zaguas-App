@@ -3,6 +3,7 @@ import { View, Text } from 'react-native';
 import { LinearGradient } from 'expo-linear-gradient';
 import { ScrollView } from 'react-native-gesture-handler';
 
+import EditHomeCaretakerContainer from '../containers/EditHomeCaretakerContainer';
 import CaretakerContainer from '../containers/CaretakerContainer';
 import IconButton from '../components/IconButton';
 
@@ -130,7 +131,7 @@ export default class CaretakerScreen extends React.Component {
                     <View style={{flexDirection:"row", paddingTop:50}}>
                     <Text style={[MainStyles.mainNameCaretaker, { color: '#000', marginLeft:20 }]}>Mis casas</Text>
                     </View>
-                    <CaretakerContainer />
+                    <CaretakerContainer/>
                 </ScrollView>
             </View>
         );

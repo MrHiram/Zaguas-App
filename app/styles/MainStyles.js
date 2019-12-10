@@ -325,6 +325,12 @@ export default StyleSheet.create({
         width: '100%',
         borderRadius: 5
     },
+    buttonHome:{
+        backgroundColor:'#F4362D',
+        color:'#fff',
+        borderRadius:5,
+        marginBottom:30,
+    },
     MainButtonText: {
         textAlign: 'center',
         color: '#fff',
@@ -350,5 +356,9 @@ export default StyleSheet.create({
     topLeftSetings: {
         minHeight: 28,
         minWidth: 28,
-    }
+    },
+    container: {
+        flex: 1,
+        backgroundColor: '#FFFFFF',
+      },
 });
