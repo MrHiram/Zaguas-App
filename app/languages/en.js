@@ -11,6 +11,7 @@ const en = {
     profile: 'Profile',
     darkTheme: 'Dark theme',
     apply: 'Apply',
+    caretakerProfile: 'Caretaker profile',
 
     /* Log in screen */
     forgotPasswordQN: 'Forgot your password?',
@@ -71,7 +72,21 @@ const en = {
     addNewPetMSG: 'Add a new pet',
     recientHomes: 'My recient places',
     noRecientHomesMSG: "You don't have recient homes",
-    beginNow: 'Begin now'
+    beginNow: 'Begin now',
+    myHouses: 'My houses',
+    location: 'Location',
+    contact: 'Contact',
+    capacity: 'Capacity',
+    pricePerNight: 'Price per night',
+    walker: 'Walker',
+    availableDays: 'Available days',
+    sunday: 'Sunday',
+    monday: 'Monday',
+    tuesday: 'Tuesday',
+    wednesday: 'Wednesday',
+    thursday: 'Thursday',
+    friday: 'Friday',
+    saturday: 'Saturday'
 };
 
 export default en;

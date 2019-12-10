@@ -77,7 +77,8 @@ export default class App extends React.Component {
   state = {
     locale: Localization.locale,
     darkThemeOn: true,
-    colorTheme: DarkTheme
+    caretakerProfile: false,
+    colorTheme: DarkTheme,
   };
 
   componentDidMount() {
@@ -87,12 +88,14 @@ export default class App extends React.Component {
   init = async () => {
     let localeStored = await LocalStorage.retrieve('locale');
     let darkThemeOn = await LocalStorage.retrieve('darkThemeOn');
+    let caretakerProfile = await LocalStorage.retrieve('caretakerScreen');
     if (localeStored != null) {
       this.setState({
         locale: localeStored,
-        colorTheme: darkThemeOn == 'true' ? DarkTheme : LightTheme, //cambiar
-        darkThemeOn: darkThemeOn == 'true' ? true : false, //cambiar
-      }), (console.log(this.state.darkThemeOn));
+        colorTheme: darkThemeOn == 'true' ? DarkTheme : LightTheme, 
+        darkThemeOn: darkThemeOn == 'true' ? true : false, 
+        caretakerProfile: caretakerProfile == 'true' ? true : false
+      });
     }
   }
 
@@ -104,6 +107,11 @@ export default class App extends React.Component {
   t = (scope, options) => {
     return i18n.t(scope, { locale: this.state.locale, ...options });
   };
+
+  setCaretakerProfile = caretakerProfileOn => {
+    this.setState({caretakerProfile: caretakerProfileOn});
+    LocalStorage.save('caretakerScreen', caretakerProfileOn ? 'true' : 'false');
+  }
 
   setDarkThemeOn = (darkThemeOnParam) => {
     this.setState({
@@ -123,7 +131,9 @@ export default class App extends React.Component {
         setLocale: this.setLocale,
         colorTheme: this.state.colorTheme,
         darkThemeOn: this.state.darkThemeOn,
-        setDarkThemeOn: this.setDarkThemeOn
+        setDarkThemeOn: this.setDarkThemeOn,
+        caretakerProfile: this.state.caretakerProfile,
+        setCaretakerProfile: this.setCaretakerProfile
       }} />);
   }
 }

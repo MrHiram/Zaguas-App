@@ -43,8 +43,9 @@ class CaretakerContainer extends Component {
 
     render() {
         const { checked } = this.state;
+        let { locale, exit, t, colorTheme, darkThemeOn } = this.props.screenProps;
         return (
-            <View>
+            <View style={{ marginBottom: 100 }}>
                 <View style={MainStyles.caretakerCard}>
                     <View style={MainStyles.editInfoCaretaker}>
                         <IconButton
@@ -58,12 +59,12 @@ class CaretakerContainer extends Component {
                         style={MainStyles.cardImageCaretaker}
                     >
                         <Image
-                        style={{width:'100%'}}
+                            style={{ width: '100%' }}
                             resizeMode='contain'
                             source={require('../../assets/casa1.jpg')}
                         />
                     </View>
-                    <Text style={MainStyles.subTitile} >Description</Text>
+                    <Text style={MainStyles.subTitile} >{t('description')}</Text>
                     <Text style={MainStyles.marginText}> Mi hermoso hogar cuenta con una gran zona verde, donde caben muchos perros hasta yo!</Text>
                     <View
                         style={{
@@ -74,21 +75,21 @@ class CaretakerContainer extends Component {
                         <View style={[MainStyles.daysColumn, { width: '40%' }]}>
                             <Text
                                 style={MainStyles.subTitile}>
-                                Precio por noche
+                                {t('pricePerNight')}
                             </Text>
                             <Text style={MainStyles.marginText}>₡5000</Text>
                         </View>
                         <View style={MainStyles.daysColumn}>
-                            <Text style={MainStyles.subTitile}>Capacidad</Text>
+                            <Text style={MainStyles.subTitile}>{t('capacity')}</Text>
                             <Text style={MainStyles.marginText}> 1-5 </Text>
                         </View>
                         <View style={MainStyles.daysColumn}>
-                            <Text style={MainStyles.subTitile}>Caminador</Text>
+                            <Text style={MainStyles.subTitile}>{t('walker')}</Text>
                             <Text style={MainStyles.marginText}>No</Text>
                         </View>
                     </View>
 
-                    <Text style={MainStyles.subTitile}>Días disponibles</Text>
+                    <Text style={MainStyles.subTitile}>{t('availableDays')}</Text>
 
                     <View
                         style={{
@@ -108,11 +109,7 @@ class CaretakerContainer extends Component {
                                     status={checked === 'yes' ? 'checked' : 'unchecked'}
                                     onPress={() => { this.setState({ checked: 'yes' }); }}
                                 />
-                                <Text
-                                    style={{
-                                        alignSelf: 'center'
-                                    }}
-                                >Lunes</Text>
+                                <Text style={{ alignSelf: 'center' }}>{t('monday')}</Text>
                             </View>
                         </View>
                         <View
@@ -129,11 +126,7 @@ class CaretakerContainer extends Component {
                                     status={checked === 'yes' ? 'checked' : 'unchecked'}
                                     onPress={() => { this.setState({ checked: 'yes' }); }}
                                 />
-                                <Text
-                                    style={{
-                                        alignSelf: 'center'
-                                    }}
-                                > Martes</Text>
+                                <Text style={{ alignSelf: 'center' }}>{t('tuesday')}</Text>
                             </View>
                         </View>
                         <View style={MainStyles.daysColumn}>
@@ -148,15 +141,10 @@ class CaretakerContainer extends Component {
                                     status={checked === 'yes' ? 'checked' : 'unchecked'}
                                     onPress={() => { this.setState({ checked: 'yes' }); }}
                                 />
-                                <Text
-                                    style={{
-                                        alignSelf: 'center'
-                                    }}>Jueves</Text>
+                                <Text style={{ alignSelf: 'center' }}>{t('thursday')}</Text>
                             </View>
                         </View>
                     </View>
-
-
                 </View>
             </View>
         );

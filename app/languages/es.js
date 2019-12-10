@@ -11,6 +11,7 @@ const es = {
     profile: 'Perfil',
     darkTheme: 'Tema oscuro',
     apply: 'Aplicar',
+    caretakerProfile: 'Perfil de cuidador',
 
     /* Página de iniciar sesion */
     forgotPasswordQN: '¿Se te olvidó lo contraseña?',
@@ -71,7 +72,21 @@ const es = {
     addNewPetMSG:'Añade una nueva mascota',
     recientHomes: 'Mis casas de cuido recientes',
     noRecientHomesMSG: 'No tenés ninguna casa cuido reciente',
-    beginNow: 'Comenzar ahora'
+    beginNow: 'Comenzar ahora',
+    myHouses: 'Mis casas',
+    location: 'Ubicación',
+    contact: 'Contacto',
+    capacity: 'Capacidad',
+    pricePerNight: 'Precio por noche',
+    walker: 'Caminador',
+    availableDays: 'Días disponibles',
+    sunday: 'Domingo',
+    monday: 'Lunes',
+    tuesday: 'Martes',
+    wednesday: 'Miércoles',
+    thursday: 'Jueves',
+    friday: 'Viernes',
+    saturday: 'Sábado'
 };
 
 export default es;

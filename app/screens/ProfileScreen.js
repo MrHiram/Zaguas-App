@@ -19,6 +19,7 @@ export default class ProfileScreen extends React.Component {
     token: '',
     open: false,
     darkThemeSwitch: false,
+    caretakerProfileSwitch: false,
     language: 'en'
   }
 
@@ -34,11 +35,12 @@ export default class ProfileScreen extends React.Component {
   }
 
   toggleOpen = (locale) => {
-    let { darkThemeOn } = this.props.screenProps;
+    let { darkThemeOn, caretakerProfile, } = this.props.screenProps;
 
-    this.setState({ 
-      open: !this.state.open ,
+    this.setState({
+      open: !this.state.open,
       darkThemeSwitch: darkThemeOn,
+      caretakerProfileSwitch: caretakerProfile,
       language: locale === 'en-US' || locale === 'en' ? 'en' : 'es'
     });
   };
@@ -49,6 +51,8 @@ export default class ProfileScreen extends React.Component {
     exit();
   }
 
+  toggleCaretaker = () => this.setState({caretakerProfileSwitch: !this.state.caretakerProfileSwitch});
+
   toggleDarkTheme = () =>
     this.setState({
       darkThemeSwitch: !this.state.darkThemeSwitch,
@@ -57,10 +61,11 @@ export default class ProfileScreen extends React.Component {
   applySettings = () => {
     this.props.screenProps.setDarkThemeOn(this.state.darkThemeSwitch);
     this.props.screenProps.setLocale(this.state.language);
+    this.props.screenProps.setCaretakerProfile(this.state.caretakerProfileSwitch);
     this.setState({ open: false });
   }
 
-  drawerContent = (locale, exit, t, colorTheme, darkThemeOn) => {
+  drawerContent = (locale, exit, t, colorTheme, darkThemeOn ) => {
     return (
       <View style={[MainStyles.animatedBox, colorTheme.mainBackground]}>
         <IconButton
@@ -69,6 +74,14 @@ export default class ProfileScreen extends React.Component {
           name={"md-arrow-back"}
           color={darkThemeOn ? '#fff' : '#222'}
           size={28} />
+
+        <View style={[MainStyles.switchContainer, { marginTop: 20 }]}>
+          <Switch
+            style={MainStyles.switchSize}
+            onValueChange={this.toggleCaretaker}
+            value={this.state.caretakerProfileSwitch} />
+          <Text style={[MainStyles.switchText, colorTheme.secondaryTextColor, this.state.termsError ? MainStyles.mainInputErrorMessage : null]}>{t('caretakerProfile')}</Text>
+        </View>
 
         <View style={[MainStyles.switchContainer, { marginTop: 20 }]}>
           <Switch
@@ -93,7 +106,7 @@ export default class ProfileScreen extends React.Component {
           colorTheme={colorTheme}
         />
 
-        <View style={{height: 20}} />
+        <View style={{ height: 20 }} />
 
         <MainButton
           onPress={() => this.requestLogout(exit)}
@@ -106,10 +119,10 @@ export default class ProfileScreen extends React.Component {
   render() {
     let { t, locale, exit, colorTheme, darkThemeOn } = this.props.screenProps;
     return (
-      <View style={[MainStyles.mainContainer, colorTheme.mainBackground]}>
+      <View style={[MainStyles.mainContainer, colorTheme.secondaryBackground]}>
         <MenuDrawer
           open={this.state.open}
-          drawerContent={this.drawerContent(locale, exit, t, colorTheme, darkThemeOn)}
+          drawerContent={this.drawerContent(locale, exit, t, colorTheme, darkThemeOn )}
           drawerPercentage={100}
           animationTime={250}
           overlay={true}
