@@ -44,6 +44,7 @@ const TABS = {
 
 export default class DynamicTabNavigatorScreen extends React.Component {
     exit = () => this.props.navigation.navigate({ routeName: 'Auth' });
+    push = (screen) => this.props.navigation.navigate({ routeName: screen });
 
     _tabNavigator(t, darkThemeOn) {
         let tabs = {};
@@ -82,6 +83,7 @@ export default class DynamicTabNavigatorScreen extends React.Component {
             <AppContainer
                 screenProps={{
                     exit: this.exit,
+                    push: this.push,
                     t: t,
                     locale: locale,
                     setLocale: setLocale,

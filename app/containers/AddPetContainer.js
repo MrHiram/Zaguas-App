@@ -40,6 +40,10 @@ export default class AddPetContainer extends React.Component {
     this.init();
   }
 
+  goBack = () =>{
+    console.log('patitos');
+    this.props.screenProps.push('profile');
+}
  
   init = async () => {
     let token = await LocalStorage.retrieveToken();
@@ -135,12 +139,15 @@ export default class AddPetContainer extends React.Component {
       Fetcher.postToken('addPet', data, this.state.token)
         .then(
           (response) => {
-            this.props.goBack();
+            if(response.message){
+              this.goBack;
+            }
+            
 
           }
         )
         .catch(
-          (error) => { console.log(error.error) }
+          (error) => { console.log("error") }
         );
     } else {
       //cambiar los success por los que verdaderos
@@ -180,7 +187,7 @@ export default class AddPetContainer extends React.Component {
     }, {
       value: 'Agresivo',
     }];
-
+    let { t, colorTheme, darkThemeOn } = this.props.screenProps;
     return (
 
 
@@ -190,6 +197,7 @@ export default class AddPetContainer extends React.Component {
           image={this.state.image}
           error={this.state.imageError}
           handlerImage={this.handlerImage}
+          colorTheme={colorTheme}
         />
         <InputMT
           title='Nombre'
@@ -198,6 +206,7 @@ export default class AddPetContainer extends React.Component {
           handler='name'
           value={this.state.name}
           error= {this.state.nameError}
+          colorTheme={colorTheme}
         />
         <InputMT
           title='Tamaño'
@@ -206,6 +215,7 @@ export default class AddPetContainer extends React.Component {
           handler='size'
           value={this.state.size}
           error={this.state.sizeError}
+          colorTheme={colorTheme}
         />
         <Combobox
           title='Temperamento'
@@ -221,6 +231,7 @@ export default class AddPetContainer extends React.Component {
           handler='race'
           value={this.state.race}
           error={this.state.raceError}
+          colorTheme={colorTheme}
         />
         <InputMT
           title='Descripcion'
@@ -229,6 +240,7 @@ export default class AddPetContainer extends React.Component {
           handler='description'
           value={this.state.description}
           error={this.state.descriptionError}
+          colorTheme={colorTheme}
         />
         <InputMT
           title='Alimentacion'
@@ -237,6 +249,7 @@ export default class AddPetContainer extends React.Component {
           handler='feeding'
           value={this.state.feeding}
           error={this.state.feedingError}
+          colorTheme={colorTheme}
         />
         <InputMT
           title='Alergias'
@@ -245,6 +258,7 @@ export default class AddPetContainer extends React.Component {
           handler='allergies'
           value={this.state.allergies}
           error={this.state.feedingError}
+          colorTheme={colorTheme}
         />
         <InputMT
           title='Cuidados especiales'
@@ -253,10 +267,12 @@ export default class AddPetContainer extends React.Component {
           handler='special_cares'
           value={this.state.special_cares}
           error={this.state.special_caresError}
+          colorTheme={colorTheme}
         />
         <MainButton
           title='Añadir Mascota'
-          onPress={this.createPet} />
+          onPress={this.createPet}
+          colorTheme={colorTheme} />
 
 
 

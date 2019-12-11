@@ -16,8 +16,14 @@ export default class AuthCheckScreen extends React.Component {
   }
   _bootstrapAsync = async () => {
     const userToken = await LocalStorage.retrieveToken();
+    const pendingSetUp = await LocalStorage.retrieve('roleSetUp');
     try {
-      this.props.navigation.navigate(userToken ? 'App' : 'Auth');
+      if(pendingSetUp && userToken){
+        this.props.navigation.navigate('Setup');
+      }else{
+        this.props.navigation.navigate(userToken ? 'App' : 'Auth');
+      }
+      
     } catch (e) {
       console.log(e);
     }

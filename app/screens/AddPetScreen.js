@@ -12,9 +12,7 @@ const HEADER_MAX_HEIGHT = 200;
 export default class AddPetScreen extends React.Component {
     scrollYAnimatedValue = new Animated.Value(0);
 
-    goBack = () =>{
-        this.props.navigation.push('Profile');
-    }
+    
     handlerScroll = (event) => {
 
         Animated.event(
@@ -34,7 +32,13 @@ export default class AddPetScreen extends React.Component {
 
 
             <View style={{ flex: 1 }}>
-                <Animated.View style={[MainStyles.animatedHeaderContainer, { height: headerHeight, position: 'absolute' }]}>
+            <KeyboardAwareScrollView
+                    enableOnAndroid={true}
+                    resetScrollToCoords={{ x: 0, y: 0 }}
+                    extraHeight={300}
+                    scrollEventThrottle={16}
+                    onScroll={(event) => this.handlerScroll(event)}>
+                <Animated.View style={[MainStyles.animatedHeaderContainer, {  position: 'absolute' }]}>
                     <LinearGradient
                         start={{ x: 0, y: 0.75 }} end={{ x: 0.50, y: 0.75 }}
                         colors={['#045379', '#1782ac']}
@@ -43,14 +47,8 @@ export default class AddPetScreen extends React.Component {
                     />
                     <Image style={[MainStyles.mainLogo, MainStyles.mainLogoWithoutBottom]} resizeMode='contain' source={require('../../assets/logo_white.png')} />
                 </Animated.View>
-                <KeyboardAwareScrollView
-                    enableOnAndroid={true}
-                    resetScrollToCoords={{ x: 0, y: 0 }}
-                    extraHeight={300}
-                    contentContainerStyle={{ paddingTop: HEADER_MAX_HEIGHT }}
-                    scrollEventThrottle={16}
-                    onScroll={(event) => this.handlerScroll(event)}>
-                    <AddPetContainer goBack={this.goBack} />
+                
+                    <AddPetContainer  screenProps={this.props.screenProps}/>
                 </KeyboardAwareScrollView>
 
 

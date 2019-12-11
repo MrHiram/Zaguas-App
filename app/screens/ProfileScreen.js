@@ -25,8 +25,8 @@ export default class ProfileScreen extends React.Component {
     
   }
   goAddPet = () => {
-    console.log('sadf');
-    this.props.navigation.push('AddPet');
+    console.log('patitos');
+    this.props.screenProps.push('AddPet');
   }
   handleSettings = () => {
     console.log('sadf');
@@ -39,18 +39,18 @@ export default class ProfileScreen extends React.Component {
   async componentDidMount() {
     let idClient =null;
     let token = await LocalStorage.retrieveToken();
-    await Fetcher.getUser(token).then((response) => {
+    await Fetcher.getClientID(token).then((response) => {
       idClient = response.data.id;
     });
-    
     await Fetcher.getToken("getProfileClient/" + idClient, token)
       .then((response) => {
+        console.log(response);
         this.setState({
           profileInfo: response.data,
           image: {uri:response.data.profile.image},
           loading:false,
         });
-        console.log(this.state.image);
+        
 
 
       })
@@ -191,7 +191,8 @@ export default class ProfileScreen extends React.Component {
                   
                 </View>
               </View>
-              <ProfileContainer description={this.state.profileInfo.profile.about}
+              <ProfileContainer 
+                description={this.state.profileInfo.profile.about}
                 goAddPet={this.goAddPet}
                 goFeed={this.goFeed} 
                 imagePet={this.state.image}

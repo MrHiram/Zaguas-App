@@ -6,15 +6,20 @@ import PetProfileCard from '../components/PetProfileCard';
 export default class AddPetContainer extends React.Component {
 
   render() {
-    const petList = this.props.pets.map((data) => {
-      let image = { uri: data.image };
-      let { t, colorTheme} = this.props;
-      return (
-        <PetProfileCard key={data.id} name={data.name}
-          image={image}
-        />
-      )
-    });
+    let { t, colorTheme} = this.props;
+    let petList = null;
+    if(this.props.pets !=null){
+       petList = this.props.pets.map((data) => {
+        let image = { uri: data.image };
+        
+        return (
+          <PetProfileCard key={data.id} name={data.name}
+            image={image}
+          />
+        )
+      });
+    }
+    
 
     return (
       <View style={[MainStyles.mainCard, MainStyles.profileCard,colorTheme.secondaryBackground]}>
@@ -28,7 +33,7 @@ export default class AddPetContainer extends React.Component {
             width: '100%', alignItems: 'flex-start', flexDirection: 'row', flexWrap: 'wrap',
             marginBottom: 10
           }}>
-            {petList}
+            {petList ? petList : null}
             {/**Ejemplo para card de agregar */}
             <View
               style={{
@@ -59,7 +64,7 @@ export default class AddPetContainer extends React.Component {
             <TouchableOpacity style={MainStyles.containerProfile}
               onPress={() => this.props.goAddPet()}>
               <Text>
-                Añade nueva mascota
+              {t('addNewPetMSG')}
           </Text>
             </TouchableOpacity>
           </View>

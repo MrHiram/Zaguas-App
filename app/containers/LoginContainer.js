@@ -57,6 +57,7 @@ export default class LoginContainer extends React.Component {
                     (response) => {
                         if (response.data.profile) {
                             LocalStorage.saveToken(response.data.accessToken);
+                            LocalStorage.save('roleSetUp', 'roleSetUp');
                             this.props.setup();
                         } else if (response.data.accessToken) {
                             LocalStorage.saveToken(response.data.accessToken);

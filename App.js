@@ -23,6 +23,7 @@ import DynamicTabNavigatorScreen from './app/screens/DynamicTabNavigatorScreen';
 import MainStyles from './app/styles/MainStyles';
 import DarkTheme from './app/styles/DarkTheme';
 import LightTheme from './app/styles/LightTheme';
+import ProfileScreen from './app/screens/ProfileScreen';
 
 i18n.fallbacks = true;
 i18n.translations = { es, en };
@@ -66,6 +67,14 @@ const AppSwitch = createSwitchNavigator(
     Setup: {
       screen: SetupScreen,
       path: 'setup'
+    },
+    AddPet:{
+      screen: AddPetScreen,
+      path: 'AddPet'
+    },
+    Profile:{
+      screen: ProfileScreen,
+      path: 'profile'
     }
   }
 );

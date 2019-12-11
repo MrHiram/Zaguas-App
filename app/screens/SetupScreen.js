@@ -23,9 +23,9 @@ export default class SetupScreen extends React.Component{
     render(){
         return(
             <View  style={MainStyles.containerCenter} >
-            {this.state.activeModule == 1 ? <SetupContainer  changeModule={this.toggleModules} /> : null}
-            {this.state.activeModule == 2 ? <CreateCareTakerProfile  changeModule={this.toggleModules}  /> : null}
-            {this.state.activeModule == 3 ? <CreateClientProfile  changeModule={this.toggleModules} setupSuccess={this.setupSuccess} /> : null}
+            {this.state.activeModule == 1 ? <SetupContainer  changeModule={this.toggleModules} screenProps={this.props.screenProps} /> : null}
+            {this.state.activeModule == 2 ? <CreateCareTakerProfile  changeModule={this.toggleModules} screenProps={this.props.screenProps} /> : null}
+            {this.state.activeModule == 3 ? <CreateClientProfile  changeModule={this.toggleModules} setupSuccess={this.setupSuccess} screenProps={this.props.screenProps}/> : null}
            
             </View>
         );
