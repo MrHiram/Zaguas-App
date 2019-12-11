@@ -4,7 +4,6 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import { createAppContainer } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
-
 import ProfileScreen from './ProfileScreen';
 import FeedScreen from './FeedScreen';
 import HistoryScreen from './HistoryScreen';
@@ -70,8 +69,13 @@ const TabNavigator = createBottomTabNavigator({
   },
 });
 
+
+
 const AppContainer = createAppContainer(TabNavigator);
 
 export default () => (
     <AppContainer />
+  
 );
+
+
