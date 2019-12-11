@@ -8,6 +8,7 @@ export default class AddPetContainer extends React.Component {
   render() {
     const petList = this.props.pets.map((data) => {
       let image = { uri: data.image };
+      let { t, colorTheme} = this.props;
       return (
         <PetProfileCard key={data.id} name={data.name}
           image={image}
@@ -16,12 +17,12 @@ export default class AddPetContainer extends React.Component {
     });
 
     return (
-      <View style={[MainStyles.mainCard, MainStyles.profileCard]}>
-        <Text style={[MainStyles.subnames, MainStyles.blue]}>Descripción</Text>
+      <View style={[MainStyles.mainCard, MainStyles.profileCard,colorTheme.secondaryBackground]}>
+        <Text style={[MainStyles.subnames, MainStyles.blue]}>{t('description')}</Text>
         <View style={MainStyles.containerProfile}>
           <Text style={MainStyles.mainText}>{this.props.description}</Text>
         </View>
-        <Text style={[MainStyles.subnames, MainStyles.green]}>Mis Mascotas</Text>
+    <Text style={[MainStyles.subnames, MainStyles.green]}>{t('myPets')}</Text>
         {this.props.pets != null ?
           <View style={{
             width: '100%', alignItems: 'flex-start', flexDirection: 'row', flexWrap: 'wrap',
@@ -64,18 +65,18 @@ export default class AddPetContainer extends React.Component {
           </View>
         }
         <Text style={[MainStyles.subnames, MainStyles.teal]}>
-          Mis casas cuido recientes
+          {t('recientHomes')}
         </Text>
         {this.props.houses != null ? null :
 
           <View style={MainStyles.containerProfile}>
             <Text style={MainStyles.mainText}>
-              No tenés ninguna casa cuido reciente
+            {t('recientHomes')}
           </Text>
             <TouchableOpacity
               onPress={() => this.props.goFeed()}>
               <Text style={[MainStyles.blue, MainStyles.mainText]}>
-                Comienza ahora
+              {t('addNewPetMSG')}
             </Text>
             </TouchableOpacity>
           </View>

@@ -5,24 +5,26 @@ import MainStyles from '../styles/MainStyles';
 
 export default class RecoverWaitingContainer extends React.Component {
     render() {
+        let { t, colorTheme } = this.props.screenProps;
         return (
             <View style={MainStyles.containerCenter}>
                 <Text
-                    style={[MainStyles.mainTitle, MainStyles.alignCenter]}>
-                    Espera un momento...
+                    style={[MainStyles.mainTitle, MainStyles.alignCenter, colorTheme.subtitleTextColor]}>
+                    {t('waitOneMoment')}
                 </Text>
-                <View style={{marginVertical: 40} /* This is a spacer */}/>
+                <View style={{marginVertical: 40}}/>
                 <Text
-                    style={[MainStyles.mainText, MainStyles.alignCenter]}>
-                        Tu petición está siendo procesada,{'\n'}esto puede tardar unos segundos.
+                    style={[MainStyles.mainText, MainStyles.alignCenter, colorTheme.secondaryTextColor]}>
+                    {t('processing')}
                 </Text>
-                <View style={{marginVertical: 40} /* This is a spacer */}/>   
+                <View style={{marginVertical: 40}}/>   
                 <TouchableText
                     style={MainStyles.spacer}
                     alignCenter={true}
-                    outerText='¿Deseas ingresar?'
-                    innerText='Iniciar sesión'
-                    onPress={() => this.props.changeModule(5) /*TODO: Debe ir un 1*/}/>
+                    outerText={t('wantToEnterQN')}
+                    innerText={t('logIn')}
+                    onPress={() => this.props.changeModule(1)}
+                    colorTheme={colorTheme}/>
             </View>
 
         );

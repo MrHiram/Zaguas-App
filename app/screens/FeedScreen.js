@@ -1,92 +1,49 @@
 import React from 'react';
 
-import { Text, View, SafeAreaView, ScrollView, Dimensions,Platform, TextInput, Image } from 'react-native';
+import { Text, View, SafeAreaView, ScrollView, Platform, TextInput } from 'react-native';
 
-import TouchableText from '../components/TouchableText';
-
-import Fetcher from '../services/Fetcher';
-import LocalStorage from '../services/LocalStorage';
 import HomeCard from '../components/HomeCard';
 import MainStyles from '../styles/MainStyles';
 
 import Icon from 'react-native-vector-icons/Ionicons';
-const { height, width } = Dimensions.get('window');
-export default class HomeScreen extends React.Component{
-    state = { 
-        token: ''
-    }
 
-    componentDidMount(){
-        this.init();
-        this.startHeaderHeight = 80
-        if(Platform.OS == 'android'){
-            this.startHeaderHeight = 140 ;
-        }
-    }
-    
-    init = async () => {
-        let token = await LocalStorage.retrieveToken();
-        this.setState({
-            token: token
-        });
-    }
+export default class FeedScreen extends React.Component {
 
-    requestLogout = () => {
-        var data= {
-            request:'Logout user'
-        }
-        Fetcher.postToken('logout',data, this.state.token);
-        LocalStorage.removeToken();        
-        this.props.navigation.navigate('Auth');
-    }
+    render() {
+        let { t, locale, colorTheme, darkThemeOn } = this.props.screenProps;
+        return (
 
-    render(){
-        return(
-            
-            <SafeAreaView style={{flex:1}}>
-                <View style={{
-                        height: this.startHeaderHeight, backgroundColor: 'white',
-                        borderBottomWidth: 1, borderBottomColor: '#dddddd'
-                    }}>
-                        <View style={{
-                            flexDirection: 'row',
-                            padding: 10,
-                            backgroundColor: 'white',
-                            marginHorizontal: 20,
-                            marginTop: Platform.OS == 'android' ? 30 : null,
-                            shadowOffset: { width: 0, height: 0 },
-                            shadowColor: 'black',
-                            shadowOpacity: 0.2,
-                            elevation: 1,
-                            borderRadius: 20,
-
-                        }}>
-                            <Icon name="ios-search" size={20}
-                                style={{ marginRight: 10,marginTop:5 }} />
-                            <TextInput
-                                placeholder="Buscar"
-                                placeholderTextColor="grey"
-                                style={{
-                                    flex: 1, fontWeight: '700'
-                                    , backgroundColor: 'white'
-                                }} />
-                        </View>
-                        <View style={{height:20}}>
+            <SafeAreaView style={{ flex: 1 }}>
+                <View style={[MainStyles.borderBottom, colorTheme.feedHeader]}>
+                    <View style={[MainStyles.searchBarContainer, colorTheme.searchBar]}>
+                        <Icon
+                            name="ios-search"
+                            size={20}
+                            color={darkThemeOn ? '#fff' : '#222'}
+                            style={MainStyles.searchBarIcon} />
+                        <TextInput
+                            placeholder={t('search')}
+                            placeholderTextColor="grey"
+                            style={MainStyles.searchBarText} />
+                    </View>
+                    <View>
                         <Text
-                        style={{fontSize: 24, textAlign:'left', fontWeight:'bold', marginStart:20,
-                    marginTop:15}}
-                        >Hogares Nuevos</Text>
+                            style={[MainStyles.feedHeaderText, colorTheme.mainTextColor]}
+                        >{t('newHomes')}</Text>
                     </View>
-                    </View>
-                    <View style={{backgroundColor:'#f3f3f3', flex:1}}>
-                        <ScrollView
-                        contentContainerStyle={{alignItems:'center'}}>
-                                <HomeCard/>
-                                <HomeCard/>
-                                <HomeCard/>
-                        </ScrollView>
+                </View>
+                <View style={colorTheme.secondaryBackground}>
+                    <ScrollView
+                        contentContainerStyle={{ alignItems: 'center' }}>
+                        <HomeCard
+                            t={t} />
+                        <HomeCard
+                            t={t} />
+                        <HomeCard
+                            t={t} />
+                    </ScrollView>
 
-                    </View>
+                </View>
 
 
             </SafeAreaView>

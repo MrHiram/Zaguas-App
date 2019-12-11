@@ -55,7 +55,7 @@ class HomeCard extends Component {
                 {/** Section de precio y extrella */}
                 <View style={{ flexDirection: 'row', marginHorizontal: 20, marginTop: 10, marginBottom:10 }}>
                     <Text style={{ fontWeight: '600', fontSize: 14, textAlign: 'left', width: '100%' }}>
-                        ₡ 8000/ por noche
+                        ₡ 8000/ {this.props.t('perNight')}
                     </Text>
                 </View>
             </View>

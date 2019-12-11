@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Alert} from 'react-native';
 
 import InputMT from '../components/InputMT';
 import TouchableText from '../components/TouchableText';
@@ -43,7 +43,7 @@ export default class ResetPasswordContainer extends React.Component {
         });
     }
 
-    requestReset = async () => {
+    requestReset = async (t) => {
         let validPassword = Validator.password(this.state.password);
         let validConfirmation = Validator.passwordConfirm(this.state.password, this.state.confirmPassword);
         if (validPassword && validConfirmation) {
@@ -55,57 +55,64 @@ export default class ResetPasswordContainer extends React.Component {
             Fetcher.postNoToken('resetPassword', data)
                 .then(
                     (response) => {
-                        console.log(response.data.message);
                         if (response.data.message) {
                             this.props.goBack();
                         } else if (response.data.error) {
-                            console.error(response.data.error);
+                            this.handleError(response.data.error, t);
                         }
                     }
                 )
                 .catch(
-                    (error) => { console.log(error) }
+                    (error) => { this.handleError(error, t) }
                 );
         } else {
-            if (!validPassword)
-                this.setState({ passwordError: 'Debe superar los 8 caracteres', passwordSuccess: false })
-            else
-                this.setState({ passwordError: '', passwordSuccess: true });
-            if (!validConfirmation){
-                console.log(this.state.confirmPassword);
-                this.setState({ confirmPasswordError: 'Las contraseñas no coinciden.', passwordSuccess: false })
+            console.log(['valid',validPassword]);
+            if (!validPassword){
+                this.setState({ passwordError: t('eightLettersER'), passwordSuccess: false });
             }else{
-
-            }
-               
-            
                 this.setState({ passwordError: '', passwordSuccess: true });
+            }
+            if (!validConfirmation) {
+                this.setState({ confirmPasswordError: t('passwordMatchER'), confirmPasswordSuccess: false });
+            } else {
+                this.setState({ confirmPasswordError: '', confirmPasswordSuccess: true });
+            }
         }
     }
 
-    handleError = (errors) => {
+    handleError = (errors, t) => {
         let passwordError = '';
-        console.log(errors);
+        // console.log(errors);
 
         errors.forEach(error => {
             switch (error) {
                 case "Invalid credentials":
-                    emailError = passwordError = 'Credenciales invalidas';
+                    emailError = passwordError = t('invalidCretentialER');
                     break;
                 case "The email field is required.":
-                    passwordError = 'Correo requerido';
+                    passwordError = t('emailRequiredER');
                     break;
                 case "The password field is required.":
-                    passwordError = 'Contraseña requerida';
+                    passwordError = t('passwordRequierdER');
                     break;
                 case "The email must be a valid email address.":
-                    emailError = 'Formato incorrecto';
+                    emailError = t('wrongFormatER');
                     break;
                 case "User does not exist":
-                    emailError = 'Usuario no encontrado';
+                    emailError = t('userNotFoundER');
                     break;
                 case "Inactive user":
-                    emailError = 'Verifica tu correo, por seguridad';
+                    emailError = t('inactiveUserER');
+                    break;
+                case "The token field is required.":
+                    Alert.alert(
+                        t('alertErrorTitle'),
+                        t('alertErrorMSG'),
+                        [
+                          { text: 'OK', onPress: () => this.props.goBack() },
+                        ],
+                        { cancelable: false }
+                      );
                     break;
             }
         });
@@ -115,31 +122,37 @@ export default class ResetPasswordContainer extends React.Component {
     }
 
     render() {
+        let { t, colorTheme, darkThemeOn } = this.props.screenProps;
         return (
-            <View style={MainStyles.containerCenter}>
+            <View style={[MainStyles.containerCenter]}>
                 <InputMT
-                    title='Contraseña'
-                    placeholder='Contraseña'
+                    title={t('password')}
+                    placeholder={t('password')}
                     handler='password'
                     secureTextEntry={this.state.showPassword}
                     value={this.state.password}
                     handleValue={this.handleValue}
                     togglePassword={this.togglePasswords}
                     error={this.state.passwordError}
-                    success={this.state.passwordSuccess} />
+                    success={this.state.passwordSuccess}
+                    darkThemeOn={darkThemeOn}
+                    colorTheme={colorTheme} />
                 <InputMT
-                    title='Confirmar contraseña'
-                    placeholder='Contraseña'
+                    title={(t('confirmPassword'))}
+                    placeholder={(t('confirmPassword'))}
                     handler='confirmPassword'
                     secureTextEntry={this.state.showPassword}
                     value={this.state.confirmPassword}
                     handleValue={this.handleValue}
                     togglePassword={this.togglePasswords}
                     error={this.state.confirmPasswordError}
-                    success={this.state.confirmPasswordSuccess} />
+                    success={this.state.confirmPasswordSuccess}
+                    darkThemeOn={darkThemeOn}
+                    colorTheme={colorTheme} />
                 <MainButton
-                    title='Cambiar Contraseña'
-                    onPress={this.requestReset} />
+                    title={t('changePassword')}
+                    onPress={() => this.requestReset(t)} 
+                    colorTheme={colorTheme}/>
             </View>
         );
     };

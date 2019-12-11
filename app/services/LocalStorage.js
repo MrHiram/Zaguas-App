@@ -10,5 +10,14 @@ const localStorage = {
     removeToken: async function () {
         await AsyncStorage.removeItem('accessToken');
     },
+    save: async function (key, value) {
+        await AsyncStorage.setItem(key, value);
+    },
+    retrieve: async function (key){
+        return await AsyncStorage.getItem(key);
+    },
+    remove: async function (key) {
+        await AsyncStorage.removeItem(key);
+    },
 }
 export default localStorage;
