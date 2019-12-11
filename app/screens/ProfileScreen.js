@@ -1,29 +1,62 @@
 import React from 'react';
-import { View, Text, Switch, Picker } from 'react-native';
+import { View, Text, ActivityIndicator, Switch, Picker} from 'react-native';
+import MenuDrawer from 'react-native-side-drawer';
+import { ScrollView } from 'react-native-gesture-handler';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
 import { LinearGradient } from 'expo-linear-gradient';
 import UploadPicture from '../components/UploadPicture';
-import MenuDrawer from 'react-native-side-drawer'
-import { ScrollView } from 'react-native-gesture-handler';
-
 import ProfileContainer from '../containers/ProfileContainer';
+import MainStyles from '../styles/MainStyles';
 import IconButton from '../components/IconButton';
-import MainButton from '../components/MainButton';
-
 import Fetcher from '../services/Fetcher';
 import LocalStorage from '../services/LocalStorage';
-
-import MainStyles from '../styles/MainStyles';
+import MainButton from '../components/MainButton';
 
 export default class ProfileScreen extends React.Component {
   state = {
-    token: '',
+    profileInfo: [],
+    loading: true,
+    image:null,
     open: false,
     darkThemeSwitch: false,
-    language: 'en'
+    caretakerProfileSwitch: false,
+    language: 'en',
+    user:null
+    
+  }
+  goAddPet = () => {
+    console.log('patitos');
+    this.props.screenProps.push('AddPet');
+  }
+  handleSettings = () => {
+    console.log('sadf');
+    this.props.navigation.push('SideNav');
   }
 
-  componentDidMount() {
-    this.init();
+  goFeed = () =>{
+    this.props.navigation.navigate('Feed')
+  }
+  async componentDidMount() {
+    let idClient =null;
+    let token = await LocalStorage.retrieveToken();
+    await Fetcher.getClientID(token).then((response) => {
+      idClient = response.data.id;
+    });
+    await Fetcher.getToken("getProfileClient/" + idClient, token)
+      .then((response) => {
+        console.log(response);
+        this.setState({
+          profileInfo: response.data,
+          image: {uri:response.data.profile.image},
+          loading:false,
+        });
+        
+
+
+      })
+      .catch((error) => {
+        console.log(error);
+      });
   }
 
   init = async () => {
@@ -34,11 +67,12 @@ export default class ProfileScreen extends React.Component {
   }
 
   toggleOpen = (locale) => {
-    let { darkThemeOn } = this.props.screenProps;
+    let { darkThemeOn, caretakerProfile, } = this.props.screenProps;
 
-    this.setState({ 
-      open: !this.state.open ,
+    this.setState({
+      open: !this.state.open,
       darkThemeSwitch: darkThemeOn,
+      caretakerProfileSwitch: caretakerProfile,
       language: locale === 'en-US' || locale === 'en' ? 'en' : 'es'
     });
   };
@@ -49,6 +83,8 @@ export default class ProfileScreen extends React.Component {
     exit();
   }
 
+  toggleCaretaker = () => this.setState({caretakerProfileSwitch: !this.state.caretakerProfileSwitch});
+
   toggleDarkTheme = () =>
     this.setState({
       darkThemeSwitch: !this.state.darkThemeSwitch,
@@ -57,10 +93,11 @@ export default class ProfileScreen extends React.Component {
   applySettings = () => {
     this.props.screenProps.setDarkThemeOn(this.state.darkThemeSwitch);
     this.props.screenProps.setLocale(this.state.language);
+    this.props.screenProps.setCaretakerProfile(this.state.caretakerProfileSwitch);
     this.setState({ open: false });
   }
 
-  drawerContent = (locale, exit, t, colorTheme, darkThemeOn) => {
+  drawerContent = (locale, exit, t, colorTheme, darkThemeOn ) => {
     return (
       <View style={[MainStyles.animatedBox, colorTheme.mainBackground]}>
         <IconButton
@@ -69,6 +106,14 @@ export default class ProfileScreen extends React.Component {
           name={"md-arrow-back"}
           color={darkThemeOn ? '#fff' : '#222'}
           size={28} />
+
+        <View style={[MainStyles.switchContainer, { marginTop: 20 }]}>
+          <Switch
+            style={MainStyles.switchSize}
+            onValueChange={this.toggleCaretaker}
+            value={this.state.caretakerProfileSwitch} />
+          <Text style={[MainStyles.switchText, colorTheme.secondaryTextColor, this.state.termsError ? MainStyles.mainInputErrorMessage : null]}>{t('caretakerProfile')}</Text>
+        </View>
 
         <View style={[MainStyles.switchContainer, { marginTop: 20 }]}>
           <Switch
@@ -93,7 +138,7 @@ export default class ProfileScreen extends React.Component {
           colorTheme={colorTheme}
         />
 
-        <View style={{height: 20}} />
+        <View style={{ height: 20 }} />
 
         <MainButton
           onPress={() => this.requestLogout(exit)}
@@ -106,47 +151,63 @@ export default class ProfileScreen extends React.Component {
   render() {
     let { t, locale, exit, colorTheme, darkThemeOn } = this.props.screenProps;
     return (
-      <View style={[MainStyles.mainContainer, colorTheme.mainBackground]}>
+      <>
+        {this.state.loading ? <ActivityIndicator size="large" color="#007EA9"
+        style={MainStyles.loading} /> :
+        <View style={[MainStyles.mainContainer, colorTheme.secondaryBackground]}>
         <MenuDrawer
           open={this.state.open}
-          drawerContent={this.drawerContent(locale, exit, t, colorTheme, darkThemeOn)}
+          drawerContent={this.drawerContent(locale, exit, t, colorTheme, darkThemeOn )}
           drawerPercentage={100}
           animationTime={250}
           overlay={true}
           opacity={1}
         >
-          <ScrollView>
-            <View style={[MainStyles.animatedHeaderContainer, { height: 300 }]}>
-              <LinearGradient
-                start={{ x: 0, y: 0.75 }} end={{ x: 0.50, y: 0.75 }}
-                colors={['#045379', '#1782ac']}
-                style={{ position: 'absolute', height: 500, width: '100%' }}
-              />
-              <IconButton
+        
+        <ScrollView>
+
+              <View style={[MainStyles.animatedHeaderContainer, { height: 300 }]}>
+                <LinearGradient
+                  start={{ x: 0, y: 0.75 }} end={{ x: 0.50, y: 0.75 }}
+                  colors={['#045379', '#1782ac']}
+                  style={{ position: 'absolute', height: 500, width: '100%' }}
+                />
+                <IconButton
                 onPress={() => this.toggleOpen()}
                 style={MainStyles.topRightSetings}
                 name={"md-settings"}
                 color={darkThemeOn ? '#222' : '#fff'}
                 size={28} />
-              <View style={{ height: 500, paddingTop: 130 }}>
-                <UploadPicture
-                  titlePicture='asdfasdfasd'
-                  image={this.state.image}
-                  error={this.state.imageError}
-                  handlerImage={this.handlerImage}
-                  colorTheme={colorTheme}
-                />
-                <Text style={[MainStyles.mainName, colorTheme.btnTextColor]} >
-                  Lolo Patel
-              </Text>
+                <View style={{ height: 500, paddingTop: 130 }}>
+                  <UploadPicture
+                    image={this.state.image}
+                    error={this.state.imageError}
+                    handlerImage={this.handlerImage}
+                    colorTheme={colorTheme}
+                  />
+                  <Text style={[MainStyles.mainName, colorTheme.btnTextColor]}>
+                    {this.state.profileInfo.user.name}
+                  </Text>
+                  
+                </View>
               </View>
-            </View>
-            <ProfileContainer
-              t={t}
-              colorTheme={colorTheme} />
-          </ScrollView>
-        </MenuDrawer>
-      </View>
+              <ProfileContainer 
+                description={this.state.profileInfo.profile.about}
+                goAddPet={this.goAddPet}
+                goFeed={this.goFeed} 
+                imagePet={this.state.image}
+                pets={this.state.profileInfo.pets}
+                t={t}
+                colorTheme={colorTheme}
+                />
+            </ScrollView>
+            </MenuDrawer>
+          </View>
+          
+          }
+
+      </>
+
     );
   };
 }

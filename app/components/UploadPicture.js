@@ -11,7 +11,7 @@ export default function UploadPicture(props) {
 
     return (
         <>
-            <TouchableOpacity style={{ height: 150, marginTop: 20 }}
+            <TouchableOpacity style={{ height: 180, marginTop: 20 }}
                 onPress={props.handlerImage}>
                 <Image
                     source={props.image == null ? require('../../assets/profile.png') : { uri: props.image.uri }}

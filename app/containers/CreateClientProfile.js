@@ -97,6 +97,7 @@ export default class CreateClientProfile extends Component {
                 .then(
                     (response) => {
                         console.log(response);
+                        LocalStorage.remove("roleSetUp");
                         this.props.setupSuccess();
                     }
                 )
@@ -120,9 +121,13 @@ export default class CreateClientProfile extends Component {
         }
     }
     render() {
+        let { locale, exit, t, colorTheme, darkThemeOn } = this.props.screenProps;
+        if(colorTheme){
+            console.log(colorTheme);
+        }
         return (
-            <>
-            {this.state.waiting ? <View style={[MainStyles.mainCard, MainStyles.profileCard]}><ActivityIndicator size="large" color="#007EA9" /></View>:<KeyboardAwareScrollView
+            <View style={[{width:'100%'},colorTheme.mainBackground]}>
+            {this.state.waiting ? <ActivityIndicator size="large" color="#007EA9" />:<KeyboardAwareScrollView
                 enableOnAndroid={true}
                 resetScrollToCoords={{ x: 0, y: 0 }}
                 style={MainStyles.scrollView}
@@ -133,6 +138,7 @@ export default class CreateClientProfile extends Component {
                     image = {this.state.image}
                     error= {this.state.imageError}
                     handlerImage = {this.handlerImage}
+                    colorTheme={colorTheme}
                     />
                     
                     <InputMT
@@ -143,6 +149,8 @@ export default class CreateClientProfile extends Component {
                         handleValue={this.handleValue}
                         error={this.state.aboutMeError}
                         success={this.state.aboutMeSuccess}
+                        colorTheme={colorTheme}
+                        darkThemeOn={darkThemeOn}
                     />
                     <InputMT
                         title='Dirección'
@@ -152,6 +160,8 @@ export default class CreateClientProfile extends Component {
                         handleValue={this.handleValue}
                         error={this.state.addressError}
                         success={this.state.addressSuccess}
+                        colorTheme={colorTheme}
+                        darkThemeOn={darkThemeOn}
                     />
                     <InputMT
                         title='Telefono'
@@ -161,15 +171,18 @@ export default class CreateClientProfile extends Component {
                         handleValue={this.handleValue}
                         error={this.state.phoneError}
                         success={this.state.phoneSuccess}
+                        colorTheme={colorTheme}
+                        darkThemeOn={darkThemeOn}
                     />
                     <MainButton
                         title='Crear perfil'
-                        onPress={this.CreateClientProfile} />
+                        onPress={this.CreateClientProfile}
+                        colorTheme={colorTheme} />
                     <Text style={MainStyles.whiteText} >2/3</Text>
                 </View>
 
             </KeyboardAwareScrollView>}
-            </>
+            </View>
         );
     }
 }

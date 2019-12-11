@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from 'react-navigation-tabs';
 import ProfileScreen from '../screens/ProfileScreen';
 import FeedScreen from '../screens/FeedScreen';
 import HistoryScreen from '../screens/HistoryScreen';
+import CaretakerScreen from '../screens/CaretakerScreen';
 
 
 const TABS = {
@@ -43,6 +44,7 @@ const TABS = {
 
 export default class DynamicTabNavigatorScreen extends React.Component {
     exit = () => this.props.navigation.navigate({ routeName: 'Auth' });
+    push = (screen) => this.props.navigation.navigate({ routeName: screen });
 
     _tabNavigator(t, darkThemeOn) {
         let tabs = {};
@@ -51,6 +53,11 @@ export default class DynamicTabNavigatorScreen extends React.Component {
         History.navigationOptions.tabBarLabel = t('history');
         Feed.navigationOptions.tabBarLabel = t('feed');
         Profile.navigationOptions.tabBarLabel = t('profile');
+        if(this.props.screenProps.caretakerProfile == true){
+            Profile.screen = CaretakerScreen;
+        }else{
+            Profile.screen = ProfileScreen;
+        }
         return createBottomTabNavigator(tabs, {
             initialRouteName: 'Feed',
             tabBarOptions: {
@@ -69,19 +76,22 @@ export default class DynamicTabNavigatorScreen extends React.Component {
     }
 
     render() {
-        let { t, locale, setLocale, colorTheme, darkThemeOn, setDarkThemeOn } = this.props.screenProps;
+        let { t, locale, setLocale, colorTheme, darkThemeOn, setDarkThemeOn, caretakerProfile, setCaretakerProfile } = this.props.screenProps;
         const Tabs = this._tabNavigator(t, darkThemeOn);
         const AppContainer = createAppContainer(Tabs);
         return (
             <AppContainer
                 screenProps={{
                     exit: this.exit,
+                    push: this.push,
                     t: t,
                     locale: locale,
                     setLocale: setLocale,
                     colorTheme: colorTheme,
                     darkThemeOn: darkThemeOn,
-                    setDarkThemeOn: setDarkThemeOn
+                    setDarkThemeOn: setDarkThemeOn,
+                    caretakerProfile: caretakerProfile,
+                    setCaretakerProfile: setCaretakerProfile
                 }} />
         );
     }

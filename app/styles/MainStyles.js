@@ -350,5 +350,16 @@ export default StyleSheet.create({
     topLeftSetings: {
         minHeight: 28,
         minWidth: 28,
-    }
-});
+    },
+    //loading style
+    loading: {
+        position: 'absolute',
+        left: 0,
+        right: 0,
+        top: 0,
+        bottom: 0,
+        alignItems: 'center',
+        justifyContent: 'center',
+      },
+    
+    });
