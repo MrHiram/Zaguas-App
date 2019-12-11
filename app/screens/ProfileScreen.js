@@ -10,6 +10,7 @@ import MainStyles from '../styles/MainStyles';
 import IconButton from '../components/IconButton';
 import Fetcher from '../services/Fetcher';
 import LocalStorage from '../services/LocalStorage';
+import MainButton from '../components/MainButton';
 
 export default class ProfileScreen extends React.Component {
   state = {
@@ -19,7 +20,8 @@ export default class ProfileScreen extends React.Component {
     open: false,
     darkThemeSwitch: false,
     caretakerProfileSwitch: false,
-    language: 'en'
+    language: 'en',
+    user:null
     
   }
   goAddPet = () => {
@@ -35,16 +37,13 @@ export default class ProfileScreen extends React.Component {
     this.props.navigation.navigate('Feed')
   }
   async componentDidMount() {
-    const user = {
-      id: "",
-      name: ""
-    };
+    let idClient =null;
     let token = await LocalStorage.retrieveToken();
     await Fetcher.getUser(token).then((response) => {
-      user.id = response.data.id;
-      user.name = response.data.name;
+      idClient = response.data.id;
     });
-    await Fetcher.getToken("getProfileClient/" + user.id, token)
+    
+    await Fetcher.getToken("getProfileClient/" + idClient, token)
       .then((response) => {
         this.setState({
           profileInfo: response.data,

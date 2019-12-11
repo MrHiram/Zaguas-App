@@ -350,7 +350,6 @@ export default StyleSheet.create({
     topLeftSetings: {
         minHeight: 28,
         minWidth: 28,
-    }
     },
     //loading style
     loading: {
@@ -360,6 +359,7 @@ export default StyleSheet.create({
         top: 0,
         bottom: 0,
         alignItems: 'center',
-        justifyContent: 'center'
+        justifyContent: 'center',
       },
-});
+    
+    });

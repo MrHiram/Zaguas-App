@@ -52,7 +52,7 @@ const fetcher = {
         var config = {
             headers: { 'Authorization': 'Bearer ' + accessToken }
         }
-        return await axios.get(this.url+"user", config);
+        return await axios.get(this.url+"getClientID", config);
     }
 }
 export default fetcher;
