@@ -10,6 +10,7 @@ import HistoryScreen from "../screens/HistoryScreen";
 import CaretakerScreen from "../screens/CaretakerScreen";
 import AddPetScreen from "../screens/AddPetScreen";
 import PetScreen from "../screens/PetScreen";
+import ViewHomeScreen from "./ViewHomeScreen";
 
 const ProfileStack = createStackNavigator(
     {
@@ -21,6 +22,9 @@ const ProfileStack = createStackNavigator(
         },
         PetProfile: {
             screen: PetScreen
+        },
+        ViewHome:{
+            screen: ViewHomeScreen
         }
     },
     {

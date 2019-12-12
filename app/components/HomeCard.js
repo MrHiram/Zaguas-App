@@ -9,6 +9,7 @@ import Icon from 'react-native-vector-icons/Ionicons';
 import InfiniteScrollView from 'react-native-infinite-scroll-view';
 
 class HomeCard extends Component {
+
     render() {
         return (
             
@@ -18,7 +19,8 @@ class HomeCard extends Component {
                     borderRadius: 15, backgroundColor: 'white',
                     padding: 10
                 }}>
-                    <TouchableOpacity >
+                    <TouchableOpacity 
+                    onPress= {()=>this.props.viewHome(this.props.item)}>
                 {/** Section de informacion personal */}
                 <View style={{ flexDirection: 'row', marginStart: 15, marginTop: 15 }}>
                     <Image source={{uri:this.props.imageCareTaker.uri}}
