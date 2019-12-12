@@ -81,7 +81,7 @@ class ViewHomeScreen extends Component {
                     <Image
                         style={{ width: '100%', height: '87%' }}
                         resizeMode='contain'
-                        source={require('../../assets/casa1.jpg')} />
+                        source={{uri:this.props.navigation.state.params.item.image}} />
                 </View>
                 <View
                     style={{ flexDirection: 'row', marginTop: 20 }}
@@ -92,15 +92,15 @@ class ViewHomeScreen extends Component {
                         <Image
                             style={{ height: 80, width: 80, borderRadius:40 }}
                             resizeMode='cover'
-                            source={require('../../assets/donald.jpg')}
+                            source={{uri : this.props.navigation.state.params.item.care_taker_image}}
                         />
 
                     </View>
                     <View
                         style={{ flexDirection: 'column', justifyContent: 'center', marginLeft: 20 }}
                     >
-                        <Text style={{ fontWeight: 'bold', fontSize: 18 }}>Lil.D</Text>
-                        <Text>Esparza,Puntarenas</Text>
+                        <Text style={{ fontWeight: 'bold', fontSize: 18 }}>{this.props.navigation.state.params.item.userName}</Text>
+                        <Text>{this.props.navigation.state.params.item.address}</Text>
                     </View>
                 </View>
                 <View
@@ -115,7 +115,7 @@ class ViewHomeScreen extends Component {
                             source={require('../../assets/paw.png')}
                         />
                         <Text style={{ fontSize: 15, fontWeight: '500' }}>Capacidad</Text>
-                        <Text>1-5</Text>
+                        <Text>{this.props.navigation.state.params.item.capacity}</Text>
                     </View>
                     <View
                         style={{ flexDirection: 'column', alignItems: 'center' }}
@@ -125,7 +125,7 @@ class ViewHomeScreen extends Component {
                             resizeMode='contain'
                             source={require('../../assets/money.png')}
                         />
-                        <Text style={{ fontSize: 15, fontWeight: '500' }}>$8</Text>
+                        <Text style={{ fontSize: 15, fontWeight: '500' }}>{this.props.navigation.state.params.item.price}</Text>
                         <Text >Por noche</Text>
                     </View>
                     <View
@@ -137,7 +137,7 @@ class ViewHomeScreen extends Component {
                             source={require('../../assets/walk.png')}
                         />
                         <Text style={{ fontSize: 15, fontWeight: '500' }}>Caminador</Text>
-                        <Text>No</Text>
+                        <Text>{this.props.navigation.state.params.item.walk ? "Si" : "No"}</Text>
                     </View>
                 </View>
                 <View
@@ -145,7 +145,7 @@ class ViewHomeScreen extends Component {
 
                 >
                     <Text style={{ fontSize: 25, fontWeight: '500', marginBottom: 10 }}>Descripción</Text>
-                    <Text>Mi hermoso hogar cuenta con una gran zona verde, donde caben muchos perros hasta yo!</Text>
+                    <Text>{this.props.navigation.state.params.item.description}</Text>
                     <TouchableOpacity><Text style={{ color: '#477DA4' }}>Contactar al dueño </Text></TouchableOpacity>
                     <Text style={{ fontSize: 25, fontWeight: '500', marginTop: 10 }}>Fecha de llegada</Text>
                     <View style={MainStyles.container}>
