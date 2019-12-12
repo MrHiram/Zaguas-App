@@ -84,6 +84,7 @@ export default class CreateClientProfile extends Component {
         let validAboutMe = Validator.blankSpace(this.state.aboutMe);
         let validAddress = Validator.blankSpace(this.state.address);
         let validPhone = Validator.blankSpace(this.state.phone);
+        let t  = this.props.screenProps;
         let validImage = this.state.image === null ? false : true;
 
         if (validAboutMe && validAddress && validPhone && validImage) {
@@ -105,16 +106,17 @@ export default class CreateClientProfile extends Component {
                     (error) => { console.log(error.error) }
                 );
         } else {
+          
             if (!validAboutMe)
-                this.setState({ aboutMeError: 'Espacio Requerido', aboutMeSuccess: false });
+                this.setState({ aboutMeError: t('required'), aboutMeSuccess: false });
             else
                 this.setState({ aboutMeError: '', aboutMeSuccess: true });
             if (!validAddress)
-                this.setState({ addressError: 'Espacio Requerido', addressSuccess: false })
+                this.setState({ addressError: t('required'), addressSuccess: false })
             else
                 this.setState({ addressError: '', addressSuccess: true });
             if (!validPhone)
-                this.setState({ phoneError: 'Espacio Requerido', phoneSuccess: false });
+                this.setState({ phoneError: t('required'), phoneSuccess: false });
             else
                 this.setState({ phoneError: '', phoneSuccess: true });
 
@@ -134,7 +136,7 @@ export default class CreateClientProfile extends Component {
                 extraHeight={300}>
                 <View style={[MainStyles.mainCard, MainStyles.profileCard]}>
                 <UploadPicture
-                    titlePicture = 'Añadir foto de mascota'
+                    titlePicture = {t('profilePhoto')}
                     image = {this.state.image}
                     error= {this.state.imageError}
                     handlerImage = {this.handlerImage}
@@ -142,9 +144,9 @@ export default class CreateClientProfile extends Component {
                     />
                     
                     <InputMT
-                        title='Acerca de mí'
+                        title={t('description')}
                         value={this.state.aboutMe}
-                        placeholder='Agrega una breve descripción de ti'
+                        placeholder={t('phDescription')}
                         handler='aboutMe'
                         handleValue={this.handleValue}
                         error={this.state.aboutMeError}
@@ -153,9 +155,9 @@ export default class CreateClientProfile extends Component {
                         darkThemeOn={darkThemeOn}
                     />
                     <InputMT
-                        title='Dirección'
+                        title={t('adress')}
                         value={this.state.address}
-                        placeholder='Ingresa tu direccion'
+                        placeholder={t('phAdress')}
                         handler='address'
                         handleValue={this.handleValue}
                         error={this.state.addressError}
@@ -164,9 +166,9 @@ export default class CreateClientProfile extends Component {
                         darkThemeOn={darkThemeOn}
                     />
                     <InputMT
-                        title='Telefono'
+                        title={t('phone')}
                         value={this.state.phone}
-                        placeholder='Ingresa tu teléfono celular'
+                        placeholder={t('phPhone')}
                         handler='phone'
                         handleValue={this.handleValue}
                         error={this.state.phoneError}
@@ -175,7 +177,7 @@ export default class CreateClientProfile extends Component {
                         darkThemeOn={darkThemeOn}
                     />
                     <MainButton
-                        title='Crear perfil'
+                        title={t('createProfile')}
                         onPress={this.CreateClientProfile}
                         colorTheme={colorTheme} />
                     <Text style={MainStyles.whiteText} >2/3</Text>

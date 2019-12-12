@@ -13,6 +13,7 @@ const es = {
     darkTheme: 'Tema oscuro',
     apply: 'Aplicar',
     caretakerProfile: 'Perfil de cuidador',
+    required: 'Espacio Requerido',
     name: 'Nombre',
     description: 'Descripción',
     capacity: 'Capacidad',
@@ -74,6 +75,8 @@ const es = {
     perNight: 'por noche',
 
     /* Perfil */
+    description: 'Descripción',
+    phDescription: 'Añade la descripción de tu perfil',
     myPets: 'Mis mascotas',
     addNewPetMSG: 'Añade una nueva mascota',
     recientHomes: 'Mis casas de cuido recientes',
@@ -92,6 +95,23 @@ const es = {
     thursday: 'Jueves',
     friday: 'Viernes',
     saturday: 'Sábado',
+    profilePhoto: 'Añade foto de perfil',
+    adress: 'Dirección',
+    phAdress: 'Ingrese su dirección',
+    phone: 'Teléfono',
+    phPhone: 'Agrega tu numero de teléfono',
+    createProfile: 'Crear Perfil',
+
+    /*Setup profile*/
+    type: 'Elegí un tipo de perfil',
+    client: 'Cliente',
+    caretaker:'Cuidador',
+    clientDescription:'Registra tus mascotas para encontrar donde dejarlas',
+    caretakerDescription:'Registra tu casa, cuida mascotas y consigue clientes',
+    /*History*/
+    recentHomes: 'Casa recientes',
+    price: 'por noche',
+    owner: 'Dueño'
 
     /* Perfil mascota */
     addPetPhoto: 'Añadir foto de mascota',

@@ -47,6 +47,25 @@ export default StyleSheet.create({
         alignItems: 'center',
         justifyContent: 'center',
     },
+    /*imagenes de los cards*/
+    userImage: {
+        borderRadius: 10,
+        width: 330,
+        height: 200
+    },
+    priceText: {
+        fontWeight: 'bold',
+        fontSize: 20,
+        marginVertical: 10
+    },
+    cardHistoryContainer: {
+        backgroundColor: '#fff',
+        width: '90%',
+        borderRadius: 10,
+        marginVertical: 20,
+        alignSelf: 'center',
+        overflow: 'hidden'
+    },
     mainBackgroundImage: {
         height: 500,
         width: '100%',
@@ -92,6 +111,14 @@ export default StyleSheet.create({
         marginBottom: 30,
         fontSize: 20,
         textAlign: 'center'
+    },
+    userText: {
+        fontSize: 16,
+        fontWeight: '600'
+    },
+    descriptionUser: {
+        fontSize: 14,
+        fontWeight: '400'
     },
     secondaryLogo: {
         width: '80%',
@@ -164,16 +191,16 @@ export default StyleSheet.create({
         flex: 1,
         padding: 20,
     },
-     /*Caretaker*/
-     mainTitleRow: {
+    /*Caretaker*/
+    mainTitleRow: {
         flexDirection: 'row',
         width: '100%',
-        paddingTop:20
+        paddingTop: 20
     },
     imageColumn: {
         flexDirection: 'column',
-        width:'45%',
-        
+        width: '45%',
+
     },
     textColumn: {
         flexDirection: 'column',
@@ -197,7 +224,7 @@ export default StyleSheet.create({
         justifyContent: 'flex-start',
         width: '50%',
     },
-    daysColumn:{
+    daysColumn: {
         flexDirection: 'column',
         width: '30%'
     },
@@ -248,13 +275,13 @@ export default StyleSheet.create({
         borderTopLeftRadius: 10,
         justifyContent: 'center'
     },
-    subTitile:{
+    subTitile: {
         fontWeight: 'bold',
         fontSize: 15,
         marginHorizontal: 10,
         marginVertical: 5
     },
-    marginText:{
+    marginText: {
         marginBottom: 10,
         marginHorizontal: 10
     },
@@ -325,11 +352,11 @@ export default StyleSheet.create({
         width: '100%',
         borderRadius: 5
     },
-    buttonHome:{
-        backgroundColor:'#F4362D',
-        color:'#fff',
-        borderRadius:5,
-        marginBottom:30,
+    buttonHome: {
+        backgroundColor: '#F4362D',
+        color: '#fff',
+        borderRadius: 5,
+        marginBottom: 30,
     },
     MainButtonText: {
         textAlign: 'center',
@@ -366,6 +393,17 @@ export default StyleSheet.create({
         bottom: 0,
         alignItems: 'center',
         justifyContent: 'center',
-      },
-    
-    });
+    },
+    //History Button
+    historyBtn: {
+        backgroundColor: '#0DAA92',
+        color: '#ffff',
+        borderRadius: 50,
+        paddingHorizontal: 50,
+        paddingVertical: 5
+
+    },
+    containerHistory: {
+        height: 2000
+    }
+});

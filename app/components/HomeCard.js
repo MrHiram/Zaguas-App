@@ -5,6 +5,7 @@ import {
     Image
 } from "react-native";
 import Icon from 'react-native-vector-icons/Ionicons';
+import MainStyles from "../styles/MainStyles";
 
 class HomeCard extends Component {
     render() {
@@ -20,8 +21,8 @@ class HomeCard extends Component {
                     <Image source={require('../../assets/dogProfile.png')}
                         style={{ height: 60, width: 60, borderRadius: 20 }} />
                     <View style={{ flexDirection: 'column', alignSelf: 'center', marginStart: 10 }}>
-                        <Text style={{ fontSize: 16, fontWeight: '600' }}>Lil. D</Text>
-                        <Text style={{ fontSize: 14, fontWeight: '400' }}>Macacona, Esparza</Text>
+                        <Text style={MainStyles.userText}>Lil. D</Text>
+                        <Text style={MainStyles.descriptionUser}>Macacona, Esparza</Text>
                     </View>
 
                 </View>
