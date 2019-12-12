@@ -14,10 +14,11 @@ export default function InputMT(props) {
                 <TextInput
                     autoCompleteType={props.autoCompleteType || 'off'}
                     secureTextEntry={props.secureTextEntry}
-                    style={[MainStyles.mainContainer, props.colorTheme.mainTextColor]}
+                    style={[MainStyles.mainContainer, props.colorTheme.mainTextColor, props.height ? {height: props.height} : null]}
                     placeholder={props.placeholder}
                     onChangeText={e => props.handleValue(props.handler, e)}
-                    value={props.value} />
+                    value={props.value}
+                    multiline={props.multiline || false} />
                 {
                     props.error || props.success ?
                         props.error ?

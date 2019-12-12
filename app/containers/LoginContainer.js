@@ -131,7 +131,7 @@ export default class LoginContainer extends React.Component {
                     handleValue={this.handleValue}
                     error={this.state.emailError}
                     success={this.state.emailSuccess}
-                    colorTheme={colorTheme} />
+                    colorTheme={colorTheme}/>
                 <InputMT
                     title={t('password')}
                     placeholder={t('password')}
