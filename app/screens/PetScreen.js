@@ -45,7 +45,7 @@ export default class PetScreen extends Component {
                 }
             })
             .catch(error => {
-                console.log(['PetScren error', error]);
+                console.log(['PetScreen error', error]);
             });
         this.setState({ token });
     };
@@ -93,286 +93,306 @@ export default class PetScreen extends Component {
                         style={MainStyles.loading}
                     />
                 ) : (
-                    <KeyboardAwareScrollView
-                        enableOnAndroid={true}
-                        resetScrollToCoords={{ x: 0, y: 100 }}
-                        extraHeight={300}
-                    >
-                        <View
-                            style={{
-                                width: '100%',
-                                height: 290,
-                                overflow: 'hidden',
-                                justifyContent: 'flex-end'
-                            }}
+                        <KeyboardAwareScrollView
+                            enableOnAndroid={true}
+                            resetScrollToCoords={{ x: 0, y: 100 }}
+                            extraHeight={300}
+                            style={colorTheme.mainBackground}
                         >
-                            <Image
-                                style={{ flex: 1 }}
-                                resizeMode="cover"
-                                source={{
-                                    uri: this.state.profileInfo.pet.image
-                                }}
-                            />
-                        </View>
-                        <View style={[colorTheme.mainBackground]}>
-                            <View
-                                style={{ flexDirection: 'row', marginTop: 40 }}
-                            >
-                                <View style={{ marginLeft: 20 }}>
-                                    <Image
-                                        style={{
-                                            height: 80,
-                                            width: 80,
-                                            borderRadius: 40
-                                        }}
-                                        resizeMode="cover"
-                                        source={{
-                                            uri: this.state.profileInfo.pet
-                                                .owner.image
-                                        }}
-                                    />
-                                </View>
-                                <View
-                                    style={{
-                                        flexDirection: 'column',
-                                        justifyContent: 'center',
-                                        marginLeft: 20
-                                    }}
-                                >
-                                    <Text
-                                        style={[
-                                            {
-                                                fontWeight: 'bold',
-                                                fontSize: 18
-                                            },
-                                            colorTheme.mainTextColor
-                                        ]}
-                                    >
-                                        {this.state.profileInfo.pet.name}
-                                    </Text>
-                                    <Text style={colorTheme.mainTextColor}>
-                                        {
-                                            this.state.profileInfo.pet.owner
-                                                .address
-                                        }
-                                    </Text>
-                                </View>
-                            </View>
                             <View
                                 style={{
-                                    flexDirection: 'row',
-                                    justifyContent: 'space-between',
-                                    marginTop: 20
+                                    width: '100%',
+                                    height: 290,
+                                    overflow: 'hidden',
+                                    justifyContent: 'flex-end'
                                 }}
                             >
-                                <View
-                                    style={{
-                                        flexDirection: 'column',
-                                        alignItems: 'center',
-                                        flexGrow: 1
+                                <Image
+                                    style={{ flex: 1 }}
+                                    resizeMode="cover"
+                                    source={{
+                                        uri: this.state.profileInfo.pet.image
                                     }}
-                                >
-                                    <Image
-                                        style={{ width: '50%', height: 50 }}
-                                        resizeMode="contain"
-                                        source={
-                                            darkThemeOn
-                                                ? require('../../assets/tempermentBlanco.png')
-                                                : require('../../assets/temperamento.png')
-                                        }
-                                    />
-                                    <Text
-                                        style={[
-                                            {
-                                                fontSize: 15,
-                                                fontWeight: '500'
-                                            },
-                                            colorTheme.mainTextColor
-                                        ]}
-                                    >
-                                        {t('temperament')}
-                                    </Text>
-                                    <Text style={colorTheme.mainTextColor}>
-                                        {this.state.profileInfo.pet.temperament}
-                                    </Text>
-                                </View>
-                                <View
-                                    style={{
-                                        flexDirection: 'column',
-                                        alignItems: 'center',
-                                        flexGrow: 1
-                                    }}
-                                >
-                                    <Image
-                                        style={{ width: '50%', height: 50 }}
-                                        resizeMode="contain"
-                                        source={
-                                            darkThemeOn
-                                                ? require('../../assets/tamanoBlanco.png')
-                                                : require('../../assets/dog.png')
-                                        }
-                                    />
-                                    <Text
-                                        style={[
-                                            {
-                                                fontSize: 15,
-                                                fontWeight: '500'
-                                            },
-                                            colorTheme.mainTextColor
-                                        ]}
-                                    >
-                                        {t('size')}
-                                    </Text>
-                                    <Text style={colorTheme.mainTextColor}>
-                                        {this.state.profileInfo.pet.size}
-                                    </Text>
-                                </View>
-                                <View
-                                    style={{
-                                        flexDirection: 'column',
-                                        alignItems: 'center',
-                                        flexGrow: 1
-                                    }}
-                                >
-                                    <Image
-                                        style={{ width: '50%', height: 50 }}
-                                        resizeMode="contain"
-                                        source={
-                                            darkThemeOn
-                                                ? require('../../assets/animalBlanco.png')
-                                                : require('../../assets/animal.png')
-                                        }
-                                    />
-                                    <Text
-                                        style={[
-                                            {
-                                                fontSize: 15,
-                                                fontWeight: '500'
-                                            },
-                                            colorTheme.mainTextColor
-                                        ]}
-                                    >
-                                        {t('race')}
-                                    </Text>
-                                    <Text style={colorTheme.mainTextColor}>
-                                        {this.state.profileInfo.pet.race}
-                                    </Text>
-                                </View>
-                            </View>
-                            <View
-                                style={{ margin: 20 }}
-                            >
-                                <Text
-                                    style={[
-                                        {
-                                            fontSize: 25,
-                                            fontWeight: '500',
-                                            marginBottom: 10
-                                        },
-                                        colorTheme.mainTextColor
-                                    ]}
-                                >
-                                    {t('description')}
-                                </Text>
-                                <Text style={colorTheme.mainTextColor}>
-                                    {this.state.profileInfo.pet.description}
-                                </Text>
-                                <TouchableOpacity
-                                    onPress={() => this.makeCall()}
-                                >
-                                    <Text style={{ color: '#477DA4' }}>
-                                        {t('callOwner')}
-                                    </Text>
-                                </TouchableOpacity>
-                                <Text
-                                    style={[
-                                        {
-                                            fontSize: 25,
-                                            fontWeight: '500',
-                                            marginTop: 10
-                                        },
-                                        colorTheme.mainTextColor
-                                    ]}
-                                >
-                                    {t('otherInfo')}
-                                </Text>
-
-                                {this.state.profileInfo.pet.allergies ? (
-                                    <>
-                                        <Text
-                                            style={[
-                                                {
-                                                    fontSize: 15,
-                                                    fontWeight: '500',
-                                                    marginTop: 10
-                                                },
-                                                colorTheme.mainTextColor
-                                            ]}
-                                        >
-                                            {t('allergies')}
-                                        </Text>
-                                        <Text style={colorTheme.mainTextColor}>
-                                            {
-                                                this.state.profileInfo.pet
-                                                    .allergies
-                                            }
-                                        </Text>
-                                    </>
-                                ) : null}
-
-                                {this.state.profileInfo.pet.feeding ? (
-                                    <>
-                                        <Text
-                                            style={[
-                                                {
-                                                    fontSize: 15,
-                                                    fontWeight: '500',
-                                                    marginTop: 10
-                                                },
-                                                colorTheme.mainTextColor
-                                            ]}
-                                        >
-                                            {t('feeding')}
-                                        </Text>
-                                        <Text style={colorTheme.mainTextColor}>
-                                            {this.state.profileInfo.pet.feeding}
-                                        </Text>
-                                    </>
-                                ) : null}
-
-                                {this.state.profileInfo.pet.special_cares ? (
-                                    <>
-                                        <Text
-                                            style={[
-                                                {
-                                                    fontSize: 15,
-                                                    fontWeight: '500',
-                                                    marginTop: 10
-                                                },
-                                                colorTheme.mainTextColor
-                                            ]}
-                                        >
-                                            {t('specialCares')}
-                                        </Text>
-                                        <Text style={colorTheme.mainTextColor}>
-                                            {
-                                                this.state.profileInfo.pet
-                                                    .special_cares
-                                            }
-                                        </Text>
-                                    </>
-                                ) : null}
-                            </View>
-                            {this.state.profileInfo.edit ? (
-                                <MainButton
-                                    title={t('editProfile')}
-                                    onPress={() => this.applySettings()}
-                                    colorTheme={colorTheme}
                                 />
-                            ) : null}
-                        </View>
-                    </KeyboardAwareScrollView>
-                )}
+                            </View>
+                            <View style={[colorTheme.mainBackground]}>
+                                <Text
+                                    style={[
+                                        {
+                                            fontWeight: 'bold',
+                                            fontSize: 30,
+                                            marginLeft: 20
+                                        },
+                                        colorTheme.mainTextColor
+                                    ]}
+                                >
+                                    {this.state.profileInfo.pet.name}
+                                </Text>
+
+                                <View
+                                    style={{ flexDirection: 'row', marginTop: 15 }}
+
+                                >
+
+                                    <View style={{ marginLeft: 20 }}>
+                                        <Image
+                                            style={{
+                                                height: 80,
+                                                width: 80,
+                                                borderRadius: 40
+                                            }}
+                                            resizeMode="cover"
+                                            source={{
+                                                uri: this.state.profileInfo.pet
+                                                    .owner.image
+                                            }}
+                                        />
+                                    </View>
+                                    <View
+                                        style={{
+                                            flexDirection: 'column',
+                                            justifyContent: 'center',
+                                            marginLeft: 20
+                                        }}
+                                    >
+                                        <Text
+                                            style={[
+                                                {
+                                                    fontWeight: 'bold',
+                                                    fontSize: 20,
+
+                                                },
+                                                colorTheme.mainTextColor
+                                            ]}
+                                        >
+                                            {this.state.profileInfo.pet.owner.user.name}
+                                        </Text>
+                                        <Text style={colorTheme.mainTextColor}>
+                                            {
+                                                this.state.profileInfo.pet.owner
+                                                    .address
+                                            }
+                                        </Text>
+                                    </View>
+                                </View>
+                                <View
+                                    style={{
+                                        flexDirection: 'row',
+                                        justifyContent: 'space-between',
+                                        marginTop: 20
+                                    }}
+                                >
+                                    <View
+                                        style={{
+                                            flexDirection: 'column',
+                                            alignItems: 'center',
+                                            flexGrow: 1
+                                        }}
+                                    >
+                                        <Image
+                                            style={{ width: '50%', height: 50 }}
+                                            resizeMode="contain"
+                                            source={
+                                                darkThemeOn
+                                                    ? require('../../assets/tempermentBlanco.png')
+                                                    : require('../../assets/temperamento.png')
+                                            }
+                                        />
+                                        <Text
+                                            style={[
+                                                {
+                                                    fontSize: 15,
+                                                    fontWeight: '500'
+                                                },
+                                                colorTheme.mainTextColor
+                                            ]}
+                                        >
+                                            {t('temperament')}
+                                        </Text>
+                                        <Text style={colorTheme.mainTextColor}>
+                                            {this.state.profileInfo.pet.temperament}
+                                        </Text>
+                                    </View>
+                                    <View
+                                        style={{
+                                            flexDirection: 'column',
+                                            alignItems: 'center',
+                                            flexGrow: 1
+                                        }}
+                                    >
+                                        <Image
+                                            style={{ width: '50%', height: 50 }}
+                                            resizeMode="contain"
+                                            source={
+                                                darkThemeOn
+                                                    ? require('../../assets/tamanoBlanco.png')
+                                                    : require('../../assets/dog.png')
+                                            }
+                                        />
+                                        <Text
+                                            style={[
+                                                {
+                                                    fontSize: 15,
+                                                    fontWeight: '500'
+                                                },
+                                                colorTheme.mainTextColor
+                                            ]}
+                                        >
+                                            {t('size')}
+                                        </Text>
+                                        <Text style={colorTheme.mainTextColor}>
+                                            {this.state.profileInfo.pet.size}
+                                        </Text>
+                                    </View>
+                                    <View
+                                        style={{
+                                            flexDirection: 'column',
+                                            alignItems: 'center',
+                                            flexGrow: 1
+                                        }}
+                                    >
+                                        <Image
+                                            style={{ width: '50%', height: 50 }}
+                                            resizeMode="contain"
+                                            source={
+                                                darkThemeOn
+                                                    ? require('../../assets/animalBlanco.png')
+                                                    : require('../../assets/animal.png')
+                                            }
+                                        />
+                                        <Text
+                                            style={[
+                                                {
+                                                    fontSize: 15,
+                                                    fontWeight: '500'
+                                                },
+                                                colorTheme.mainTextColor
+                                            ]}
+                                        >
+                                            {t('race')}
+                                        </Text>
+                                        <Text style={colorTheme.mainTextColor}>
+                                            {this.state.profileInfo.pet.race}
+                                        </Text>
+                                    </View>
+                                </View>
+                                <View
+                                    style={{ margin: 20 }}
+                                >
+                                    <Text
+                                        style={[
+                                            {
+                                                fontSize: 25,
+                                                fontWeight: '500',
+                                                marginBottom: 10
+                                            },
+                                            colorTheme.mainTextColor
+                                        ]}
+                                    >
+                                        {t('description')}
+                                    </Text>
+                                    <Text style={colorTheme.mainTextColor}>
+                                        {this.state.profileInfo.pet.description}
+                                    </Text>
+                                    <TouchableOpacity
+                                        onPress={() => this.makeCall()}
+                                    >
+                                        <Text style={{ color: '#477DA4' }}>
+                                            {t('callOwner')}
+                                        </Text>
+                                    </TouchableOpacity>
+                                    <Text
+                                        style={[
+                                            {
+                                                fontSize: 25,
+                                                fontWeight: '500',
+                                                marginTop: 10
+                                            },
+                                            colorTheme.mainTextColor
+                                        ]}
+                                    >
+                                        {t('otherInfo')}
+                                    </Text>
+
+                                    {this.state.profileInfo.pet.allergies ? (
+                                        <>
+                                            <Text
+                                                style={[
+                                                    {
+                                                        fontSize: 15,
+                                                        fontWeight: '500',
+                                                        marginTop: 10
+                                                    },
+                                                    colorTheme.mainTextColor
+                                                ]}
+                                            >
+                                                {t('allergies')}
+                                            </Text>
+                                            <Text style={colorTheme.mainTextColor}>
+                                                {
+                                                    this.state.profileInfo.pet
+                                                        .allergies
+                                                }
+                                            </Text>
+                                        </>
+                                    ) : null}
+
+                                    {this.state.profileInfo.pet.feeding ? (
+                                        <>
+                                            <Text
+                                                style={[
+                                                    {
+                                                        fontSize: 15,
+                                                        fontWeight: '500',
+                                                        marginTop: 10
+                                                    },
+                                                    colorTheme.mainTextColor
+                                                ]}
+                                            >
+                                                {t('feeding')}
+                                            </Text>
+                                            <Text style={colorTheme.mainTextColor}>
+                                                {this.state.profileInfo.pet.feeding}
+                                            </Text>
+                                        </>
+                                    ) : null}
+
+                                    {this.state.profileInfo.pet.special_cares ? (
+                                        <>
+                                            <Text
+                                                style={[
+                                                    {
+                                                        fontSize: 15,
+                                                        fontWeight: '500',
+                                                        marginTop: 10
+                                                    },
+                                                    colorTheme.mainTextColor
+                                                ]}
+                                            >
+                                                {t('specialCares')}
+                                            </Text>
+                                            <Text style={colorTheme.mainTextColor}>
+                                                {
+                                                    this.state.profileInfo.pet
+                                                        .special_cares
+                                                }
+                                            </Text>
+                                        </>
+                                    ) : null}
+                                </View>
+                                <View style={{ width:'100%', paddingHorizontal:20 }}>
+                                    {this.state.profileInfo.edit ? (
+                                        <MainButton
+                                            title={t('editProfile')}
+                                            onPress={() => this.props.navigation.push("EditPetScreen",{screenProps:this.state.profileInfo})
+                                            }
+                                            colorTheme={colorTheme}
+                                        />
+                                    ) : null}
+                                </View>
+                            </View>
+                        </KeyboardAwareScrollView>
+                    )}
             </>
         );
     }
