@@ -57,7 +57,8 @@ export default class AddPetContainer extends React.Component {
             options = {
                 mediaTypes: ImagePicker.MediaTypeOptions.All,
                 allowsEditing: true,
-                aspect: [4, 4]
+                aspect: [4, 4],
+                quality: 0.5
             };
             let result = await ImagePicker.launchImageLibraryAsync(options);
 
@@ -147,6 +148,7 @@ export default class AddPetContainer extends React.Component {
             this.setState({ waiting: true });
             await Fetcher.postToken('addPet', data, this.state.token)
                 .then(response => {
+                    console.log(response);
                     if (
                         response.data.message == 'Mascota creada correctamente'
                     ) {
@@ -250,7 +252,8 @@ export default class AddPetContainer extends React.Component {
                     data={data1}
                     onChangeText={this.onChangeTextPress}
                     error={this.state.temperamentError}
-                ></Combobox>
+                    colorTheme={colorTheme}
+                />
                 <InputMT
                     title={t('race')}
                     handleValue={this.handleValue}
@@ -289,7 +292,7 @@ export default class AddPetContainer extends React.Component {
                 />
                 <InputMT
                     title={t('specialCares')}
-                    handleValue={(key, value) => this.setState({ allergies: value })}
+                    handleValue={(key, value) => this.setState({ special_cares: value })}
                     placeholder={t('enterSpecialCares')}
                     handler="special_cares"
                     value={this.state.special_cares}

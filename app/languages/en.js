@@ -15,6 +15,7 @@ const en = {
     caretakerProfile: 'Caretaker profile',
     name: 'Name',
     description: 'Description',
+    capacity: 'Capacity',
 
     /* Login */
     forgotPasswordQN: 'Forgot your password?',
@@ -80,7 +81,6 @@ const en = {
     myHouses: 'My houses',
     location: 'Location',
     contact: 'Contact',
-    capacity: 'Capacity',
     pricePerNight: 'Price per night',
     walker: 'Walker',
     availableDays: 'Available days',
@@ -111,7 +111,10 @@ const en = {
     calm: 'Calm',
     docile: 'Docile',
     friendly: 'Friendly',
-    aggressive: 'Aggressive'
+    aggressive: 'Aggressive',
+    callOwner: 'Call the owner',
+    otherInfo: 'Other info',
+    editProfile: 'Edit profile',
 };
 
 export default en;

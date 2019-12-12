@@ -4,16 +4,18 @@ const es = {
     emailExampleCom: 'correo@ejemplo.com',
     password: 'Contraseña',
     logIn: 'Iniciar Sesión',
-    processing: 'Tu petición está siendo procesada,\nesto puede tardar unos segundos',
+    processing:
+        'Tu petición está siendo procesada,\nesto puede tardar unos segundos',
     backToHome: 'Volver al inicio',
     feed: 'Inicio',
-    history: 'Historial', 
+    history: 'Historial',
     profile: 'Perfil',
     darkTheme: 'Tema oscuro',
     apply: 'Aplicar',
     caretakerProfile: 'Perfil de cuidador',
     name: 'Nombre',
     description: 'Descripción',
+    capacity: 'Capacidad',
 
     /* Iniciar sesion */
     forgotPasswordQN: '¿Se te olvidó lo contraseña?',
@@ -35,7 +37,8 @@ const es = {
 
     /* Recuperar */
     recoverPassword: 'Recupera tu contrasña',
-    recoverPasswordMsg: 'Ingresa tu correo electrónico \npara enviarte una nueva contraseña',
+    recoverPasswordMsg:
+        'Ingresa tu correo electrónico \npara enviarte una nueva contraseña',
     sendEmail: 'Enviar correo',
     wantToEnterQN: '¿Deseas ingresar?',
     waitOneMoment: 'Espere un momento...',
@@ -49,18 +52,19 @@ const es = {
 
     /* Errores */
     wrongFormatER: 'Formato incorrecto',
-    eightLettersER:'Debe superar los 8 caracteres',
+    eightLettersER: 'Debe superar los 8 caracteres',
     invalidCredentialsER: 'Credenciales invalidas',
     emailRequiredER: 'Correo requerido',
     passwordRequiredER: 'Contraseña requerida',
     userNotFoundER: 'Usuario no encontrado',
-    inactiveUserER:  'Verifica tu correo, por seguridad',
+    inactiveUserER: 'Verifica tu correo, por seguridad',
     nameER: 'Ingrese su nombre',
     lastnameER: 'Ingrese su apellido',
     passwordMatchER: 'Las contraseñas no coinciden',
     invalidCredentialsER: 'Credenciales inválidas',
     alertErrorTitle: '¡Ohh ohh! Hubo un error',
-    alertErrorMSG: 'No logramos actualizar tu contraseña, parece que tu link ya expiró',
+    alertErrorMSG:
+        'No logramos actualizar tu contraseña, parece que tu link ya expiró',
     spaceRequiredER: 'Espacio requerido',
     imageRequiredER: 'Imagen requerida',
 
@@ -71,14 +75,13 @@ const es = {
 
     /* Perfil */
     myPets: 'Mis mascotas',
-    addNewPetMSG:'Añade una nueva mascota',
+    addNewPetMSG: 'Añade una nueva mascota',
     recientHomes: 'Mis casas de cuido recientes',
     noRecientHomesMSG: 'No tenés ninguna casa cuido reciente',
     beginNow: 'Comenzar ahora',
     myHouses: 'Mis casas',
     location: 'Ubicación',
     contact: 'Contacto',
-    capacity: 'Capacidad',
     pricePerNight: 'Precio por noche',
     walker: 'Caminador',
     availableDays: 'Días disponibles',
@@ -100,7 +103,8 @@ const es = {
     enterPetRace: 'Ingrese la raza de su mascota',
     petDescription: 'Ingrese una pequeña descipcion de su mascota',
     feeding: 'Alimentación',
-    feedingDescription: 'Ingrese una pequeña descipción de la alimentación de su mascota',
+    feedingDescription:
+        'Ingrese una pequeña descipción de la alimentación de su mascota',
     allergies: 'Alergias',
     enterAllergies: 'Ingrese las alergias, si las presenta',
     specialCares: 'Cuidados especiales',
@@ -109,7 +113,10 @@ const es = {
     calm: 'Tranquilo',
     docile: 'Docil',
     friendly: 'Amigable',
-    aggressive: 'Agresivo'
+    aggressive: 'Agresivo',
+    callOwner: 'Llamar al dueño',
+    otherInfo: 'Otra infromación',
+    editProfile: 'Editar perfil'
 };
 
 export default es;
