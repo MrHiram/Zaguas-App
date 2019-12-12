@@ -42,10 +42,10 @@ export default class AddPetScreen extends React.Component {
                     <LinearGradient
                         start={{ x: 0, y: 0.75 }} end={{ x: 0.50, y: 0.75 }}
                         colors={['#045379', '#1782ac']}
-                        style={{ position: 'absolute', height: 500, width: '100%' }}
+                        style={{ position: 'absolute', height: 520, width: '100%' }}
 
                     />
-                    <Image style={[MainStyles.mainLogo, MainStyles.mainLogoWithoutBottom]} resizeMode='contain' source={require('../../assets/logo_white.png')} />
+                   
                 </Animated.View>
                 
                     <AddPetContainer  screenProps={this.props.screenProps}/>

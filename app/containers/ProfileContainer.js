@@ -51,7 +51,7 @@ export default class AddPetContainer extends React.Component {
                 }}
                 onPress={() => this.props.goAddPet()}>
                   <Text style={[{ alignSelf:'center',
-               fontSize: 40, color: '#FFFFFF' }]}>
+               fontSize: 80, color: '#FFFFFF', marginTop:48,fontWeight:'100' }]}>
                 +
               </Text>
 
@@ -69,23 +69,8 @@ export default class AddPetContainer extends React.Component {
             </TouchableOpacity>
           </View>
         }
-        <Text style={[MainStyles.subnames, MainStyles.teal]}>
-          {t('recientHomes')}
-        </Text>
-        {this.props.houses != null ? null :
 
-          <View style={MainStyles.containerProfile}>
-            <Text style={MainStyles.mainText}>
-            {t('recientHomes')}
-          </Text>
-            <TouchableOpacity
-              onPress={() => this.props.goFeed()}>
-              <Text style={[MainStyles.blue, MainStyles.mainText]}>
-              {t('addNewPetMSG')}
-            </Text>
-            </TouchableOpacity>
-          </View>
-        }
+     
 
       </View>
 

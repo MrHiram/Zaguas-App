@@ -40,11 +40,11 @@ export default class AddPetContainer extends React.Component {
     this.init();
   }
 
-  goBack = () =>{
+  goBack = () => {
     console.log('patitos');
     this.props.screenProps.push('profile');
-}
- 
+  }
+
   init = async () => {
     let token = await LocalStorage.retrieveToken();
     this.setState({
@@ -139,10 +139,10 @@ export default class AddPetContainer extends React.Component {
       Fetcher.postToken('addPet', data, this.state.token)
         .then(
           (response) => {
-            if(response.message){
+            if (response.message) {
               this.goBack;
             }
-            
+
 
           }
         )
@@ -172,7 +172,7 @@ export default class AddPetContainer extends React.Component {
         this.setState({ temperamentError: 'Espacio Requerido', phoneSuccess: false });
       else
         this.setState({ temperamentError: '', phoneSuccess: true });
-        
+
     }
   }
 
@@ -192,20 +192,24 @@ export default class AddPetContainer extends React.Component {
 
 
       <View style={[MainStyles.mainCard, MainStyles.profileCard]}>
-        <UploadPicture
-          titlePicture='Añadir foto de mascota'
-          image={this.state.image}
-          error={this.state.imageError}
-          handlerImage={this.handlerImage}
-          colorTheme={colorTheme}
-        />
+        <View style={{ height: '18%', width: '100%', alignContent:'center', marginVertical:20 }}>
+          <UploadPicture
+            titlePicture='Añadir foto de mascota'
+            image={this.state.image}
+            error={this.state.imageError}
+            handlerImage={this.handlerImage}
+            colorTheme={colorTheme}
+          />
+
+        </View>
+
         <InputMT
           title='Nombre'
           handleValue={this.handleValue}
           placeholder='Ingrese el nombre de su mascota'
           handler='name'
           value={this.state.name}
-          error= {this.state.nameError}
+          error={this.state.nameError}
           colorTheme={colorTheme}
         />
         <InputMT
@@ -222,7 +226,7 @@ export default class AddPetContainer extends React.Component {
           data={data1}
           onChangeText={this.onChangeTextPress}
           error={this.state.temperamentError}
-          
+
         ></Combobox>
         <InputMT
           title='Raza'
