@@ -100,6 +100,7 @@ export default class App extends React.Component {
     LocalStorage.save('locale', locale);
   };
 
+
   t = (scope, options) => {
     return i18n.t(scope, { locale: this.state.locale, ...options });
   };
