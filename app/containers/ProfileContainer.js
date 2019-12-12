@@ -11,15 +11,16 @@ export default class AddPetContainer extends React.Component {
     if (this.props.pets != null) {
       petList = this.props.pets.map((data) => {
         let image = { uri: data.image };
-
         return (
-          <PetProfileCard key={data.id} name={data.name}
+          <PetProfileCard
+            key={data.id}
+            name={data.name}
             image={image}
+            onPress={() => this.props.navigation.push('PetProfile', {petId: data.id})}
           />
         )
       });
     }
-
 
     return (
       <View style={[MainStyles.mainCard, MainStyles.profileCard, colorTheme.secondaryBackground]}>
@@ -50,9 +51,11 @@ export default class AddPetContainer extends React.Component {
 
                 }}
                 onPress={() => this.props.goAddPet()}>
-                  <Text style={[{ alignSelf:'center',
-               fontSize: 80, color: '#FFFFFF', marginTop:48,fontWeight:'100' }]}>
-                +
+                <Text style={[{
+                  alignSelf: 'center',
+                  fontSize: 80, color: '#FFFFFF', marginTop: 48, fontWeight: '100'
+                }]}>
+                  +
               </Text>
 
               </TouchableOpacity>
@@ -69,11 +72,7 @@ export default class AddPetContainer extends React.Component {
             </TouchableOpacity>
           </View>
         }
-
-     
-
       </View>
-
     );
   };
 }

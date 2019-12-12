@@ -4,22 +4,24 @@ const en = {
     emailExampleCom: 'email@example.com',
     password: 'Password',
     logIn: 'Log in',
-    processing: 'Your request is being processed,\nthis might take a few seconds',
+    processing:
+        'Your request is being processed,\nthis might take a few seconds',
     backToHome: 'Go back',
     feed: 'Feed',
-    history: 'History', 
+    history: 'History',
     profile: 'Profile',
     darkTheme: 'Dark theme',
     apply: 'Apply',
     caretakerProfile: 'Caretaker profile',
+    name: 'Name',
+    description: 'Description',
 
-    /* Log in screen */
+    /* Login */
     forgotPasswordQN: 'Forgot your password?',
     registerQN: "Don't have an account?",
     signUp: 'Sign up',
 
     /* Register */
-    name: 'Name',
     enterName: 'Enter your name',
     lastname: 'Lastname',
     enterLastname: 'Enter your lastname',
@@ -42,13 +44,13 @@ const en = {
     passwordSentTo: 'Your password has been sent to',
     linkForTimeMsg: 'The link will be valid for \n60 minutes',
 
-    /* Reset password */
+    /* Change password */
     changePassword: 'Change password',
     linkExpired: 'Link expired',
-    
+
     /* Errors */
     wrongFormatER: 'Wrong format',
-    eightLettersER:'Must have 8 letters',
+    eightLettersER: 'Must have 8 letters',
     invalidCredentialsER: 'Invalid credentials',
     emailRequiredER: 'Email required',
     passwordRequiredER: 'Password required',
@@ -59,15 +61,17 @@ const en = {
     passwordMatchER: "Passwords don't match",
     invalidCredentialsER: 'Invalid credentials',
     alertErrorTitle: 'Something went wrong',
-    alertErrorMSG: 'There was an error changing your password, seems that your link expired',
+    alertErrorMSG:
+        'There was an error changing your password, seems that your link expired',
+    spaceRequiredER: 'Space required',
+    imageRequiredER: 'Image required',
 
-    /* Feed */ 
+    /* Home */ 
     newHomes: 'New Places',
     search: 'Search',
     perNight: 'per night',
 
     /* Profile */
-    description: 'Description',
     myPets: 'My pets',
     addNewPetMSG: 'Add a new pet',
     recientHomes: 'My recient places',
@@ -86,7 +90,28 @@ const en = {
     wednesday: 'Wednesday',
     thursday: 'Thursday',
     friday: 'Friday',
-    saturday: 'Saturday'
+    saturday: 'Saturday',
+
+    /* Pet profile */
+    addPetPhoto: 'Add pet photo',
+    enterPetName: "Enter your pet's name",
+    size: 'Size',
+    enterPetSize: "Enter your pet's size",
+    temperament: 'Temperament',
+    race: 'Race',
+    enterPetRace: "Enter your pet's race",
+    petDescription: 'Enter a small description about your pet',
+    feeding: 'Feeding',
+    feedingDescription: "Enter a small description of your pet's food",
+    allergies: 'Allergies',
+    enterAllergies: 'Enter allergies if it presents',
+    specialCares: 'Special cares',
+    enterSpecialCares: 'Enter special needs if it presents',
+    addPet: 'Add pet',
+    calm: 'Calm',
+    docile: 'Docile',
+    friendly: 'Friendly',
+    aggressive: 'Aggressive'
 };
 
 export default en;

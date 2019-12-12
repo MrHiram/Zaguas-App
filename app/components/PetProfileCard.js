@@ -22,7 +22,7 @@ export default function PetProfileCard(props) {
                     backgroundColor:'#000000',
                     borderRadius: 10
                 }}
-                onPress={props.handlerImage}>
+                onPress={() => props.onPress()}>
                 <Image source={props.image == null ? require('../../assets/dogProfile.png') : { uri: props.image.uri }}
                     style={{ width: '100%', height: '100%', resizeMode: 'cover', borderRadius: 10 }} />
 

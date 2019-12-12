@@ -12,14 +12,15 @@ const es = {
     darkTheme: 'Tema oscuro',
     apply: 'Aplicar',
     caretakerProfile: 'Perfil de cuidador',
+    name: 'Nombre',
+    description: 'Descripción',
 
-    /* Página de iniciar sesion */
+    /* Iniciar sesion */
     forgotPasswordQN: '¿Se te olvidó lo contraseña?',
     registerQN: '¿No tienes una cuenta?',
     signUp: 'Crear una',
 
     /* Registro */
-    name: 'Nombre',
     enterName: 'Ingrese su nombre',
     lastname: 'Apellido',
     enterLastname: 'Ingrese su apellido',
@@ -60,6 +61,8 @@ const es = {
     invalidCredentialsER: 'Credenciales inválidas',
     alertErrorTitle: '¡Ohh ohh! Hubo un error',
     alertErrorMSG: 'No logramos actualizar tu contraseña, parece que tu link ya expiró',
+    spaceRequiredER: 'Espacio requerido',
+    imageRequiredER: 'Imagen requerida',
 
     /* Inicio */
     newHomes: 'Hogares Nuevos',
@@ -67,7 +70,6 @@ const es = {
     perNight: 'por noche',
 
     /* Perfil */
-    description: 'Descripción',
     myPets: 'Mis mascotas',
     addNewPetMSG:'Añade una nueva mascota',
     recientHomes: 'Mis casas de cuido recientes',
@@ -86,7 +88,28 @@ const es = {
     wednesday: 'Miércoles',
     thursday: 'Jueves',
     friday: 'Viernes',
-    saturday: 'Sábado'
+    saturday: 'Sábado',
+
+    /* Perfil mascota */
+    addPetPhoto: 'Añadir foto de mascota',
+    enterPetName: 'Ingrese el nombre de su mascota',
+    size: 'Tamaño',
+    enterPetSize: 'Ingrese en tamaño de su mascota',
+    temperament: 'Temperamento',
+    race: 'Raza',
+    enterPetRace: 'Ingrese la raza de su mascota',
+    petDescription: 'Ingrese una pequeña descipcion de su mascota',
+    feeding: 'Alimentación',
+    feedingDescription: 'Ingrese una pequeña descipción de la alimentación de su mascota',
+    allergies: 'Alergias',
+    enterAllergies: 'Ingrese las alergias, si las presenta',
+    specialCares: 'Cuidados especiales',
+    enterSpecialCares: 'Ingrese los cuidados especiales, si los presenta',
+    addPet: 'Añadir mascota',
+    calm: 'Tranquilo',
+    docile: 'Docil',
+    friendly: 'Amigable',
+    aggressive: 'Agresivo'
 };
 
 export default es;

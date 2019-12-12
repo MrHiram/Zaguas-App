@@ -1,60 +1,46 @@
-import React from 'react';
-import { Text, View, Image, ScrollView, Animated } from 'react-native';
-import MainStyles from '../styles/MainStyles';
-import AddPetContainer from '../containers/AddPetContainer'
-import InputMT from '../components/InputMT';
-import { LinearGradient } from 'expo-linear-gradient';
-import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
-
-const HEADER_MIN_HEIGHT = 50;
-const HEADER_MAX_HEIGHT = 200;
+import React from "react";
+import { View } from "react-native";
+import MainStyles from "../styles/MainStyles";
+import AddPetContainer from "../containers/AddPetContainer";
+import { LinearGradient } from "expo-linear-gradient";
+import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
 
 export default class AddPetScreen extends React.Component {
-    scrollYAnimatedValue = new Animated.Value(0);
-
-    
-    handlerScroll = (event) => {
-
-        Animated.event(
-            [{ nativeEvent: { contentOffset: { y: this.scrollYAnimatedValue } } }]
-        )(event)
-    }
     render() {
-
-        const headerHeight = this.scrollYAnimatedValue.interpolate(
-            {
-                inputRange: [0, (HEADER_MAX_HEIGHT - HEADER_MIN_HEIGHT)],
-                outputRange: [HEADER_MAX_HEIGHT, HEADER_MIN_HEIGHT],
-                extrapolate: 'clamp'
-            });
-
+        let { colorTheme } = this.props.screenProps;
         return (
-
-            <View style={{ flex: 1 }}>
-            <KeyboardAwareScrollView
+            <View style={[{ flex: 1 }, colorTheme.mainBackground]}>
+                <KeyboardAwareScrollView
                     enableOnAndroid={true}
                     resetScrollToCoords={{ x: 0, y: 0 }}
                     extraHeight={300}
-                    scrollEventThrottle={16}
-                    onScroll={(event) => this.handlerScroll(event)}>
-                <Animated.View style={[MainStyles.animatedHeaderContainer, {  position: 'absolute' }]}>
-                    <LinearGradient
-                        start={{ x: 0, y: 0.75 }} end={{ x: 0.50, y: 0.75 }}
-                        colors={['#045379', '#1782ac']}
-                        style={{ position: 'absolute', height: 520, width: '100%' }}
-
-                    />
-                   
-                </Animated.View>
-                
-                    <AddPetContainer  
+                >
+                    <View
+                        style={[
+                            MainStyles.animatedHeaderContainer,
+                            { position: "absolute" }
+                        ]}
+                    >
+                        <LinearGradient
+                            start={{ x: 0, y: 0.75 }}
+                            end={{ x: 0.5, y: 0.75 }}
+                            colors={["#045379", "#1782ac"]}
+                            style={{
+                                position: "absolute",
+                                height: 520,
+                                width: "100%"
+                            }}
+                        />
+                    </View>
+                    <AddPetContainer
                         goBack={() => {
                             this.props.navigation.state.params.onGoBack();
-                            this.props.navigation.goBack()
+                            this.props.navigation.goBack();
                         }}
-                        screenProps={this.props.screenProps}/>
+                        screenProps={this.props.screenProps}
+                    />
                 </KeyboardAwareScrollView>
             </View>
         );
-    };
+    }
 }
