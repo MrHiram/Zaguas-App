@@ -50,7 +50,7 @@ export default StyleSheet.create({
     /*imagenes de los cards*/
     userImage: {
         borderRadius: 10,
-        width: 330,
+        width: '100%',
         height: 200
     },
     priceText: {
@@ -64,7 +64,6 @@ export default StyleSheet.create({
         borderRadius: 10,
         marginVertical: 20,
         alignSelf: 'center',
-        overflow: 'hidden'
     },
     mainBackgroundImage: {
         height: 500,

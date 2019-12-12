@@ -111,7 +111,7 @@ const es = {
     /*History*/
     recentHomes: 'Casa recientes',
     price: 'por noche',
-    owner: 'Dueño'
+    owner: 'Dueño',
 
     /* Perfil mascota */
     addPetPhoto: 'Añadir foto de mascota',

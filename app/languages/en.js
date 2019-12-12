@@ -111,7 +111,7 @@ const en = {
     /*History*/
     recentHomes: 'Recent Homes',
     price:'a night',
-    owner:'owner'
+    owner:'owner',
 
     /* Pet profile */
     addPetPhoto: 'Add pet photo',
