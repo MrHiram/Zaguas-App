@@ -1,13 +1,31 @@
 import React from 'react';
 import Icon from 'react-native-vector-icons/Ionicons';
-import { createAppContainer, createSwitchNavigator } from 'react-navigation';
+import { createAppContainer } from 'react-navigation';
+import { createStackNavigator } from 'react-navigation-stack';
 import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import ProfileScreen from '../screens/ProfileScreen';
 import FeedScreen from '../screens/FeedScreen';
 import HistoryScreen from '../screens/HistoryScreen';
 import CaretakerScreen from '../screens/CaretakerScreen';
+import AddPetScreen from '../screens/AddPetScreen';
 
+
+const ProfileStack = createStackNavigator(
+    {
+        Profile: {
+            screen: ProfileScreen,
+        },
+        AddPet: {
+            screen: AddPetScreen,
+        },
+    },{
+        initialRouteName: 'Profile',
+        defaultNavigationOptions: {
+          header: null
+        },
+    }
+);
 
 const TABS = {
     History: {
@@ -17,8 +35,8 @@ const TABS = {
             tabBarIcon: ({ tintColor }) => (
                 <Icon name="md-timer" color=
                     {tintColor} size={24} />
-            )
-        }
+            ),
+        },
     },
     Feed: {
         screen: FeedScreen,
@@ -31,7 +49,7 @@ const TABS = {
         }
     },
     Profile: {
-        screen: ProfileScreen,
+        screen: ProfileStack,
         navigationOptions: {
             tabBarLabel: 'Profile',
             tabBarIcon: ({ tintColor }) => (
@@ -44,7 +62,7 @@ const TABS = {
 
 export default class DynamicTabNavigatorScreen extends React.Component {
     exit = () => this.props.navigation.navigate({ routeName: 'Auth' });
-    push = (screen) => this.props.navigation.navigate({ routeName: screen });
+    push = (screen, props) => this.props.navigation.navigate(screen, { props });
 
     _tabNavigator(t, darkThemeOn) {
         let tabs = {};
@@ -53,10 +71,8 @@ export default class DynamicTabNavigatorScreen extends React.Component {
         History.navigationOptions.tabBarLabel = t('history');
         Feed.navigationOptions.tabBarLabel = t('feed');
         Profile.navigationOptions.tabBarLabel = t('profile');
-        if(this.props.screenProps.caretakerProfile == true){
+        if (this.props.screenProps.caretakerProfile == true) {
             Profile.screen = CaretakerScreen;
-        }else{
-            Profile.screen = ProfileScreen;
         }
         return createBottomTabNavigator(tabs, {
             initialRouteName: 'Feed',

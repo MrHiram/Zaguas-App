@@ -1,18 +1,13 @@
 import React from 'react';
-import Icon from 'react-native-vector-icons/Ionicons';
 import { Linking } from 'expo';
 import { createAppContainer, createSwitchNavigator } from 'react-navigation';
 import { createStackNavigator } from 'react-navigation-stack';
-import { createBottomTabNavigator } from 'react-navigation-tabs';
 
 import AuthCheckScreen from './app/screens/AuthCheckScreen';
 import AuthScreen from './app/screens/AuthScreen';
 import SetupScreen from './app/screens/SetupScreen';
 import ValidateEmailScreen from './app/screens/ValidateEmailScreen';
 import ResetPasswordScreen from './app/screens/ResetPasswordScreen';
-import AddPetScreen from './app/screens/AddPetScreen';
-import CaretakerScreen from './app/screens/CaretakerScreen';
-
 import * as Localization from 'expo-localization';
 import i18n from 'i18n-js';
 import en from './app/languages/en';
@@ -20,10 +15,8 @@ import es from './app/languages/es';
 import LocalStorage from './app/services/LocalStorage';
 
 import DynamicTabNavigatorScreen from './app/screens/DynamicTabNavigatorScreen';
-import MainStyles from './app/styles/MainStyles';
 import DarkTheme from './app/styles/DarkTheme';
 import LightTheme from './app/styles/LightTheme';
-import ProfileScreen from './app/screens/ProfileScreen';
 
 i18n.fallbacks = true;
 i18n.translations = { es, en };
@@ -68,14 +61,6 @@ const AppSwitch = createSwitchNavigator(
       screen: SetupScreen,
       path: 'setup'
     },
-    AddPet:{
-      screen: AddPetScreen,
-      path: 'AddPet'
-    },
-    Profile:{
-      screen: ProfileScreen,
-      path: 'profile'
-    }
   }
 );
 

@@ -39,11 +39,6 @@ export default class AddPetContainer extends React.Component {
   componentDidMount() {
     this.init();
   }
-
-  goBack = () =>{
-    console.log('patitos');
-    this.props.screenProps.push('profile');
-}
  
   init = async () => {
     let token = await LocalStorage.retrieveToken();
@@ -66,7 +61,6 @@ export default class AddPetContainer extends React.Component {
       }
       let result = await ImagePicker.launchImageLibraryAsync(options);
       //let result = await ImagePicker.launchCameraAsync(options);
-      console.log(result);
 
       if (!result.cancelled) {
         this.setState({ image: result });
@@ -136,18 +130,16 @@ export default class AddPetContainer extends React.Component {
       data.append("temperament", this.state.temperament)
       data.append("image", { uri: this.state.image.uri, name: 'uploadProfile.jpg', type: 'image/jpeg' })
       this.setState({ waiting: true });
-      Fetcher.postToken('addPet', data, this.state.token)
+      await Fetcher.postToken('addPet', data, this.state.token)
         .then(
           (response) => {
-            if(response.message){
-              this.goBack;
+            if(response.data.message == "Mascota creada correctamente"){
+              this.props.goBack();
             }
-            
-
-          }
+          } 
         )
         .catch(
-          (error) => { console.log("error") }
+          (error) => { console.log(["Error Add Pet Container", error]) }
         );
     } else {
       //cambiar los success por los que verdaderos

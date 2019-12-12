@@ -6,12 +6,12 @@ import PetProfileCard from '../components/PetProfileCard';
 export default class AddPetContainer extends React.Component {
 
   render() {
-    let { t, colorTheme} = this.props;
+    let { t, colorTheme } = this.props.screenProps;
     let petList = null;
-    if(this.props.pets !=null){
-       petList = this.props.pets.map((data) => {
+    if (this.props.pets != null) {
+      petList = this.props.pets.map((data) => {
         let image = { uri: data.image };
-        
+
         return (
           <PetProfileCard key={data.id} name={data.name}
             image={image}
@@ -19,15 +19,15 @@ export default class AddPetContainer extends React.Component {
         )
       });
     }
-    
+
 
     return (
-      <View style={[MainStyles.mainCard, MainStyles.profileCard,colorTheme.secondaryBackground]}>
+      <View style={[MainStyles.mainCard, MainStyles.profileCard, colorTheme.secondaryBackground]}>
         <Text style={[MainStyles.subnames, MainStyles.blue]}>{t('description')}</Text>
         <View style={MainStyles.containerProfile}>
           <Text style={MainStyles.mainText}>{this.props.description}</Text>
         </View>
-    <Text style={[MainStyles.subnames, MainStyles.green]}>{t('myPets')}</Text>
+        <Text style={[MainStyles.subnames, MainStyles.green]}>{t('myPets')}</Text>
         {this.props.pets != null ?
           <View style={{
             width: '100%', alignItems: 'flex-start', flexDirection: 'row', flexWrap: 'wrap',
@@ -40,32 +40,34 @@ export default class AddPetContainer extends React.Component {
                 width: '45%', height: 200, marginRight: 10,
                 marginTop: 10,
                 opacity: 0.9,
-                  backgroundColor: '#045379',
-                  borderRadius: 10
+                backgroundColor: '#045379',
+                borderRadius: 10
               }}>
               <TouchableOpacity
                 style={{
-                  width:'100%',
-                  height:'100%',
-                  
+                  width: '100%',
+                  height: '100%',
+
                 }}
                 onPress={() => this.props.goAddPet()}>
-                  <Text style={[{ alignSelf:'center',
-               fontSize: 40, color: '#FFFFFF' }]}>
-                +
+                <Text style={[{
+                  alignSelf: 'center',
+                  fontSize: 40, color: '#FFFFFF'
+                }]}>
+                  +
               </Text>
 
               </TouchableOpacity>
-              
-              </View>
+
             </View>
+          </View>
           :
           <View style={{ flexDirection: "row" }}>
             <TouchableOpacity style={MainStyles.containerProfile}
               onPress={() => this.props.goAddPet()}>
               <Text>
-              {t('addNewPetMSG')}
-          </Text>
+                {t('addNewPetMSG')}
+              </Text>
             </TouchableOpacity>
           </View>
         }
@@ -76,13 +78,13 @@ export default class AddPetContainer extends React.Component {
 
           <View style={MainStyles.containerProfile}>
             <Text style={MainStyles.mainText}>
-            {t('recientHomes')}
-          </Text>
-            <TouchableOpacity
-              onPress={() => this.props.goFeed()}>
-              <Text style={[MainStyles.blue, MainStyles.mainText]}>
-              {t('addNewPetMSG')}
+              {t('recientHomes')}
             </Text>
+            <TouchableOpacity
+              onPress={() => this.props.goAddPet()}>
+              <Text style={[MainStyles.blue, MainStyles.mainText]}>
+                {t('addNewPetMSG')}
+              </Text>
             </TouchableOpacity>
           </View>
         }

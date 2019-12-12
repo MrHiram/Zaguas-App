@@ -22,21 +22,13 @@ export default class ProfileScreen extends React.Component {
     caretakerProfileSwitch: false,
     language: 'en',
     user:null
-    
   }
-  goAddPet = () => {
-    console.log('patitos');
-    this.props.screenProps.push('AddPet');
-  }
-  handleSettings = () => {
-    console.log('sadf');
-    this.props.navigation.push('SideNav');
+  
+  componentDidMount() {
+    this.requestPets();
   }
 
-  goFeed = () =>{
-    this.props.navigation.navigate('Feed')
-  }
-  async componentDidMount() {
+  requestPets = async () =>{
     let idClient =null;
     let token = await LocalStorage.retrieveToken();
     await Fetcher.getClientID(token).then((response) => {
@@ -44,26 +36,15 @@ export default class ProfileScreen extends React.Component {
     });
     await Fetcher.getToken("getProfileClient/" + idClient, token)
       .then((response) => {
-        console.log(response);
         this.setState({
           profileInfo: response.data,
           image: {uri:response.data.profile.image},
           loading:false,
         });
-        
-
-
       })
       .catch((error) => {
         console.log(error);
       });
-  }
-
-  init = async () => {
-    let token = await LocalStorage.retrieveToken();
-    this.setState({
-      token: token
-    });
   }
 
   toggleOpen = (locale) => {
@@ -193,12 +174,12 @@ export default class ProfileScreen extends React.Component {
               </View>
               <ProfileContainer 
                 description={this.state.profileInfo.profile.about}
-                goAddPet={this.goAddPet}
-                goFeed={this.goFeed} 
+                screenProps={this.props.screenProps}
+                goAddPet={() => this.props.navigation.navigate('AddPet', {
+                  onGoBack: () => this.requestPets(),
+                })} 
                 imagePet={this.state.image}
                 pets={this.state.profileInfo.pets}
-                t={t}
-                colorTheme={colorTheme}
                 />
             </ScrollView>
             </MenuDrawer>

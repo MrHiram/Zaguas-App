@@ -30,7 +30,6 @@ export default class AddPetScreen extends React.Component {
 
         return (
 
-
             <View style={{ flex: 1 }}>
             <KeyboardAwareScrollView
                     enableOnAndroid={true}
@@ -48,14 +47,14 @@ export default class AddPetScreen extends React.Component {
                     <Image style={[MainStyles.mainLogo, MainStyles.mainLogoWithoutBottom]} resizeMode='contain' source={require('../../assets/logo_white.png')} />
                 </Animated.View>
                 
-                    <AddPetContainer  screenProps={this.props.screenProps}/>
+                    <AddPetContainer  
+                        goBack={() => {
+                            this.props.navigation.state.params.onGoBack();
+                            this.props.navigation.goBack()
+                        }}
+                        screenProps={this.props.screenProps}/>
                 </KeyboardAwareScrollView>
-
-
             </View>
-
-
-
         );
     };
 }
