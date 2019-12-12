@@ -7,11 +7,12 @@ const es = {
     processing: 'Tu petición está siendo procesada,\nesto puede tardar unos segundos',
     backToHome: 'Volver al inicio',
     feed: 'Inicio',
-    history: 'Historial', 
+    history: 'Historial',
     profile: 'Perfil',
     darkTheme: 'Tema oscuro',
     apply: 'Aplicar',
     caretakerProfile: 'Perfil de cuidador',
+    required: 'Espacio Requerido',
 
     /* Página de iniciar sesion */
     forgotPasswordQN: '¿Se te olvidó lo contraseña?',
@@ -48,12 +49,12 @@ const es = {
 
     /* Errores */
     wrongFormatER: 'Formato incorrecto',
-    eightLettersER:'Debe superar los 8 caracteres',
+    eightLettersER: 'Debe superar los 8 caracteres',
     invalidCredentialsER: 'Credenciales invalidas',
     emailRequiredER: 'Correo requerido',
     passwordRequiredER: 'Contraseña requerida',
     userNotFoundER: 'Usuario no encontrado',
-    inactiveUserER:  'Verifica tu correo, por seguridad',
+    inactiveUserER: 'Verifica tu correo, por seguridad',
     nameER: 'Ingrese su nombre',
     lastnameER: 'Ingrese su apellido',
     passwordMatchER: 'Las contraseñas no coinciden',
@@ -68,8 +69,9 @@ const es = {
 
     /* Perfil */
     description: 'Descripción',
+    phDescription: 'Añade la descripción de tu perfil',
     myPets: 'Mis mascotas',
-    addNewPetMSG:'Añade una nueva mascota',
+    addNewPetMSG: 'Añade una nueva mascota',
     recientHomes: 'Mis casas de cuido recientes',
     noRecientHomesMSG: 'No tenés ninguna casa cuido reciente',
     beginNow: 'Comenzar ahora',
@@ -86,7 +88,24 @@ const es = {
     wednesday: 'Miércoles',
     thursday: 'Jueves',
     friday: 'Viernes',
-    saturday: 'Sábado'
+    saturday: 'Sábado',
+    profilePhoto: 'Añade foto de perfil',
+    adress: 'Dirección',
+    phAdress: 'Ingrese su dirección',
+    phone: 'Teléfono',
+    phPhone: 'Agrega tu numero de teléfono',
+    createProfile: 'Crear Perfil',
+
+    /*Setup profile*/
+    type: 'Elegí un tipo de perfil',
+    client: 'Cliente',
+    caretaker:'Cuidador',
+    clientDescription:'Registra tus mascotas para encontrar donde dejarlas',
+    caretakerDescription:'Registra tu casa, cuida mascotas y consigue clientes',
+    /*History*/
+    recentHomes: 'Casa recientes',
+    price: 'por noche',
+    owner: 'Dueño'
 };
 
 export default es;

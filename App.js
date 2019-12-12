@@ -119,7 +119,7 @@ export default class App extends React.Component {
 
   render() {
     const prefix = Linking.makeUrl('/');
-    return (
+    return ( 
       <AppContainer
         uriPrefix={prefix}
         screenProps={{
@@ -131,6 +131,6 @@ export default class App extends React.Component {
           setDarkThemeOn: this.setDarkThemeOn,
           caretakerProfile: this.state.caretakerProfile,
           setCaretakerProfile: this.setCaretakerProfile
-        }} />);
+        }} /> );
   }
 }

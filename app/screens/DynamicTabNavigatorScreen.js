@@ -19,6 +19,9 @@ const ProfileStack = createStackNavigator(
         AddPet: {
             screen: AddPetScreen,
         },
+        History:{
+            screen: HistoryScreen,
+        },
     },{
         initialRouteName: 'Profile',
         defaultNavigationOptions: {

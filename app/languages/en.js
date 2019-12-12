@@ -12,6 +12,7 @@ const en = {
     darkTheme: 'Dark theme',
     apply: 'Apply',
     caretakerProfile: 'Caretaker profile',
+    required: 'This space is required',
 
     /* Log in screen */
     forgotPasswordQN: 'Forgot your password?',
@@ -68,6 +69,7 @@ const en = {
 
     /* Profile */
     description: 'Description',
+    phDescription:'Add your profile description',
     myPets: 'My pets',
     addNewPetMSG: 'Add a new pet',
     recientHomes: 'My recient places',
@@ -86,7 +88,25 @@ const en = {
     wednesday: 'Wednesday',
     thursday: 'Thursday',
     friday: 'Friday',
-    saturday: 'Saturday'
+    saturday: 'Saturday',
+    profilePhoto: 'Add profile photo',
+    adress:'Adress',
+    phAdress:'Add your adress',
+    phone:'Phone Number',
+    phPhone:'Add your phone number',
+    createProfile:'Create Profile',
+
+    /*Setup profile*/
+    type:'Choose a profile type',
+    client:'Client',
+    caretaker:'Caretaker',
+    clientDescription:'Find available and awesome homes to leave your pets.',
+    caretakerDescription:'Post your home, take care of pets and get customers',
+
+    /*History*/
+    recentHomes: 'Recent Homes',
+    price:'a night',
+    owner:'owner'
 };
 
 export default en;
