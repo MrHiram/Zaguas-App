@@ -1,5 +1,5 @@
 import React from 'react';
-import { View, Text, ActivityIndicator, Switch, Picker} from 'react-native';
+import { View, Text, ActivityIndicator, Switch, Picker } from 'react-native';
 import MenuDrawer from 'react-native-side-drawer';
 import { ScrollView } from 'react-native-gesture-handler';
 import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
@@ -16,12 +16,13 @@ export default class ProfileScreen extends React.Component {
   state = {
     profileInfo: [],
     loading: true,
-    image:null,
+    image: null,
     open: false,
     darkThemeSwitch: false,
     caretakerProfileSwitch: false,
     language: 'en',
-    user:null
+    user: null
+
   }
   
   componentDidMount() {
@@ -38,8 +39,8 @@ export default class ProfileScreen extends React.Component {
       .then((response) => {
         this.setState({
           profileInfo: response.data,
-          image: {uri:response.data.profile.image},
-          loading:false,
+          image: { uri: response.data.profile.image },
+          loading: false,
         });
       })
       .catch((error) => {
@@ -64,7 +65,7 @@ export default class ProfileScreen extends React.Component {
     exit();
   }
 
-  toggleCaretaker = () => this.setState({caretakerProfileSwitch: !this.state.caretakerProfileSwitch});
+  toggleCaretaker = () => this.setState({ caretakerProfileSwitch: !this.state.caretakerProfileSwitch });
 
   toggleDarkTheme = () =>
     this.setState({
@@ -78,7 +79,7 @@ export default class ProfileScreen extends React.Component {
     this.setState({ open: false });
   }
 
-  drawerContent = (locale, exit, t, colorTheme, darkThemeOn ) => {
+  drawerContent = (locale, exit, t, colorTheme, darkThemeOn) => {
     return (
       <View style={[MainStyles.animatedBox, colorTheme.mainBackground]}>
         <IconButton
@@ -134,42 +135,43 @@ export default class ProfileScreen extends React.Component {
     return (
       <>
         {this.state.loading ? <ActivityIndicator size="large" color="#007EA9"
-        style={MainStyles.loading} /> :
-        <View style={[MainStyles.mainContainer, colorTheme.secondaryBackground]}>
-        <MenuDrawer
-          open={this.state.open}
-          drawerContent={this.drawerContent(locale, exit, t, colorTheme, darkThemeOn )}
-          drawerPercentage={100}
-          animationTime={250}
-          overlay={true}
-          opacity={1}
-        >
-        
-        <ScrollView>
+          style={MainStyles.loading} /> :
+          <View style={[MainStyles.mainContainer, colorTheme.secondaryBackground]}>
+            <MenuDrawer
+              open={this.state.open}
+              drawerContent={this.drawerContent(locale, exit, t, colorTheme, darkThemeOn)}
+              drawerPercentage={100}
+              animationTime={250}
+              overlay={true}
+              opacity={1}
+            >
+              <ScrollView>
 
-              <View style={[MainStyles.animatedHeaderContainer, { height: 300 }]}>
-                <LinearGradient
-                  start={{ x: 0, y: 0.75 }} end={{ x: 0.50, y: 0.75 }}
-                  colors={['#045379', '#1782ac']}
-                  style={{ position: 'absolute', height: 500, width: '100%' }}
-                />
-                <IconButton
-                onPress={() => this.toggleOpen()}
-                style={MainStyles.topRightSetings}
-                name={"md-settings"}
-                color={darkThemeOn ? '#222' : '#fff'}
-                size={28} />
-                <View style={{ height: 500, paddingTop: 130 }}>
-                  <UploadPicture
-                    image={this.state.image}
-                    error={this.state.imageError}
-                    handlerImage={this.handlerImage}
-                    colorTheme={colorTheme}
+                <View style={[MainStyles.animatedHeaderContainer, { height: 300 }]}>
+                  <LinearGradient
+                    start={{ x: 0, y: 0.75 }} end={{ x: 0.50, y: 0.75 }}
+                    colors={['#045379', '#1782ac']}
+                    style={{ position: 'absolute', height: 500, width: '100%'}}
                   />
-                  <Text style={[MainStyles.mainName, colorTheme.btnTextColor]}>
-                    {this.state.profileInfo.user.name}
-                  </Text>
-                  
+                  <IconButton
+                    onPress={() => this.toggleOpen()}
+                    style={MainStyles.topRightSetings}
+                    name={"md-settings"}
+                    color={darkThemeOn ? '#222' : '#fff'}
+                    size={28} />
+                  <View style={{flexDirection:'column', marginTop:30}}>
+                    <View style={{width:180, height:180}}>
+                      <UploadPicture
+                        image={this.state.image}
+                        error={this.state.imageError}
+                        handlerImage={this.handlerImage}
+                        colorTheme={colorTheme}
+                      />
+                    </View>
+                    <Text style={[MainStyles.mainName, colorTheme.btnTextColor]}>
+                      {this.state.profileInfo.user.name}
+                    </Text>
+                  </View>
                 </View>
               </View>
               <ProfileContainer 
@@ -181,11 +183,11 @@ export default class ProfileScreen extends React.Component {
                 imagePet={this.state.image}
                 pets={this.state.profileInfo.pets}
                 />
-            </ScrollView>
+              </ScrollView>
             </MenuDrawer>
           </View>
-          
-          }
+
+        }
 
       </>
 

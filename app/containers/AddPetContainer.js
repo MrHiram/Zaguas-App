@@ -164,7 +164,7 @@ export default class AddPetContainer extends React.Component {
         this.setState({ temperamentError: 'Espacio Requerido', phoneSuccess: false });
       else
         this.setState({ temperamentError: '', phoneSuccess: true });
-        
+
     }
   }
 
@@ -184,20 +184,24 @@ export default class AddPetContainer extends React.Component {
 
 
       <View style={[MainStyles.mainCard, MainStyles.profileCard]}>
-        <UploadPicture
-          titlePicture='Añadir foto de mascota'
-          image={this.state.image}
-          error={this.state.imageError}
-          handlerImage={this.handlerImage}
-          colorTheme={colorTheme}
-        />
+        <View style={{ height: '18%', width: '100%', alignContent:'center', marginVertical:20 }}>
+          <UploadPicture
+            titlePicture='Añadir foto de mascota'
+            image={this.state.image}
+            error={this.state.imageError}
+            handlerImage={this.handlerImage}
+            colorTheme={colorTheme}
+          />
+
+        </View>
+
         <InputMT
           title='Nombre'
           handleValue={this.handleValue}
           placeholder='Ingrese el nombre de su mascota'
           handler='name'
           value={this.state.name}
-          error= {this.state.nameError}
+          error={this.state.nameError}
           colorTheme={colorTheme}
         />
         <InputMT
@@ -214,7 +218,7 @@ export default class AddPetContainer extends React.Component {
           data={data1}
           onChangeText={this.onChangeTextPress}
           error={this.state.temperamentError}
-          
+
         ></Combobox>
         <InputMT
           title='Raza'
