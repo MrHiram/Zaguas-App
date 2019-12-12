@@ -8,6 +8,8 @@ import AuthScreen from './app/screens/AuthScreen';
 import SetupScreen from './app/screens/SetupScreen';
 import ValidateEmailScreen from './app/screens/ValidateEmailScreen';
 import ResetPasswordScreen from './app/screens/ResetPasswordScreen';
+import ViewHomeScreen from './app/screens/ViewHomeScreen';
+
 import * as Localization from 'expo-localization';
 import i18n from 'i18n-js';
 import en from './app/languages/en';
@@ -137,6 +139,6 @@ export default class App extends React.Component {
         setDarkThemeOn: this.setDarkThemeOn,
         caretakerProfile: this.state.caretakerProfile,
         setCaretakerProfile: this.setCaretakerProfile
-      }} />);
+      }} />*/);
   }
 }
