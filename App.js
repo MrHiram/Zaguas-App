@@ -88,8 +88,8 @@ export default class App extends React.Component {
     if (localeStored != null) {
       this.setState({
         locale: localeStored,
-        colorTheme: darkThemeOn == 'true' ? DarkTheme : LightTheme, 
-        darkThemeOn: darkThemeOn == 'true' ? true : false, 
+        colorTheme: darkThemeOn == 'true' ? DarkTheme : LightTheme,
+        darkThemeOn: darkThemeOn == 'true' ? true : false,
         caretakerProfile: caretakerProfile == 'true' ? true : false
       });
     }
@@ -105,7 +105,7 @@ export default class App extends React.Component {
   };
 
   setCaretakerProfile = caretakerProfileOn => {
-    this.setState({caretakerProfile: caretakerProfileOn});
+    this.setState({ caretakerProfile: caretakerProfileOn });
     LocalStorage.save('caretakerScreen', caretakerProfileOn ? 'true' : 'false');
   }
 
@@ -120,25 +120,17 @@ export default class App extends React.Component {
   render() {
     const prefix = Linking.makeUrl('/');
     return (
-      <ViewHomeScreen
-      uriPrefix={prefix} 
-      screenProps={{  
-        t: this.t,
-        locale: this.state.locale,
-        setLocale: this.setLocale,
-        colorTheme: this.state.colorTheme,
-      }}/> /*
-    <AppContainer
-      uriPrefix={prefix}
-      screenProps={{
-        t: this.t,
-        locale: this.state.locale,
-        setLocale: this.setLocale,
-        colorTheme: this.state.colorTheme,
-        darkThemeOn: this.state.darkThemeOn,
-        setDarkThemeOn: this.setDarkThemeOn,
-        caretakerProfile: this.state.caretakerProfile,
-        setCaretakerProfile: this.setCaretakerProfile
-      }} />*/);
+      <AppContainer
+        uriPrefix={prefix}
+        screenProps={{
+          t: this.t,
+          locale: this.state.locale,
+          setLocale: this.setLocale,
+          colorTheme: this.state.colorTheme,
+          darkThemeOn: this.state.darkThemeOn,
+          setDarkThemeOn: this.setDarkThemeOn,
+          caretakerProfile: this.state.caretakerProfile,
+          setCaretakerProfile: this.setCaretakerProfile
+        }} />);
   }
 }
