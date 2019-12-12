@@ -24,13 +24,13 @@ export default class ProfileScreen extends React.Component {
     user: null
 
   }
-  
+
   componentDidMount() {
     this.requestPets();
   }
 
-  requestPets = async () =>{
-    let idClient =null;
+  requestPets = async () => {
+    let idClient = null;
     let token = await LocalStorage.retrieveToken();
     await Fetcher.getClientID(token).then((response) => {
       idClient = response.data.id;
@@ -146,12 +146,11 @@ export default class ProfileScreen extends React.Component {
               opacity={1}
             >
               <ScrollView>
-
                 <View style={[MainStyles.animatedHeaderContainer, { height: 300 }]}>
                   <LinearGradient
                     start={{ x: 0, y: 0.75 }} end={{ x: 0.50, y: 0.75 }}
                     colors={['#045379', '#1782ac']}
-                    style={{ position: 'absolute', height: 500, width: '100%'}}
+                    style={{ position: 'absolute', height: 500, width: '100%' }}
                   />
                   <IconButton
                     onPress={() => this.toggleOpen()}
@@ -159,8 +158,8 @@ export default class ProfileScreen extends React.Component {
                     name={"md-settings"}
                     color={darkThemeOn ? '#222' : '#fff'}
                     size={28} />
-                  <View style={{flexDirection:'column', marginTop:30}}>
-                    <View style={{width:180, height:180}}>
+                  <View style={{ flexDirection: 'column', marginTop: 30 }}>
+                    <View style={{ width: 180, height: 180 }}>
                       <UploadPicture
                         image={this.state.image}
                         error={this.state.imageError}
@@ -173,15 +172,14 @@ export default class ProfileScreen extends React.Component {
                     </Text>
                   </View>
                 </View>
-              </View>
-              <ProfileContainer 
-                description={this.state.profileInfo.profile.about}
-                screenProps={this.props.screenProps}
-                goAddPet={() => this.props.navigation.navigate('AddPet', {
-                  onGoBack: () => this.requestPets(),
-                })} 
-                imagePet={this.state.image}
-                pets={this.state.profileInfo.pets}
+                <ProfileContainer
+                  description={this.state.profileInfo.profile.about}
+                  screenProps={this.props.screenProps}
+                  goAddPet={() => this.props.navigation.navigate('AddPet', {
+                    onGoBack: () => this.requestPets(),
+                  })}
+                  imagePet={this.state.image}
+                  pets={this.state.profileInfo.pets}
                 />
               </ScrollView>
             </MenuDrawer>
