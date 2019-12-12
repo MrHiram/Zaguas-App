@@ -325,6 +325,12 @@ export default StyleSheet.create({
         width: '100%',
         borderRadius: 5
     },
+    buttonHome:{
+        backgroundColor:'#F4362D',
+        color:'#fff',
+        borderRadius:5,
+        marginBottom:30,
+    },
     MainButtonText: {
         textAlign: 'center',
         color: '#fff',

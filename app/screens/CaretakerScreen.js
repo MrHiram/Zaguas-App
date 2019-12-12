@@ -4,6 +4,7 @@ import { LinearGradient } from 'expo-linear-gradient';
 import { ScrollView } from 'react-native-gesture-handler';
 import MenuDrawer from 'react-native-side-drawer'
 
+import EditHomeCaretakerContainer from '../containers/EditHomeCaretakerContainer';
 import CaretakerContainer from '../containers/CaretakerContainer';
 import IconButton from '../components/IconButton';
 import MainButton from '../components/MainButton';

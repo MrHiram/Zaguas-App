@@ -117,7 +117,16 @@ export default class App extends React.Component {
 
   render() {
     const prefix = Linking.makeUrl('/');
-    return (<AppContainer
+    return (
+      <ViewHomeScreen
+      uriPrefix={prefix} 
+      screenProps={{  
+        t: this.t,
+        locale: this.state.locale,
+        setLocale: this.setLocale,
+        colorTheme: this.state.colorTheme,
+      }}/> /*
+    <AppContainer
       uriPrefix={prefix}
       screenProps={{
         t: this.t,
