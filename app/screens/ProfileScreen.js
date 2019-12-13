@@ -264,6 +264,7 @@ export default class ProfileScreen extends React.Component {
                                     imagePet={this.state.image}
                                     pets={this.state.profileInfo.pets}
                                     navigation={this.props.navigation}
+                                    requestPets={() => this.requestPets()}
                                 />
                             </ScrollView>
                         </MenuDrawer>

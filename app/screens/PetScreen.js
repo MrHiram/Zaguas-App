@@ -75,7 +75,12 @@ export default class PetScreen extends Component {
         }
 
         Linking.openURL(phoneNumber);
-    };
+    }
+
+    goBack = () =>{
+        this.props.navigation.state.params.onGoBack();
+        this.props.navigation.goBack();
+    }
 
     render() {
         let { t, locale, colorTheme, darkThemeOn } = this.props.screenProps;
@@ -95,6 +100,7 @@ export default class PetScreen extends Component {
                     />
                 ) : this.state.editing ? (
                     <EditPetScreen
+                        goBack={() => this.goBack()}
                         profileInfo={this.state.profileInfo}
                         screenProps={this.props.screenProps}
                     />

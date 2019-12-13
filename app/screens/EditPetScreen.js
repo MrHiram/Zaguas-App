@@ -48,6 +48,7 @@ export default class EditPetScreen extends React.Component {
                         />
                     </View>
                     <EditPetContainer
+                        goBack={() => this.props.goBack()}
                         screenProps={this.props.screenProps}
                         profileInfo={this.props.profileInfo}
                     />
