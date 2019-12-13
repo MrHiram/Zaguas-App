@@ -1,17 +1,18 @@
 import React from 'react';
-import { Text, View, ScrollView, Platform, TextInput, ActivityIndicator } from 'react-native';
+import { Text, View, Platform, TextInput, ActivityIndicator } from 'react-native';
 import Icon from 'react-native-vector-icons/Ionicons';
 import MainStyles from '../styles/MainStyles';
 import HistoryCardContainer from '../containers/HistoryCardContainer';
 import LocalStorage from '../services/LocalStorage';
 import Fetcher from '../services/Fetcher';
 import HistoryButton from '../components/HistoryButton'
-
+import { ScrollView } from "react-native-gesture-handler";
 export default class HistoryScreen extends React.Component{
 
     state={
         cards: [],
         loading:false,
+        token:''
     }
     componentDidMount(){
         this.getData();
@@ -26,12 +27,14 @@ export default class HistoryScreen extends React.Component{
                     this.setState({
                         cards: response.data.reservations,
                         loading: false
-                    });
+                    }),(console.log(this.state.cards));
+                    
                     
                 })
                 .catch(error => {
                     console.log(error);
                 });
+               
     };
 
 
@@ -42,15 +45,16 @@ export default class HistoryScreen extends React.Component{
         let historyCards =null;
         if(this.state.cards !=null){
             historyCards = this.state.cards.map(data => {
-                console.log(data);
+               
                 return (
+                    
                     <HistoryCardContainer screenProps={this.props.screenProps}
                     key={data.id}
-                    ownerName={data.care_taker.user.name}
-                    ownerImage={data.care_taker.image}
-                    ownerLocation={data.care_taker.address}
-                    image={data.home.image}
-                    price_per_night={data.home.price_per_night}
+                    ownerName={data.careTakerName}
+                    ownerImage={data.careTakerImage}
+                    ownerLocation={data.ownerLocation}
+                    image={data.homeImage}
+                    price_per_night={data.price_per_night}
                     status={data.status}
                     start_date={data.start_date}
                     end_date={data.end_date}/>
@@ -88,10 +92,15 @@ export default class HistoryScreen extends React.Component{
                         >{t('recentHomes')}</Text>
                     </View>
                 </View>
-                <View style={colorTheme.secondaryBackground}>
+                <View style={{flex: 1}}>
                     <ScrollView
-                        contentContainerStyle={{ alignItems: 'center' }}>
-                        {historyCards ? historyCards: null}
+                    behaviour="height"
+                        >
+                           
+                            {historyCards ? historyCards: null}
+                        
+                            
+                        
                   
                     </ScrollView>
                     
