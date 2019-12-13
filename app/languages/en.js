@@ -70,14 +70,14 @@ const en = {
     spaceRequiredER: 'Space required',
     imageRequiredER: 'Image required',
 
-    /* Home */ 
+    /* Home */
     newHomes: 'New Places',
     search: 'Search',
     perNight: 'per night',
 
     /* Profile */
     description: 'Description',
-    phDescription:'Add your profile description',
+    phDescription: 'Add your profile description',
     myPets: 'My pets',
     addNewPetMSG: 'Add a new pet',
     recientHomes: 'My recient places',
@@ -97,23 +97,23 @@ const en = {
     friday: 'Friday',
     saturday: 'Saturday',
     profilePhoto: 'Add profile photo',
-    adress:'Adress',
-    phAdress:'Add your adress',
-    phone:'Phone Number',
-    phPhone:'Add your phone number',
-    createProfile:'Create Profile',
+    adress: 'Adress',
+    phAdress: 'Add your adress',
+    phone: 'Phone Number',
+    phPhone: 'Add your phone number',
+    createProfile: 'Create Profile',
 
     /*Setup profile*/
-    type:'Choose a profile type',
-    client:'Client',
-    caretaker:'Caretaker',
-    clientDescription:'Find available and awesome homes to leave your pets.',
-    caretakerDescription:'Post your home, take care of pets and get customers',
+    type: 'Choose a profile type',
+    client: 'Client',
+    caretaker: 'Caretaker',
+    clientDescription: 'Find available and awesome homes to leave your pets.',
+    caretakerDescription: 'Post your home, take care of pets and get customers',
 
     /*History*/
     recentHomes: 'Recent Homes',
-    price:'a night',
-    owner:'owner',
+    price: 'a night',
+    owner: 'owner',
 
     /* Pet profile */
     addPetPhoto: 'Add pet photo',
@@ -131,8 +131,8 @@ const en = {
     specialCares: 'Special cares',
     enterSpecialCares: 'Enter special needs if it presents',
     addPet: 'Add pet',
-    editPet:'Edit pet',
-    deletePet:'Delete pet',
+    editPet: 'Edit pet',
+    deletePet: 'Delete pet',
     deletePetQN: 'If you accept your pet will be deleted',
     calm: 'Calm',
     docile: 'Docile',
@@ -141,6 +141,13 @@ const en = {
     callOwner: 'Call the owner',
     otherInfo: 'Other info',
     editProfile: 'Edit profile',
+    /*View home*/
+    capacity: 'Capacidad',
+    price: 'Precio',
+    walker: 'Caminador',
+    arrival: 'Fecha de llegada',
+    choose: 'Escoja sus mascotas',
+    reserve: 'reservar'
 };
 
 export default en;

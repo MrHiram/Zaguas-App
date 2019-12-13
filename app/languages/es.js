@@ -141,7 +141,14 @@ const es = {
     aggressive: 'Agresivo',
     callOwner: 'Llamar al dueño',
     otherInfo: 'Otra infromación',
-    editProfile: 'Editar perfil'
+    editProfile: 'Editar perfil',
+    /*View home*/
+    capacity:'Capacity',
+    price:'Price',
+    walker:'Walker',
+    arrival:'Arrival',
+    choose:'Choose your pets',
+    reserve:'reserve'
 };
 
 export default es;
