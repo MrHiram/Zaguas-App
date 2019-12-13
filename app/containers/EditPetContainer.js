@@ -35,28 +35,11 @@ export default class EditPetContainer extends React.Component {
         waiting: false
     };
     componentDidMount() {
-        this.init();
-        console.log("Prop que recibo"+this.props.petInfo);
+        console.log(this.props.profileInfo);    
+        this.setState({
+            name: this.props.profileInfo.pet.name,
+        })
     }
-
-    init = async () => {
-        let token = await LocalStorage.retrieveToken();
-        let id = this.props.navigation.state.params.petId;
-        await Fetcher.getToken('pet/' + id, token)
-            .then(response => {
-                if (response.data != null) {
-                    this.setState({
-                        petInfo: response.data,
-                        image: { uri: response.data.pet.image },
-                        loading: false
-                    })
-                }
-            })
-            .catch(error => {
-                console.log(['EditPetScreen error', error]);
-            });
-        this.setState({ token });
-    };
 
     onChangeTextPress = value => {
         this.setState({ temperament: value });
@@ -84,46 +67,6 @@ export default class EditPetContainer extends React.Component {
         }
     };
 
-    handleValue = (key, value) => {
-        switch (key) {
-            case 'name':
-                this.setState({
-                    name: value
-                });
-                return;
-            case 'race':
-                this.setState({
-                    race: value
-                });
-                return;
-            case 'size':
-                this.setState({
-                    size: value
-                });
-                return;
-            case 'description':
-                this.setState({
-                    description: value
-                });
-                return;
-            case 'feeding':
-                this.setState({
-                    feeding: value
-                });
-                return;
-            case 'allergies':
-                this.setState({
-                    allergies: value
-                });
-                return;
-            case 'special_cares':
-                this.setState({
-                    special_cares: value
-                });
-                return;
-        }
-    };
-
     render() {
         let { t, colorTheme, darkThemeOn } = this.props.screenProps;
         let data1 = [
@@ -141,7 +84,6 @@ export default class EditPetContainer extends React.Component {
             }
         ];
         return (
-
             <View style={[MainStyles.mainCard, MainStyles.profileCard]}>
                 <View
                     style={{
@@ -151,7 +93,6 @@ export default class EditPetContainer extends React.Component {
                         marginVertical: 20
                     }}
                 >
-
                     <UploadPicture
                         titlePicture={t('addPetPhoto')}
                         image={this.state.image}
@@ -163,16 +104,16 @@ export default class EditPetContainer extends React.Component {
 
                 <InputMT
                     title={t('name')}
-                    handleValue={this.handleValue}
+                    handleValue={(key, value) => this.setState({ name: value })}
                     placeholder={t('enterPetName')}
                     handler="name"
-                    value= {this.state.petInfo.name }
+                    value={this.state.name}
                     error={this.state.nameError}
                     colorTheme={colorTheme}
                 />
                 <InputMT
                     title={t('size')}
-                    handleValue={this.handleValue}
+                    handleValue={(key, value) => this.setState({ size: value })}
                     placeholder={t('enterPetSize')}
                     handler="size"
                     value={this.state.size}
@@ -188,7 +129,7 @@ export default class EditPetContainer extends React.Component {
                 />
                 <InputMT
                     title={t('race')}
-                    handleValue={this.handleValue}
+                    handleValue={(key, value) => this.setState({ race: value })}
                     placeholder={t('enterPetRace')}
                     handler="race"
                     value={this.state.race}
@@ -197,7 +138,9 @@ export default class EditPetContainer extends React.Component {
                 />
                 <InputMT
                     title={t('description')}
-                    handleValue={this.handleValue}
+                    handleValue={(key, value) =>
+                        this.setState({ description: value })
+                    }
                     placeholder={t('petDescription')}
                     handler="description"
                     value={this.state.description}
@@ -206,7 +149,9 @@ export default class EditPetContainer extends React.Component {
                 />
                 <InputMT
                     title={t('feeding')}
-                    handleValue={this.handleValue}
+                    handleValue={(key, value) =>
+                        this.setState({ feeding: value })
+                    }
                     placeholder={t('feedingDescription')}
                     handler="feeding"
                     value={this.state.feeding}
@@ -215,7 +160,9 @@ export default class EditPetContainer extends React.Component {
                 />
                 <InputMT
                     title={t('allergies')}
-                    handleValue={this.handleValue}
+                    handleValue={(key, value) =>
+                        this.setState({ allergies: value })
+                    }
                     placeholder={t('enterAllergies')}
                     handler="allergies"
                     value={this.state.allergies}
@@ -224,7 +171,9 @@ export default class EditPetContainer extends React.Component {
                 />
                 <InputMT
                     title={t('specialCares')}
-                    handleValue={(key, value) => this.setState({ special_cares: value })}
+                    handleValue={(key, value) =>
+                        this.setState({ special_cares: value })
+                    }
                     placeholder={t('enterSpecialCares')}
                     handler="special_cares"
                     value={this.state.special_cares}
@@ -233,7 +182,7 @@ export default class EditPetContainer extends React.Component {
                 />
                 <MainButton
                     title={t('editPet')}
-                   // onPress={() => this.editPet(t)}
+                    // onPress={() => this.editPet(t)}
                     colorTheme={colorTheme}
                 />
             </View>
