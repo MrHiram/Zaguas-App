@@ -7,7 +7,7 @@ export default function HistoryButton(props) {
         <>
             <TouchableOpacity
                style={MainStyles.historyBtn}
-                onPress={() => props.onPress()}>
+                >
                 <Text
                     style={[props.colorTheme.btnTextColor]}>
                     {props.title}
