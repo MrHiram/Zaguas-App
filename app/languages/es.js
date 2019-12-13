@@ -131,6 +131,7 @@ const es = {
     enterSpecialCares: 'Ingrese los cuidados especiales, si los presenta',
     addPet: 'Añadir mascota',
     editPet:'Editar mascota',
+    deletePet:'Eliminar mascota',
     calm: 'Tranquilo',
     docile: 'Docil',
     friendly: 'Amigable',

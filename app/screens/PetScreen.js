@@ -367,7 +367,7 @@ export default class PetScreen extends Component {
                                     </>
                                 ) : null}
 
-                                {this.state.profileInfo.pet.special_cares ? (
+                                {this.state.profileInfo.pet.specials_cares ? (
                                     <>
                                         <Text
                                             style={[
@@ -384,7 +384,7 @@ export default class PetScreen extends Component {
                                         <Text style={colorTheme.mainTextColor}>
                                             {
                                                 this.state.profileInfo.pet
-                                                    .special_cares
+                                                    .specials_cares
                                             }
                                         </Text>
                                     </>

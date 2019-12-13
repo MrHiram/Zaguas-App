@@ -10,6 +10,7 @@ import LocalStorage from '../services/LocalStorage';
 import Validator from '../services/Validator';
 import Fetcher from '../services/Fetcher';
 import MainButton from '../components/MainButton';
+import DeleteButton from '../components/DeleteButton';
 export default class EditPetContainer extends React.Component {
     state = {
         image: '',
@@ -20,7 +21,7 @@ export default class EditPetContainer extends React.Component {
         description: '',
         feeding: '',
         allergies: '',
-        special_cares: '',
+        specials_cares: '',
         imageError: '',
         token: '',
         imageError: '',
@@ -31,18 +32,18 @@ export default class EditPetContainer extends React.Component {
         descriptionError: '',
         feedingError: '',
         allergiesError: '',
-        special_caresError: '',
+        specials_caresError: '',
         waiting: false
     };
     componentDidMount() {
         this.init();
     }
 
-    init = async() =>{
+    init = async () => {
         let token = await LocalStorage.retrieveToken();
         this.setState({
             token: token,
-            image: {uri: this.props.profileInfo.pet.image},
+            image: { uri: this.props.profileInfo.pet.image },
             name: this.props.profileInfo.pet.name,
             size: this.props.profileInfo.pet.size,
             temperament: this.props.profileInfo.pet.temperament,
@@ -50,7 +51,7 @@ export default class EditPetContainer extends React.Component {
             description: this.props.profileInfo.pet.description,
             feeding: this.props.profileInfo.pet.feeding,
             allergies: this.props.profileInfo.pet.allergies,
-            special_cares: this.props.profileInfo.pet.special_cares,
+            specials_cares: this.props.profileInfo.pet.specials_cares,
         });
     }
 
@@ -75,8 +76,10 @@ export default class EditPetContainer extends React.Component {
             alert('Hey! You heve not enabled selected permissions');
         }
     }
-
-    sendUpdate = async () =>{
+    deletePet = async () => {
+      
+    }
+    sendUpdate = async () => {
         let validName = Validator.blankSpace(this.state.name);
         let validRace = Validator.blankSpace(this.state.race);
         let validSize = Validator.blankSpace(this.state.size);
@@ -93,14 +96,14 @@ export default class EditPetContainer extends React.Component {
             let data = new FormData();
             data.append('id', this.props.profileInfo.pet.id);
             this.state.name != this.props.profileInfo.pet.name
-                ?data.append('name', this.state.name)
-                :null;
+                ? data.append('name', this.state.name)
+                : null;
             this.state.race != this.props.profileInfo.pet.race
-                ?data.append('race', this.state.race)
-                :null;
+                ? data.append('race', this.state.race)
+                : null;
             this.state.size != this.props.profileInfo.pet.size
-                ?data.append('size', this.state.size)
-                :null;
+                ? data.append('size', this.state.size)
+                : null;
             this.state.description != this.props.profileInfo.pet.description
                 ? data.append('description', this.state.description)
                 : null;
@@ -110,19 +113,19 @@ export default class EditPetContainer extends React.Component {
             this.state.allergies != this.props.profileInfo.pet.allergies
                 ? data.append('allergies', this.state.allergies)
                 : null;
-            this.state.special_cares != this.props.profileInfo.pet.special_cares
-                ? data.append('special_cares', this.state.special_cares)
+            this.state.specials_cares != this.props.profileInfo.pet.specials_cares
+                ? data.append('specials_cares', this.state.specials_cares)
                 : null;
             this.state.temperament != this.props.profileInfo.pet.temperament
-                ?data.append('temperament', this.state.temperament)
-                :null;
-            this.state.image != {uri: this.props.profileInfo.pet.image}
-                ?data.append('image', {
+                ? data.append('temperament', this.state.temperament)
+                : null;
+            this.state.image != { uri: this.props.profileInfo.pet.image }
+                ? data.append('image', {
                     uri: this.state.image.uri,
                     name: 'uploadProfile.jpg',
                     type: 'image/jpeg'
                 })
-                :null;
+                : null;
             this.setState({ waiting: true });
             await Fetcher.postToken('editPet', data, this.state.token)
                 .then(response => {
@@ -226,7 +229,7 @@ export default class EditPetContainer extends React.Component {
                 <Combobox
                     title={t('temperament')}
                     data={data1}
-                    onChangeText={(value)=>this.setState({ temperament: value })}
+                    onChangeText={(value) => this.setState({ temperament: value })}
                     error={this.state.temperamentError}
                     colorTheme={colorTheme}
                     value={this.state.temperament}
@@ -276,17 +279,22 @@ export default class EditPetContainer extends React.Component {
                 <InputMT
                     title={t('specialCares')}
                     handleValue={(key, value) =>
-                        this.setState({ special_cares: value })
+                        this.setState({ specials_cares: value })
                     }
                     placeholder={t('enterSpecialCares')}
-                    handler="special_cares"
-                    value={this.state.special_cares}
-                    error={this.state.special_caresError}
+                    handler="specials_cares"
+                    value={this.state.specials_cares}
+                    error={this.state.specials_caresError}
                     colorTheme={colorTheme}
                 />
                 <MainButton
                     title={t('editPet')}
                     onPress={() => this.sendUpdate()}
+                    colorTheme={colorTheme}
+                />
+                <DeleteButton
+                    title={t('deletePet')}
+                    onPress={() => this.deletePet()}
                     colorTheme={colorTheme}
                 />
             </View>

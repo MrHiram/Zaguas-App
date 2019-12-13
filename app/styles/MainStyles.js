@@ -351,6 +351,12 @@ export default StyleSheet.create({
         width: '100%',
         borderRadius: 5
     },
+    deleteButton:{
+        backgroundColor: '#FF0000',
+        width: '100%',
+        borderRadius: 5, 
+        marginTop:20
+    },
     buttonHome: {
         backgroundColor: '#F4362D',
         color: '#fff',

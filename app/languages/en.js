@@ -130,6 +130,7 @@ const en = {
     enterSpecialCares: 'Enter special needs if it presents',
     addPet: 'Add pet',
     editPet:'Edit pet',
+    deletePet:'Delete pet',
     calm: 'Calm',
     docile: 'Docile',
     friendly: 'Friendly',
