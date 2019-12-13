@@ -38,6 +38,14 @@ export default class EditPetContainer extends React.Component {
         console.log(this.props.profileInfo);    
         this.setState({
             name: this.props.profileInfo.pet.name,
+            size: this.props.profileInfo.pet.size,
+            temperament: this.props.profileInfo.temperament,
+            race: this.props.profileInfo.pet.race,
+            description: this.props.profileInfo.pet.description,
+            feeding: this.props.profileInfo.pet.feeding,
+            allergies: this.props.profileInfo.pet.allergies,
+            special_cares: this.props.profileInfo.pet.special_cares,
+
         })
     }
 
