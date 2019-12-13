@@ -28,9 +28,6 @@ const ProfileStack = createStackNavigator(
         EditPetScreen:{
             screen: EditPetScreen
         },
-        SelectPet:{
-            screen: SelectPetScreen
-        }
     },
     {
         initialRouteName: "Profile",
@@ -48,6 +45,9 @@ const FeedStack = createStackNavigator(
         ViewHome:{
             screen: ViewHomeScreen
         },
+        SelectPet:{
+            screen: SelectPetScreen
+        }
     },
     {
         initialRouteName: "Feed",

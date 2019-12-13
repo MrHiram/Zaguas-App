@@ -1,7 +1,7 @@
 import axios from 'axios';
 
 const fetcher = {
-    url: 'http://192.168.1.13:8000/api/',
+    url: 'http://192.168.1.6:8000/api/',
     postNoToken: async function(route, data) {
         return await axios.post(this.url + route, data);
     },

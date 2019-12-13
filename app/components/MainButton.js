@@ -6,7 +6,7 @@ export default function MainButton(props) {
     return(
         <>
             <TouchableOpacity
-                style={MainStyles.MainButtonContainer}
+                style={[MainStyles.MainButtonContainer, props.alignSelfBottom ? {alignSelf:'flex-end'}: null]}
                 onPress={() => props.onPress()}>
                 <Text
                     style={[MainStyles.MainButtonText, props.colorTheme.btnTextColor]}>

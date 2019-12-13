@@ -37,7 +37,7 @@ class ViewHomeScreen extends Component {
     //metodo enviar a la vista de seleccionar la mascota.
     selectPets = () => {
         this.props.navigation.navigate('SelectPet', {
-            screenProps: this.props.screenProps
+            screenProps: this.props.screenProps,
         });
     };
     onDateChange(date, type) {
@@ -115,7 +115,9 @@ class ViewHomeScreen extends Component {
             console.log(data);
             await Fetcher.postToken('addReservation', data, token)
                 .then(response => {
-                    console.log(response);
+                    if(response.data.message == "Reservacion  creada"){
+                        this.props.navigation.pop();
+                    }
                 })
                 .catch(error => {
                     console.log(['Error reservation', error]);
@@ -135,11 +137,6 @@ class ViewHomeScreen extends Component {
                             key={data.id}
                             name={data.name}
                             image={image}
-                            onPress={() =>
-                                this.props.navigation.push('PetProfile', {
-                                    petId: data.id
-                                })
-                            }
                         />
                     );
                 }
@@ -239,7 +236,7 @@ class ViewHomeScreen extends Component {
                                 colorTheme.mainTextColor
                             ]}
                         >
-                            Capacidad
+                            {t('capacity')}
                         </Text>
                         <Text style={colorTheme.mainTextColor}>
                             {this.props.navigation.state.params.item.capacity}
@@ -254,7 +251,11 @@ class ViewHomeScreen extends Component {
                         <Image
                             style={{ width: '80%', height: 70 }}
                             resizeMode="contain"
-                            source={require('../../assets/money.png')}
+                            source={
+                                darkThemeOn
+                                    ? require('../../assets/moneyWhite.png')
+                                    : require('../../assets/money.png')
+                            }
                         />
                         <Text
                             style={[
@@ -264,7 +265,7 @@ class ViewHomeScreen extends Component {
                         >
                             {this.props.navigation.state.params.item.price}
                         </Text>
-                        <Text style={colorTheme.mainTextColor}>Por noche</Text>
+                        <Text style={colorTheme.mainTextColor}>{t('perNight')}</Text>
                     </View>
                     <View
                         style={{
@@ -288,7 +289,7 @@ class ViewHomeScreen extends Component {
                                 colorTheme.mainTextColor
                             ]}
                         >
-                            Caminador
+                            {t('walker')}
                         </Text>
                         <Text style={colorTheme.mainTextColor}>
                             {this.props.navigation.state.params.item.walk
@@ -308,7 +309,7 @@ class ViewHomeScreen extends Component {
                             colorTheme.subtitleTextColor
                         ]}
                     >
-                        Descripción
+                        {t('description')}
                     </Text>
                     <Text style={colorTheme.mainTextColor}>
                         {this.props.navigation.state.params.item.description}
@@ -316,11 +317,10 @@ class ViewHomeScreen extends Component {
                     <TouchableOpacity onPress={() => this.makeCall()}>
                         <Text
                             style={[
-                                { color: '#477DA4' },
-                                colorTheme.mainTextColor
+                                { color: '#477DA4' }
                             ]}
                         >
-                            Contactar al dueño{' '}
+                            {t('contact')}
                         </Text>
                     </TouchableOpacity>
                     <Text
@@ -333,7 +333,7 @@ class ViewHomeScreen extends Component {
                             colorTheme.subtitleTextColor
                         ]}
                     >
-                        Fecha de llegada
+                        {t('arrival')}
                     </Text>
                     <View style={MainStyles.container}>
                         <CalendarPicker
@@ -350,15 +350,14 @@ class ViewHomeScreen extends Component {
 
                         <View>
                             <Text style={colorTheme.mainTextColor}>
-                                Día de llegada: {startDate}
+                                {t('checkInDay')+': '+startDate}
                             </Text>
                             <Text style={colorTheme.mainTextColor}>
-                                Día de salida: {endDate}
+                                {t('checkOutDay')+': '+endDate}
                             </Text>
                         </View>
                     </View>
 
-                    {petListSelected ? (
                         <View
                             style={{
                                 width: '100%',
@@ -370,7 +369,6 @@ class ViewHomeScreen extends Component {
                         >
                             {petListSelected}
                         </View>
-                    ) : (
                         <>
                             <Text
                                 style={[
@@ -382,7 +380,7 @@ class ViewHomeScreen extends Component {
                                     colorTheme.subtitleTextColor
                                 ]}
                             >
-                                Seleccionar Mascota
+                                {t('choose')}
                             </Text>
                             <TouchableOpacity
                                 style={MainStyles.containerProfile}
@@ -391,7 +389,6 @@ class ViewHomeScreen extends Component {
                                 <Text>{t('addNewPetMSG')}</Text>
                             </TouchableOpacity>
                         </>
-                    )}
 
                     <HomeCaretakerButton
                         title={t('reserve')}

@@ -416,7 +416,6 @@ export default StyleSheet.create({
         paddingVertical: 5,
         margin: 3,
         flexDirection: "row",
-        backgroundColor: "#192338",
         justifyContent: "flex-start",
         alignItems: "center",
         zIndex: -1
