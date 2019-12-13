@@ -25,13 +25,8 @@ const ProfileStack = createStackNavigator(
         PetProfile: {
             screen: PetScreen
         },
-        ViewHome:{
-            screen: ViewHomeScreen
-        },
         EditPetScreen:{
             screen: EditPetScreen
-        },
-
         },
         SelectPet:{
             screen: SelectPetScreen
@@ -45,6 +40,23 @@ const ProfileStack = createStackNavigator(
     }
 );
 
+const FeedStack = createStackNavigator(
+    {
+        Feed:{
+            screen: FeedScreen
+        },
+        ViewHome:{
+            screen: ViewHomeScreen
+        },
+    },
+    {
+        initialRouteName: "Feed",
+        defaultNavigationOptions: {
+            header: null
+        }
+    }
+)
+
 const TABS = {
     History: {
         screen: HistoryScreen,
@@ -56,7 +68,7 @@ const TABS = {
         }
     },
     Feed: {
-        screen: FeedScreen,
+        screen: FeedStack,
         navigationOptions: {
             tabBarLabel: "Feed",
             tabBarIcon: ({ tintColor }) => (
