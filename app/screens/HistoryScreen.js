@@ -13,6 +13,8 @@ import LocalStorage from '../services/LocalStorage';
 import Fetcher from '../services/Fetcher';
 import HistoryButton from '../components/HistoryButton';
 import { ScrollView } from 'react-native-gesture-handler';
+import { NavigationEvents } from 'react-navigation';
+
 export default class HistoryScreen extends React.Component {
     _isMounted = false;
 
@@ -91,6 +93,9 @@ export default class HistoryScreen extends React.Component {
                     colorTheme.secondaryBackground
                 ]}
             >
+                <NavigationEvents
+                    onDidFocus={payload => this.getData()}
+                />
                 <View style={[MainStyles.borderBottom, colorTheme.feedHeader]}>
                     <View
                         style={[
