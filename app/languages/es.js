@@ -17,6 +17,8 @@ const es = {
     name: 'Nombre',
     description: 'Descripción',
     capacity: 'Capacidad',
+    cancel: 'Cancelar',
+    accept: 'Accept',
 
     /* Iniciar sesion */
     forgotPasswordQN: '¿Se te olvidó lo contraseña?',
@@ -132,6 +134,7 @@ const es = {
     addPet: 'Añadir mascota',
     editPet:'Editar mascota',
     deletePet:'Eliminar mascota',
+    deletePetQN: 'Si acepta se eliminará tu mascota por completo',
     calm: 'Tranquilo',
     docile: 'Docil',
     friendly: 'Amigable',

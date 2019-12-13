@@ -17,6 +17,8 @@ const en = {
     name: 'Name',
     description: 'Description',
     capacity: 'Capacity',
+    cancel: 'Cencel',
+    accept: 'Accept',
 
     /* Login */
     forgotPasswordQN: 'Forgot your password?',
@@ -131,6 +133,7 @@ const en = {
     addPet: 'Add pet',
     editPet:'Edit pet',
     deletePet:'Delete pet',
+    deletePetQN: 'If you accept your pet will be deleted',
     calm: 'Calm',
     docile: 'Docile',
     friendly: 'Friendly',

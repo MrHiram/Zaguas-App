@@ -1,5 +1,5 @@
 import React from 'react';
-import { View } from 'react-native';
+import { View, Alert } from 'react-native';
 import MainStyles from '../styles/MainStyles';
 import InputMT from '../components/InputMT';
 import Combobox from '../components/ComboxProfile';
@@ -51,9 +51,9 @@ export default class EditPetContainer extends React.Component {
             description: this.props.profileInfo.pet.description,
             feeding: this.props.profileInfo.pet.feeding,
             allergies: this.props.profileInfo.pet.allergies,
-            specials_cares: this.props.profileInfo.pet.specials_cares,
+            specials_cares: this.props.profileInfo.pet.specials_cares
         });
-    }
+    };
 
     handlerImage = async () => {
         const { status, permissions } = await Permissions.askAsync(
@@ -75,10 +75,43 @@ export default class EditPetContainer extends React.Component {
         } else {
             alert('Hey! You heve not enabled selected permissions');
         }
-    }
+    };
     deletePet = async () => {
-      
-    }
+        let { t } = this.props.screenProps;
+        Alert.alert(
+            t('deletePet'),
+            t('deletePetQN'),
+            [
+                {
+                    text: t('cancel'),
+                    style: 'cancel'
+                },
+                {
+                    text: t('accept'),
+                    onPress: async () => {
+                        await Fetcher.getToken(
+                            'deletePet/' + this.props.profileInfo.pet.id,
+                            this.state.token
+                        )
+                            .then(response => {
+                                if (
+                                    response.data.message == 'mascota borrada'
+                                ) {
+                                    this.props.goBack();
+                                }
+                            })
+                            .catch(error => {
+                                console.log([
+                                    'Error Delete Pet Container',
+                                    error
+                                ]);
+                            });
+                    }
+                }
+            ],
+            { cancelable: false }
+        );
+    };
     sendUpdate = async () => {
         let validName = Validator.blankSpace(this.state.name);
         let validRace = Validator.blankSpace(this.state.race);
@@ -113,7 +146,8 @@ export default class EditPetContainer extends React.Component {
             this.state.allergies != this.props.profileInfo.pet.allergies
                 ? data.append('allergies', this.state.allergies)
                 : null;
-            this.state.specials_cares != this.props.profileInfo.pet.specials_cares
+            this.state.specials_cares !=
+            this.props.profileInfo.pet.specials_cares
                 ? data.append('specials_cares', this.state.specials_cares)
                 : null;
             this.state.temperament != this.props.profileInfo.pet.temperament
@@ -121,10 +155,10 @@ export default class EditPetContainer extends React.Component {
                 : null;
             this.state.image != { uri: this.props.profileInfo.pet.image }
                 ? data.append('image', {
-                    uri: this.state.image.uri,
-                    name: 'uploadProfile.jpg',
-                    type: 'image/jpeg'
-                })
+                      uri: this.state.image.uri,
+                      name: 'uploadProfile.jpg',
+                      type: 'image/jpeg'
+                  })
                 : null;
             this.setState({ waiting: true });
             await Fetcher.postToken('editPet', data, this.state.token)
@@ -171,7 +205,7 @@ export default class EditPetContainer extends React.Component {
                 });
             else this.setState({ temperamentError: '', phoneSuccess: true });
         }
-    }
+    };
 
     render() {
         let { t, colorTheme, darkThemeOn } = this.props.screenProps;
@@ -229,7 +263,9 @@ export default class EditPetContainer extends React.Component {
                 <Combobox
                     title={t('temperament')}
                     data={data1}
-                    onChangeText={(value) => this.setState({ temperament: value })}
+                    onChangeText={value =>
+                        this.setState({ temperament: value })
+                    }
                     error={this.state.temperamentError}
                     colorTheme={colorTheme}
                     value={this.state.temperament}
