@@ -142,12 +142,14 @@ const en = {
     otherInfo: 'Other info',
     editProfile: 'Edit profile',
     /*View home*/
-    capacity: 'Capacidad',
-    price: 'Precio',
-    walker: 'Caminador',
-    arrival: 'Fecha de llegada',
-    choose: 'Escoja sus mascotas',
-    reserve: 'reservar'
+    price:'Price',
+    walker:'Walker',
+    arrival:'Arrival',
+    choose:'Choose your pets',
+    reserve: 'Reserve',
+    checkInDay: 'Check in date',
+    checkOutDay: 'Check out date',
+    select: 'Select'
 };
 
 export default en;
