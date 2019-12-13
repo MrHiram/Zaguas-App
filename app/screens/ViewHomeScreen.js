@@ -4,13 +4,18 @@ import {
     Text,
     Image,
     TouchableOpacity,
-    Animated
+    Animated,
+    Platform,
+    Linking,
 } from "react-native";
 import HomeCaretakerButton from '../components/HomeCaretakerButton';
 import CalendarPicker from 'react-native-calendar-picker';
 import InputMT from '../components/InputMT';
 import MainStyles from "../styles/MainStyles";
 import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
+import PetProfileCard from '../components/PetProfileCard';
+import LocalStorage from "../services/LocalStorage";
+import Fetcher from "../services/Fetcher";
 
 const HEADER_MIN_HEIGHT = 50;
 const HEADER_MAX_HEIGHT = 0;
@@ -20,6 +25,7 @@ class ViewHomeScreen extends Component {
     state = {
         amount: '',
         language: 'es',
+     
     }
     constructor(props) {
         super(props);
@@ -30,14 +36,22 @@ class ViewHomeScreen extends Component {
         this.onDateChange = this.onDateChange.bind(this);
     }
 
+    //metodo enviar a la vista de seleccionar la mascota.
+    selectPets = () =>{
+      
+        this.props.navigation.navigate("SelectPet",{screenProps:this.props.screenProps});
+    }
     onDateChange(date, type) {
+        let dateString = new Date(date);
+        console.log(dateString);
         if (type === 'END_DATE') {
+            
           this.setState({
-            selectedEndDate: date,
+            selectedEndDate: dateString.getFullYear() + "/" + (dateString.getMonth() + 1) + "/" + dateString.getDate(),
           });
         } else {
           this.setState({
-            selectedStartDate: date,
+            selectedStartDate: dateString.getFullYear() + "/" + (dateString.getMonth() + 1) + "/" + dateString.getDate(),
             selectedEndDate: null,
           });
         }
@@ -52,10 +66,81 @@ class ViewHomeScreen extends Component {
             [{ nativeEvent: { contentOffset: { y: this.scrollYAnimatedValue } } }]
         )(event)
     }
+
+    //metodo de llamada
+    makeCall = () => {
+        let phoneNumber = '';
+
+        if (Platform.OS === 'android') {
+            phoneNumber =
+                'tel:${' + this.props.navigation.state.params.item.phone + '}';
+        } else {
+            phoneNumber = 'telprompt:${' + 1 + '}';
+        }
+
+        Linking.openURL(phoneNumber);
+    };
+
+    //reservation fetch
+
+    makeReservation = async() =>{
+        let pets=[];
+        let collections =this.props.navigation.state.params.selected;
+        let idOwnerHouse =this.props.navigation.state.params.item.careTakerId;
+        let idHouse =this.props.navigation.state.params.item.id;
+        let token = await LocalStorage.retrieveToken();
+  
+        if (this.state.selectedStartDate && this.state.selectedEndDate &&
+            collections) {
+                //concat elements
+                collections.forEach(element => {
+                    pets.push(element.id);
+                });
+                
+            var data = {
+                home_id: idHouse,
+                start_date:this.state.selectedStartDate,
+                end_date:this.state.selectedEndDate,
+                pets_id: pets,
+                
+            };
+            console.log(data);
+            await Fetcher.postToken('addReservation', data,token)
+                .then(
+                    (response) => {
+                        console.log(response);
+                        
+
+                    }
+                )
+                .catch(
+                    (error) => { console.log(['Error reservation', error]) }
+                );
+        
+        }
+    }
+
     render() {
         let { t, locale, colorTheme } = this.props.screenProps;
+        let petListSelected = null;
+        if (this.props.navigation.state.params.selected != null) {
+            
+            petListSelected = this.props.navigation.state.params.selected.map((data) => {
+                let image = { uri: data.image };
+                return (
+                <PetProfileCard
+                    key={data.id}
+                    name={data.name}
+                    image={image}
+                    onPress={() => this.props.navigation.push('PetProfile', {petId: data.id})}
+                />
+                )
+            });
+        }
+        
+        
         const { selectedStartDate, selectedEndDate } = this.state;
-        const minDate = new Date(2019,10,3); // Today
+        const minDate = new Date(); // Today
         const maxDate = new Date(2030, 6, 3);
         const startDate  =  selectedStartDate ? selectedStartDate.toString() : '';
         const endDate = selectedEndDate ? selectedEndDate.toString() : '';
@@ -146,7 +231,7 @@ class ViewHomeScreen extends Component {
                 >
                     <Text style={{ fontSize: 25, fontWeight: '500', marginBottom: 10 }}>Descripción</Text>
                     <Text>{this.props.navigation.state.params.item.description}</Text>
-                    <TouchableOpacity><Text style={{ color: '#477DA4' }}>Contactar al dueño </Text></TouchableOpacity>
+                    <TouchableOpacity onPress={() => this.makeCall()}><Text style={{ color: '#477DA4' }}>Contactar al dueño </Text></TouchableOpacity>
                     <Text style={{ fontSize: 25, fontWeight: '500', marginTop: 10 }}>Fecha de llegada</Text>
                     <View style={MainStyles.container}>
                         <CalendarPicker
@@ -165,17 +250,25 @@ class ViewHomeScreen extends Component {
                             <Text>Día de salida:{ endDate }</Text>
                         </View>
                     </View>
-                    <Text style={{ fontSize: 25, fontWeight: '500', marginTop: 20 }}>Cantidad de mascotas</Text>
-                    <InputMT
-                        title={t('amount')}
-                        placeholder={t('Cantidad de mascotas')}
-                        handler='amount'
-                        value={this.state.amount}
-                        handleValue={this.handleValue}
-                        colorTheme={colorTheme} />
+                    
+                    {petListSelected ? <View style={{
+            width: '100%', alignItems: 'flex-start', flexDirection: 'row', flexWrap: 'wrap',
+            marginBottom: 10
+          }}>{petListSelected}</View> : <>
+                    <Text style={{ fontSize: 25, fontWeight: '500', marginTop: 20 }}>Seleccionar Mascota</Text>
+                    <TouchableOpacity style={MainStyles.containerProfile}
+                    onPress={() => this.selectPets()}>
+                        <Text>
+                        {t('addNewPetMSG')}
+                        </Text>
+                    </TouchableOpacity></>
+                    }
+                    
+                    
+                    
                     <HomeCaretakerButton
                         title={t('reserve')}
-                        onPress={() => this.applySettings()}
+                        onPress={() => this.makeReservation()}
                         colorTheme={colorTheme}
                     />
 

@@ -404,5 +404,24 @@ export default StyleSheet.create({
     },
     containerHistory: {
         height: 2000
-    }
+    },
+    //select pets
+    list: {
+        paddingVertical: 5,
+        margin: 3,
+        flexDirection: "row",
+        backgroundColor: "#192338",
+        justifyContent: "flex-start",
+        alignItems: "center",
+        zIndex: -1
+      },
+      lightText: {
+        color: "#f7f7f7",
+        width: 200,
+        paddingLeft: 15,
+        fontSize: 12
+       },
+       selected:{
+        backgroundColor: "#ffffff",
+       }
 });
