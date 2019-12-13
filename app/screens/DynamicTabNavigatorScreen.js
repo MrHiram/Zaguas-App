@@ -12,6 +12,7 @@ import AddPetScreen from "../screens/AddPetScreen";
 import PetScreen from "../screens/PetScreen";
 import ViewHomeScreen from "./ViewHomeScreen";
 import EditPetScreen from "./EditPetScreen";
+import SelectPetScreen from "./SelectPetScreen";
 
 const ProfileStack = createStackNavigator(
     {
@@ -31,6 +32,10 @@ const ProfileStack = createStackNavigator(
             screen: EditPetScreen
         },
 
+        },
+        SelectPet:{
+            screen: SelectPetScreen
+        }
     },
     {
         initialRouteName: "Profile",

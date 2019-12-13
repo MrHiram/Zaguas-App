@@ -70,7 +70,7 @@ export default class FeedScreen extends React.Component {
     };
 
     viewHome = (item) =>{
-       this.props.navigation.navigate('ViewHome', {item :item});
+       this.props.navigation.navigate('ViewHome', {item :item, navigation: this.props.navigation, screenProps: this.props.screenProps});
        
     };
 
