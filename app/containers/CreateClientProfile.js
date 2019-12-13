@@ -66,6 +66,7 @@ export default class CreateClientProfile extends Component {
                 mediaTypes: ImagePicker.MediaTypeOptions.All,
                 allowsEditing: true,
                 aspect: [4, 4],
+                quality: 0.5
             }
             let result = await ImagePicker.launchImageLibraryAsync(options);
             //let result = await ImagePicker.launchCameraAsync(options);

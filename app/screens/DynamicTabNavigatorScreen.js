@@ -102,7 +102,7 @@ export default class DynamicTabNavigatorScreen extends React.Component {
             Profile.screen = CaretakerScreen;
         }
         return createBottomTabNavigator(tabs, {
-            initialRouteName: "History",
+            initialRouteName: "Feed",
             tabBarOptions: {
                 activeTintColor: darkThemeOn ? "#fff" : "#007EA8",
                 inactiveTintColor: "grey",

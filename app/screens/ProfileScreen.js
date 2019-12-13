@@ -1,18 +1,20 @@
-import React from "react";
-import { View, Text, ActivityIndicator, Switch, Picker } from "react-native";
-import MenuDrawer from "react-native-side-drawer";
-import { ScrollView } from "react-native-gesture-handler";
-import { KeyboardAwareScrollView } from "react-native-keyboard-aware-scroll-view";
-import { LinearGradient } from "expo-linear-gradient";
-import UploadPicture from "../components/UploadPicture";
-import ProfileContainer from "../containers/ProfileContainer";
-import MainStyles from "../styles/MainStyles";
-import IconButton from "../components/IconButton";
-import Fetcher from "../services/Fetcher";
-import LocalStorage from "../services/LocalStorage";
-import MainButton from "../components/MainButton";
+import React from 'react';
+import { View, Text, ActivityIndicator, Switch, Picker } from 'react-native';
+import MenuDrawer from 'react-native-side-drawer';
+import { ScrollView } from 'react-native-gesture-handler';
+import { KeyboardAwareScrollView } from 'react-native-keyboard-aware-scroll-view';
+import { LinearGradient } from 'expo-linear-gradient';
+import UploadPicture from '../components/UploadPicture';
+import ProfileContainer from '../containers/ProfileContainer';
+import MainStyles from '../styles/MainStyles';
+import IconButton from '../components/IconButton';
+import Fetcher from '../services/Fetcher';
+import LocalStorage from '../services/LocalStorage';
+import MainButton from '../components/MainButton';
 
 export default class ProfileScreen extends React.Component {
+    _isMounted = false;
+
     state = {
         profileInfo: [],
         loading: true,
@@ -20,12 +22,17 @@ export default class ProfileScreen extends React.Component {
         open: false,
         darkThemeSwitch: false,
         caretakerProfileSwitch: false,
-        language: "en",
+        language: 'en',
         user: null
     };
 
     componentDidMount() {
+        this._isMounted = true;
         this.requestPets();
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
     }
 
     requestPets = async () => {
@@ -34,13 +41,15 @@ export default class ProfileScreen extends React.Component {
         await Fetcher.getClientID(token).then(response => {
             idClient = response.data.id;
         });
-        await Fetcher.getToken("getProfileClient/" + idClient, token)
+        await Fetcher.getToken('getProfileClient/' + idClient, token)
             .then(response => {
-                this.setState({
-                    profileInfo: response.data,
-                    image: { uri: response.data.profile.image },
-                    loading: false
-                });
+                if (this._isMounted) {
+                    this.setState({
+                        profileInfo: response.data,
+                        image: { uri: response.data.profile.image },
+                        loading: false
+                    });
+                }
             })
             .catch(error => {
                 console.log(error);
@@ -53,13 +62,13 @@ export default class ProfileScreen extends React.Component {
         this.setState({
             darkThemeSwitch: darkThemeOn,
             caretakerProfileSwitch: caretakerProfile,
-            language: locale === "en-US" || locale === "en" ? "en" : "es",
-            open: !this.state.open,
+            language: locale === 'en-US' || locale === 'en' ? 'en' : 'es',
+            open: !this.state.open
         });
     };
 
     requestLogout = exit => {
-        Fetcher.postToken("logout", this.state.token);
+        Fetcher.postToken('logout', this.state.token);
         LocalStorage.removeToken();
         exit();
     };
@@ -89,8 +98,8 @@ export default class ProfileScreen extends React.Component {
                 <IconButton
                     onPress={() => this.toggleOpen(locale)}
                     style={MainStyles.topLeftSetings}
-                    name={"md-arrow-back"}
-                    color={darkThemeOn ? "#fff" : "#222"}
+                    name={'md-arrow-back'}
+                    color={darkThemeOn ? '#fff' : '#222'}
                     size={28}
                 />
 
@@ -109,7 +118,7 @@ export default class ProfileScreen extends React.Component {
                                 : null
                         ]}
                     >
-                        {t("caretakerProfile")}
+                        {t('caretakerProfile')}
                     </Text>
                 </View>
 
@@ -128,7 +137,7 @@ export default class ProfileScreen extends React.Component {
                                 : null
                         ]}
                     >
-                        {t("darkTheme")}
+                        {t('darkTheme')}
                     </Text>
                 </View>
 
@@ -144,7 +153,7 @@ export default class ProfileScreen extends React.Component {
                 </Picker>
 
                 <MainButton
-                    title={t("apply")}
+                    title={t('apply')}
                     onPress={() => this.applySettings()}
                     colorTheme={colorTheme}
                 />
@@ -207,28 +216,33 @@ export default class ProfileScreen extends React.Component {
                                     <LinearGradient
                                         start={{ x: 0, y: 0.75 }}
                                         end={{ x: 0.5, y: 0.75 }}
-                                        colors={["#045379", "#1782ac"]}
+                                        colors={['#045379', '#1782ac']}
                                         style={{
-                                            position: "absolute",
+                                            position: 'absolute',
                                             height: 500,
-                                            width: "100%"
+                                            width: '100%'
                                         }}
                                     />
                                     <IconButton
                                         onPress={() => this.toggleOpen(locale)}
                                         style={MainStyles.topRightSetings}
-                                        name={"md-settings"}
-                                        color={darkThemeOn ? "#222" : "#fff"}
+                                        name={'md-settings'}
+                                        color={darkThemeOn ? '#222' : '#fff'}
                                         size={28}
                                     />
                                     <View
                                         style={{
-                                            flexDirection: "column",
-                                            marginTop: 30
+                                            flexDirection: 'column',
+                                            marginTop: 30,
+                                            justifyContent: 'center'
                                         }}
                                     >
                                         <View
-                                            style={{ width: 180, height: 180 }}
+                                            style={{
+                                                width: 180,
+                                                height: 180,
+                                                alignSelf: 'center'
+                                            }}
                                         >
                                             <UploadPicture
                                                 image={this.state.image}
@@ -254,7 +268,7 @@ export default class ProfileScreen extends React.Component {
                                     screenProps={this.props.screenProps}
                                     goAddPet={() =>
                                         this.props.navigation.navigate(
-                                            "AddPet",
+                                            'AddPet',
                                             {
                                                 onGoBack: () =>
                                                     this.requestPets()

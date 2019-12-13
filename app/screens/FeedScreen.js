@@ -19,6 +19,8 @@ import LocalStorage from '../services/LocalStorage';
 import Icon from 'react-native-vector-icons/Ionicons';
 
 export default class FeedScreen extends React.Component {
+    _isMounted = false;
+
     state = {
         loading: true,
         data: [],
@@ -29,7 +31,12 @@ export default class FeedScreen extends React.Component {
     };
 
     componentDidMount() {
+        this._isMounted = true;
         this.getData();
+    }
+
+    componentWillUnmount() {
+        this._isMounted = false;
     }
 
     getData = async () => {
@@ -39,18 +46,20 @@ export default class FeedScreen extends React.Component {
         this.setState({ token: await LocalStorage.retrieveToken() }),
             Fetcher.getToken(`getHomes/?page=${page}`, this.state.token)
                 .then(response => {
-                    this.setState({
-                        data:
-                            page == 1
-                                ? response.data.homes.data
-                                : [
-                                      ...this.state.data,
-                                      ...response.data.homes.data
-                                  ],
-                        last_page: response.data.homes.last_page,
-                        refreshing: false,
-                        loading: false
-                    });
+                    if (this._isMounted) {
+                        this.setState({
+                            data:
+                                page == 1
+                                    ? response.data.homes.data
+                                    : [
+                                          ...this.state.data,
+                                          ...response.data.homes.data
+                                      ],
+                            last_page: response.data.homes.last_page,
+                            refreshing: false,
+                            loading: false
+                        });
+                    }
                 })
                 .catch(error => {
                     console.log(error);
