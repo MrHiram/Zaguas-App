@@ -8,11 +8,12 @@ import MainStyles from '../styles/MainStyles';
 export default class HistoryCardContainer extends React.Component {
     render() {
         let { t, colorTheme, darkThemeOn } = this.props.screenProps;
+        
         return (
             <View style={MainStyles.cardHistoryContainer}>
                 <View style={{ flexDirection: 'row', width: '100%' }}>
                     <Image
-                        source={require('../../assets/dogProfile.png')}
+                        source={{uri:this.props.ownerImage}}
                         style={{
                             height: 60,
                             width: 60,
@@ -27,29 +28,29 @@ export default class HistoryCardContainer extends React.Component {
                             justifyContent: 'center'
                         }}
                     >
-                        <Text style={MainStyles.userText}>Lil. D</Text>
+                        <Text style={MainStyles.userText}>{this.props.ownerName}</Text>
                         <Text style={MainStyles.descriptionUser}>
-                            {t('owner')}
+                            {this.props.ownerLocation}
                         </Text>
                     </View>
                     <Text style={{ alignSelf: 'flex-start', marginTop: 20 }}>
-                        10/02/19-15/02/19
+                        {this.props.start_date}  -  {this.props.end_date}
                     </Text>
                 </View>
                 <View style={{ flexDirection: 'row', alignSelf: 'center' }}>
                     <View style={{ flexDirection: 'column', width: '100%',  padding: 20 }}>
                         <Image
                             resizeMode="cover"
-                            source={require('../../assets/casa1.jpg')}
+                            source={{uri:this.props.image}}
                             style={MainStyles.userImage}
                         />
                         <Text style={MainStyles.priceText}>
-                            ₡8.000 {t('price')}
+                        ₡{this.props.price_per_night} {t('price')}
                         </Text>
                     </View>
                 </View>
                 <View style={{ alignSelf: 'center', marginBottom: 10 }}>
-                    <HistoryButton title="pending" colorTheme={colorTheme} />
+                    <HistoryButton title={this.props.status} colorTheme={colorTheme} />
                 </View>
             </View>
         );
